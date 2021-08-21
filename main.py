@@ -5,7 +5,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from db.sparkSession import spark_session
 from routers.users import router as users
 from routers.exams import router as exams
-from routers.result import router as results
+from routers.student_save_result import router as student_save_result
+from routers.postExamAnalytics import router as postExamAnalytics
 from routers.subscriptions import router as subscriptions
 from routers.registration import router as registerations
 from routers.question_selection import router as question_selections
@@ -74,7 +75,8 @@ app.include_router(subscriptions)
 app.include_router(payments)
 app.include_router(bookmarkQuestions)
 app.include_router(exams)
-app.include_router(results)
+app.include_router(student_save_result)
+app.include_router(postExamAnalytics)
 app.include_router(question_selections)
 app.include_router(registerations)
 app.include_router(testSeries)
