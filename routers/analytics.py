@@ -120,7 +120,7 @@ async def overall_analytics(user_id:int=0):
         # find daily progress
 
         query=f"SELECT updated_at AS date,no_of_question,IFNULL(correct_ans,0) AS correct_ans," \
-              f"IFNULL(incorret_ans,0)AS incorrect_ans,(no_of_question-(IFNULL(correct_ans,0)+IFNULL(incorret_ans,0))) AS unattempted_questions,test_time,time_taken FROM user_result" \
+              f"IFNULL(incorrect_ans,0)AS incorrect_ans,(no_of_question-(IFNULL(correct_ans,0)+IFNULL(incorrect_ans,0))) AS unattempted_questions,test_time,time_taken FROM user_result" \
               f" WHERE user_id = {user_id} GROUP BY DATE"
 
 
@@ -136,7 +136,7 @@ async def overall_analytics(user_id:int=0):
         #for all users in exam
 
         query1=f"SELECT updated_at AS date,no_of_question,IFNULL(correct_ans,0) AS correct_ans," \
-              f"IFNULL(incorret_ans,0)AS incorrect_ans,(no_of_question-(IFNULL(correct_ans,0)+IFNULL(incorret_ans,0))) AS unattempted_questions,test_time,time_taken FROM user_result" \
+              f"IFNULL(incorrect_ans,0)AS incorrect_ans,(no_of_question-(IFNULL(correct_ans,0)+IFNULL(incorrect_ans,0))) AS unattempted_questions,test_time,time_taken FROM user_result" \
               f" WHERE class_grade_id = {class_exam_id} GROUP BY DATE"
 
 

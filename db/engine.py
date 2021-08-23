@@ -18,7 +18,7 @@ class UNIQ_UAT:
     DB_URL="mysql://admin:5DBYs1ou3ACxlRjBUmfn@database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com:3306/learntoday_uat"
 
 def db_connection():
-    db_cofig = UNIQ_Live()
+    db_cofig = UNIQ_UAT()
     db_url = db_cofig.DB_URL
     db_host=db_cofig.DB_HOST
     db_user=db_cofig.DB_USER

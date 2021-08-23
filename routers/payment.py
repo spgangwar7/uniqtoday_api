@@ -48,8 +48,8 @@ async def get_order_id(orderdetails:OrderSchema):
 async def verify_payment(verifyPayment:VerifyPayment):
     try:
         conn = Tortoise.get_connection("default")
-        _RAZORPAY_KEY = "rzp_test_foHLtdKSJjEDzv"
-        _RAZORPAY_SECRET = "RFrAe68CEzVrQpuuHnlKJHcy"
+        _RAZORPAY_KEY = "rzp_test_ZDZNbJZXjNvae9"
+        _RAZORPAY_SECRET = "AeB0cSCNc2fhU7fJZx4nRvYc"
         client = razorpay.Client(auth=(_RAZORPAY_KEY, _RAZORPAY_SECRET))
         razorpay_payment_id=verifyPayment.payment_id
         razorpay_order_id=verifyPayment.order_id

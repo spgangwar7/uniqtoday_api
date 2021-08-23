@@ -79,7 +79,7 @@ async def testSeries_report(student_id:int):
         conn = Tortoise.get_connection("default")
         student_id = str(student_id)
         query = f'select us.id, us.user_id, us.class_grade_id, us.test_type, \
-                   us.exam_mode, us.no_of_question, us.correct_ans, us.incorret_ans,  \
+                   us.exam_mode, us.no_of_question, us.correct_ans, us.incorrect_ans,  \
                    us.unattmepted_ques_cnt, us.marks_gain, time_format(us.test_time,"%T") as test_time,  \
                    time_format(us.time_taken,"%T") as time_taken,  \
                    us.result_percentage, us.ans_swap_count, us.test_series_id,  \
