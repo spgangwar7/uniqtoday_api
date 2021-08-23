@@ -673,17 +673,16 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
             else:
                 query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
                 df_time1 = await conn.execute_query_dict(query)
-                df_time = pd.DataFrame(df_time1)
-                exam_time_per_ques = df_time.iloc[0]
+                exam_time_per_ques = df_time1[0]['exam_time_per_ques']
                 exam_cache['exam_time_per_ques']=exam_time_per_ques
+                print(exam_cache)
                 r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
         else:
             query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
             df_time1 = await conn.execute_query_dict(query)
-            df_time = pd.DataFrame(df_time1)
-            exam_time_per_ques = df_time.iloc[0]
+            exam_time_per_ques = df_time1[0]['exam_time_per_ques']
             exam_cache={"exam_time_per_ques": exam_time_per_ques }
-            #print(exam_time_per_ques)
+            print(df_time1)
             r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
             #print("Data stored in redis: ")
 
