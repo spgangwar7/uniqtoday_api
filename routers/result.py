@@ -137,7 +137,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         total_exam_marks = int(answerList_copy[0]["marks"]) * no_of_question
         result_percentage = int(round((marks_gain / int(total_exam_marks)) * 100))
         if result_percentage < 0: result_percentage = 0
-        query_update = f"INSERT INTO user_result (user_id,class_grade_id,no_of_question, correct_ans, incorret_ans, unattmepted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
+        query_update = f"INSERT INTO user_result (user_id,class_grade_id,no_of_question, correct_ans, incorrect_ans, unattmepted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
                         VALUES ({user_id},{class_id},{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count} )"
         qryExecute=await conn.execute_query(query_update)
         if not qryExecute:

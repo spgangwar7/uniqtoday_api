@@ -1,7 +1,10 @@
+import json
 from http import HTTPStatus
 from typing import List
 import pandas as pd
 import traceback
+
+import redis
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 from tortoise.exceptions import *
@@ -147,36 +150,49 @@ async def MobileOtp(mobile_no: int):
         traceback.print_tb(e.__traceback__)
         return JSONResponse(status_code=400, content={"error": f"{e}", "success": False})
 
-    if response.status_code == 200:
-        try:
-            query = f'update student_users set mobile_otp={mobile_otp} where mobile={mobile_no}'
-            await conn.execute_query_dict(query)
-            resp = {
-                "success": True,
-                "mobile_otp": mobile_otp,
-                "message": "Login Otp"
-            }
-            return JSONResponse(status_code=200, content=resp)
-        except Exception as e:
-            print(e)
-            traceback.print_tb(e.__traceback__)
-            return JSONResponse(status_code=400, content={"error": f"{e}", "success": False})
+    try:
+        query = f'update student_users set mobile_otp={mobile_otp} where mobile={mobile_no}'
+        await conn.execute_query_dict(query)
+        resp = {
+            "success": True,
+            "mobile_otp": mobile_otp,
+            "message": "Login Otp"
+        }
+        return JSONResponse(status_code=200, content=resp)
+    except Exception as e:
+        print(e)
+        traceback.print_tb(e.__traceback__)
+        return JSONResponse(status_code=400, content={"error": f"{e}", "success": False})
     return JSONResponse(status_code=response.status_code, content={"success": False})
 
 
 @router.post('/studentlogin', description='Student Login')
 async def studentloginElast(data: StudentLogin):
     try:
+        start_time = datetime.now()
         conn = Tortoise.get_connection('default')
-        getJson = jsonable_encoder(data)
-        df_j = pd.DataFrame([getJson])
-        mobile_otp = df_j["mobile_otp"].iloc[0]
-        mobile = df_j["mobile"].iloc[0]
+        mobile_otp = data.mobile_otp
+        mobile = data.mobile
+        r = redis.Redis()
         query = f'select id,first_name,user_name,last_name,email,mobile,address,city,state,gender,status,mobile_otp,stream_code,grade_id from student_users where mobile_otp={mobile_otp} and mobile={mobile}'
         val = await conn.execute_query_dict(query)
-        if not val:
+        val = pd.DataFrame(val)
+        user_id = val["id"].iloc[0]
+        val = val.rename(columns={"grade_id": "exam_id"})
+        login_cache = {}
+        print(user_id)
+        if r.exists(str(user_id) + "_sid"):
+            pass
+        else:
+            value = val[['first_name', "user_name", "last_name", "exam_id"]]
+            login_cache = value.to_dict('records')
+            r.set(str(user_id) + "_sid", json.dumps(login_cache))
+        if val.empty:
             return JSONResponse(status_code=400, content={"message": "Please sign up first", "success": False})
-        return JSONResponse(status_code=200, content={"message": "You are logged in", "result": val, "success": True})
+        time_taken = datetime.now() - start_time
+        print(time_taken.total_seconds())
+        return JSONResponse(status_code=200,
+                            content={"message": "You are logged in", "result": val.to_dict('records'), "success": True})
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)

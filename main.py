@@ -62,7 +62,7 @@ class UNIQ_UAT:
     DB_NAME="learntoday_uat"
     DB_URL="mysql://admin:5DBYs1ou3ACxlRjBUmfn@database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com:3306/learntoday_uat"
 
-db_cofig=UNIQ_UAT()
+db_cofig=UNIQ_Live()
 db_url=db_cofig.DB_URL
 register_tortoise(
     app,
@@ -81,7 +81,6 @@ app.include_router(question_selections)
 app.include_router(registerations)
 app.include_router(testSeries)
 app.include_router(questionsReviews)
-app.include_router(profilling_input)
 app.include_router(profilingTest)
 app.include_router(scholarshipTest)
 app.include_router(referrals)

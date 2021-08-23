@@ -46,12 +46,15 @@ async def postExamAnalytics(user_id:int=0,exam_id:int=0):
     subjectquery = f'SELECT sqa.subject_id, subjects.subject_name, count(*) as total_questions,sum(attempt_status="Correct") as correct_count, sum(attempt_status="Incorrect") as incorrect_count,sum(attempt_status="Unanswered") as unanswered_count FROM student_questions_attempted as sqa inner join subjects on sqa.subject_id=subjects.id  where student_result_id={result_id} group by subject_id;'
     resultbysubject = await conn.execute_query_dict(subjectquery)
     resultbysubject=pd.DataFrame(resultbysubject)
-    resultbysubject=resultbysubject[["correct_count","incorrect_count","unanswered_count","total_questions"]].astype(int)
+    resultbysubject=resultbysubject.fillna(0)
+    resultbysubject = resultbysubject.astype({"correct_count": int, "incorrect_count": int,"unanswered_count": int,"total_questions": int})
+
     # Get stats of result by topic
-    topicquery = f'SELECT sqa.subject_id,subjects.subject_name ,topic_id ,topics.topic_name,  count(*) as total_questions,sum(attempt_status="Correct") as correct_count, sum(attempt_status="Incorrect") as incorrect_count,sum(attempt_status="Unanswered") as unanswered_count FROM student_questions_attempted as sqa inner join subjects on sqa.subject_id=subjects.id left join topics on sqa.topic_id =topics.id where student_result_id={result_id} group by subject_id,topic_id order by subject_id;'
+    topicquery = f'SELECT sqa.subject_id,topic_id ,topics.topic_name,  count(*) as total_questions,sum(attempt_status="Correct") as correct_count, sum(attempt_status="Incorrect") as incorrect_count,sum(attempt_status="Unanswered") as unanswered_count FROM student_questions_attempted as sqa inner join subjects on sqa.subject_id=subjects.id left join topics on sqa.topic_id =topics.id where student_result_id={result_id} group by subject_id,topic_id order by subject_id;'
     resultbytopic = await conn.execute_query_dict(topicquery)
     resultbytopic = pd.DataFrame(resultbytopic)
-    resultbytopic=resultbytopic[["correct_count","incorrect_count","unanswered_count","total_questions"]].astype(int)
+    resultbytopic=resultbytopic.fillna("")
+    resultbytopic = resultbytopic.astype({"correct_count": int, "incorrect_count": int,"unanswered_count": int,"total_questions": int})
     resultbytopic = resultbytopic.fillna("")
     resultbytopic = resultbytopic.to_dict("records")
 

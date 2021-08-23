@@ -52,7 +52,7 @@ async def StudentProfilingTest(exam_id:int=0):
                  f'a.time_allowed,a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
                  f'FROM {question_bank_name} a left join question_bank_passage_inst b ON a.passage_inst_id = b.id ' \
                  f'where a.question_id in ' \
-                 f'(select question_id from student_profiling_questions where exam_id = {exam_id}) ORDER BY RAND()'
+                 f'(select question_id from student_profiling_questions where exam_id = {exam_id}) ORDER BY RAND() limit 75'
 
         summary1 = await conn.execute_query_dict(query1)
         summary1 = pd.DataFrame(summary1)
@@ -123,7 +123,7 @@ async def StudentProfilingTestWeb(exam_id:int=0):
                  f'a.time_allowed,a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
                  f'FROM {question_bank_name} a left join question_bank_passage_inst b ON a.passage_inst_id = b.id ' \
                  f'where a.question_id in ' \
-                 f'(select question_id from student_profiling_questions where exam_id = {exam_id}) ORDER BY RAND()'
+                 f'(select question_id from student_profiling_questions where exam_id = {exam_id}) ORDER BY RAND() limit 75'
 
         summary1 = await conn.execute_query_dict(query1)
         summary1 = pd.DataFrame(summary1)

@@ -205,11 +205,11 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
 
         resp = {
 
-            "massage":"result saved successfully",
+            "message":"result saved successfully",
             "success":True
 
             }
-        print(f"exceution time is {(datetime.now()-start_time)}")
+        print(f"execution time is {(datetime.now()-start_time)}")
         return resp
     except Exception as e:
         print(e)
@@ -219,20 +219,12 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
 @router.post('/save-student-summary', description='Save Student summary', status_code=201)
 async def save_student_summary(student_id:int,exam_id:int):
     try:
-        pd.set_option('display.max_columns', None)
-        pd.set_option('display.max_rows', None)
+        start_time=datetime.now()
         conn = Tortoise.get_connection("default")
-        query = f'SELECT id,class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,' \
-                f'attempt_status,question_marks,gain_marks,option_id,negative_marks_cnt,time_taken,answer_swap_cnt,created_on ' \
-                f'FROM student_questions_attempted where student_id={student_id} and class_exam_id={exam_id}'
-        result= await conn.execute_query_dict(query)
-        resultdf=pd.DataFrame(result)
-        if resultdf.empty:
-            return JSONResponse(status_code=400,content={"response":"invalid credentials","success":False})
-        print(len(resultdf))
         #Initializing Redis
         r = redis.Redis()
         exam_cache={}
+        classTablename=""
         if r.exists(str(exam_id) + "_examid"):
             exam_cache = json.loads(r.get(str(exam_id) + "_examid"))
             if "question_bank_name" in exam_cache:
@@ -251,22 +243,20 @@ async def save_student_summary(student_id:int,exam_id:int):
             r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
         result2=[]
 
-        for result_dict in result:
-            joinquery = f"SELECT question_id,unit_id,skill_id,difficulty_level,major_concept_id FROM {classTablename} where question_id={result_dict['question_id']}"
-            mergeoutput = await conn.execute_query_dict(joinquery)
-            for mergeoutputdict in mergeoutput:
-                if not mergeoutput:
-                    print("Question id not found:"+str(result_dict['question_id']))
-                else:
-                    minoridquery = f"SELECT * FROM question_concepts where question_id={result_dict['question_id']}"
-                    minorid = await conn.execute_query_dict(minoridquery)
-                    result2.append(mergeoutputdict)
+        query = f'SELECT id,class_exam_id,student_id,student_result_id,sqa.subject_id,sqa.chapter_id,sqa.topic_id,exam_type,' \
+                f'sqa.question_id,attempt_status,sqa.gain_marks,unit_id,skill_id,difficulty_level,major_concept_id,sqa.created_on FROM ' \
+                f'student_questions_attempted as sqa left join {classTablename} as qbj on sqa.question_id=qbj.question_id ' \
+                f'where student_id={student_id} and class_exam_id={exam_id}'
+        result= await conn.execute_query_dict(query)
+        resultdf=pd.DataFrame(result)
+        resultdf["created_on"]=pd.to_datetime(resultdf["created_on"]).dt.strftime('%Y-%m-%d')
+        if resultdf.empty:
+            return JSONResponse(status_code=400,content={"response":"invalid credentials","success":False})
+        print(len(resultdf))
+        print(resultdf)
+        resultdf=resultdf.fillna(0)
 
-        result2=pd.DataFrame(result2)
-        #print(result2)
-        final_df = pd.merge(resultdf, result2, how='inner', on='question_id')
-        final_df=final_df.loc[:, final_df.columns != 'time_taken'].fillna(0)
-        dfgrouponehot = pd.get_dummies(final_df, columns=['attempt_status'], prefix=['attempt_status'])
+        dfgrouponehot = pd.get_dummies(resultdf, columns=['attempt_status'], prefix=['attempt_status'])
         #dfgrouponehot = dfgrouponehot.fillna(0)
         if 'attempt_status_Correct' not in dfgrouponehot:
             dfgrouponehot['attempt_status_Correct'] = 0
@@ -295,7 +285,7 @@ async def save_student_summary(student_id:int,exam_id:int):
             skill_id=dict['skill_id']
             difficulty_level=dict['difficulty_level']
             major_concept_id=dict['major_concept_id']
-            created_on=dict['created_on'].strftime('%Y-%m-%d')
+            created_on=dict['created_on']
             gain_marks=dict['gain_marks']
             attempt_status_Correct=dict['attempt_status_Correct']
             attempt_status_Incorrect=dict['attempt_status_Incorrect']
@@ -310,6 +300,8 @@ async def save_student_summary(student_id:int,exam_id:int):
 
         resp={"response":"Records inserted in db successfully"
             ,"success":True}
+        print(f"execution time is {(datetime.now()-start_time)}")
+
         return resp
     except Exception as e:
         print(e)

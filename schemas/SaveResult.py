@@ -8,12 +8,12 @@ class answer_list(BaseModel):
     question_id: float
 
 class SaveResult(BaseModel):
-    user_id:str
+    user_id:int
     test_time:str
     time_taken:str
     class_id:int
     questions_list:List[int]
     total_marks:float
-    no_of_question:float
+    no_of_question:int
     answerList:List[answer_list]
 
