@@ -85,7 +85,7 @@ async def postExamAnalytics(user_id:int=0,exam_id:int=0):
     a = df['user_id'].unique()
     i, = np.where(a == user_id)
 
-    class_average_query=f'SELECT avg(marks_gain) as class_average FROM learntoday_uat.user_result where class_grade_id={exam_id};'
+    class_average_query=f'SELECT avg(marks_gain) as class_average FROM user_result where class_grade_id={exam_id};'
     class_average = await conn.execute_query_dict(class_average_query)
     class_average = class_average[0].get("class_average")
     class_average=float(class_average)
