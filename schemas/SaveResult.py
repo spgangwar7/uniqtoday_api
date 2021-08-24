@@ -16,4 +16,7 @@ class SaveResult(BaseModel):
     total_marks:float
     no_of_question:int
     answerList:List[answer_list]
+    test_type:str
+    exam_mode:str
+    exam_type:str
 

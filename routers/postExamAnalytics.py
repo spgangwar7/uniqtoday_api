@@ -84,6 +84,11 @@ async def postExamAnalytics(user_id:int=0,exam_id:int=0):
     v = df[filt]['score'].max()
     a = df['user_id'].unique()
     i, = np.where(a == user_id)
+
+    class_average_query=f'SELECT avg(marks_gain) as class_average FROM learntoday_uat.user_result where class_grade_id={exam_id};'
+    class_average = await conn.execute_query_dict(class_average_query)
+    class_average = class_average[0].get("class_average")
+    class_average=float(class_average)
     resp = {
         "no_of_question":no_of_question,
         "correct_count":correct_count,
@@ -92,6 +97,7 @@ async def postExamAnalytics(user_id:int=0,exam_id:int=0):
         "incorrect_score":incorrect_score,
         "total_exam_marks":total_exam_marks,
         "total_get_marks":total_get_marks,
+        "class_average":class_average,
         "result_time_taken":result_time_taken,
         "result_percentage":result_percentage,
         "not_answered":not_answered,

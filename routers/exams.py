@@ -3,12 +3,15 @@ from http import HTTPStatus
 from typing import List
 import pandas as pd
 from fastapi import APIRouter
+import redis
+import json
 from fastapi.encoders import jsonable_encoder
 from db.engine import db_connection
 from schemas.SubjectRating import SubjectRating
 from tortoise.exceptions import  *
 from tortoise import Tortoise
 from fastapi.responses import JSONResponse
+from datetime import datetime,timedelta
 router = APIRouter(
     prefix='/api',
     tags=['Exams'],
@@ -18,11 +21,18 @@ router = APIRouter(
 async def getAllExams():
     try:
         conn = Tortoise.get_connection("default")
-        query = 'select id,class_exam_cd from class_exams'
-        val = await conn.execute_query_dict(query)
+        r=redis.Redis()
+        class_exams=[]
+        if r.exists("class_exams"):
+            class_exams=json.loads(r.get("class_exams"))
+
+        else:
+            query = 'select id,class_exam_cd from class_exams'
+            class_exams = await conn.execute_query_dict(query)
+            r.setex("class_exams", timedelta(days=1), json.dumps(class_exams))
         resp={
             'message': "Class/Exam List",
-            'response': val,
+            'response': class_exams,
             "success":True
         }
         return JSONResponse(status_code=200,content=resp)
@@ -33,14 +43,31 @@ async def getAllExams():
 @router.get("/subjects/{exam_id}",description='Get All Subjects From An Exam', status_code=201)
 async def GetAllSubjects(exam_id:int=0):
     try:
+        start_time=datetime.now()
         conn = Tortoise.get_connection("default")
-        query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} group by exam_subjects.subject_id'
-        val = await conn.execute_query_dict(query)
-        #print(val)
-        #await conn.close()
-        if len(val)==0:
-            return JSONResponse(status_code=400,content={"msg":f"no subjects with the given exam_id : {exam_id}","success":False})
-        return JSONResponse(status_code=200,content={'message': "Subject list by class Id", 'response':val,"success":True})
+        r=redis.Redis()
+        exam_cache={}
+        subjects=''
+        if r.exists(str(exam_id)+"_examid"):
+            exam_cache=json.loads(r.get(str(exam_id)+"_examid"))
+            if "subjects" in exam_cache:
+                subjects=exam_cache['subjects']
+            else:
+                query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} group by exam_subjects.subject_id'
+                subjects = await conn.execute_query_dict(query)
+                exam_cache['subjects'] = subjects
+                r.setex(str(exam_id) + "_examid", timedelta(days=1), json.dumps(exam_cache))
+        else:
+            query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} group by exam_subjects.subject_id'
+            subjects = await conn.execute_query_dict(query)
+            if len(subjects) == 0:
+                return JSONResponse(status_code=400, content={"msg": f"no subjects with the given exam_id : {exam_id}",
+                                                              "success": False})
+            exam_cache['subjects'] = subjects
+            r.setex(str(exam_id) + "_examid", timedelta(days=1), json.dumps(exam_cache))
+
+        print(f"execution time {datetime.now() - start_time}")
+        return JSONResponse(status_code=200,content={'message': "Subject list by class Id", 'response':subjects,"success":True})
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 
@@ -48,14 +75,33 @@ async def GetAllSubjects(exam_id:int=0):
 @router.get("/topics-by-subject-id/{subject_id}",description='Get All Topics From A Subject', status_code=201)
 async def GetAllTopics(subject_id:int=0):
     try:
+        start_time=datetime.now()
         conn = Tortoise.get_connection("default")
-        query = f"select id,topic_name from topics where subject_id={subject_id}"
-        val = await conn.execute_query_dict(query)
-        if len(val)==0:
-            return JSONResponse(status_code=400,content={"msg":f"no topics with given subject_id : {subject_id}",
-                                                         "success":False})
+        r=redis.Redis()
+        subject_cache={}
+        topics=''
+        if r.exists(str(subject_id)+"_subject_id"):
+            subject_cache=json.loads(r.get(str(subject_id)+"_subject_id"))
+            if "topics" in subject_cache:
+                topics=subject_cache['topics']
+            else:
+                query = f"select id as topic_id,topic_name from topics where subject_id={subject_id}"
+                topics = await conn.execute_query_dict(query)
+                subject_cache['topics']=topics
+                r.setex(str(subject_id)+"_subject_id",timedelta(days=1),json.dumps(subject_cache))
+        else:
+            query = f"select id as topic_id,topic_name from topics where subject_id={subject_id}"
+            topics = await conn.execute_query_dict(query)
+            if len(topics) == 0:
+                return JSONResponse(status_code=400, content={"msg": f"no topics with given subject_id : {subject_id}",
+                                                              "success": False})
+            subject_cache['topics'] = topics
+            r.setex(str(subject_id) + "_subject_id", timedelta(days=1), json.dumps(subject_cache))
+
+
+        print(f"execution time:{datetime.now()-start_time}")
         return JSONResponse(status_code=200,content={'message': "Topic list by subject Id",
-                                                     'response': val,
+                                                     'response': topics,
                                                      "success":True
                                                      })
     except IntegrityError as e:
@@ -65,12 +111,32 @@ async def GetAllTopics(subject_id:int=0):
 @router.get("/topics-by-chapter-id/{chapter_id}",description='Get All Topics From A Chapter', status_code=201)
 async def GetAllTopics(chapter_id:int=0):
     try:
+        start_time=datetime.now()
         conn = Tortoise.get_connection("default")
-        query = f"select id,topic_name from topics where chapter_id={chapter_id}"
-        val = await conn.execute_query_dict(query)
-        if len(val)==0:
-            return JSONResponse(status_code=400,content={"msg":f"no topics with given Chapter ID : {chapter_id}","success":False})
-        return JSONResponse(status_code=200,content={'message': "Topic list by Chapter Id", 'response': val,"success":True})
+        r=redis.Redis()
+        chapter_cache={}
+        topics=''
+        if r.exists(str(chapter_id)+"_chapter_id"):
+            chapter_cache=json.loads(r.get(str(chapter_id)+"_chapter_id"))
+            if 'topics' in chapter_cache:
+                topics=chapter_cache['topics']
+            else:
+                query = f"select id ,topic_name from topics where chapter_id={chapter_id}"
+                topics = await conn.execute_query_dict(query)
+                chapter_cache['topics']=topics
+                r.setex(str(chapter_id)+"_chapter_id",timedelta(days=1),json.dumps(chapter_cache))
+        else:
+            query = f"select id ,topic_name from topics where chapter_id={chapter_id}"
+            topics = await conn.execute_query_dict(query)
+            if len(topics)!=0:
+                chapter_cache['topics'] = topics
+                r.setex(str(chapter_id) + "_chapter_id", timedelta(days=1), json.dumps(chapter_cache))
+            else:
+                return JSONResponse(status_code=400, content={"msg": f"no topics with given Chapter ID : {chapter_id}",
+                                                              "success": False})
+
+        print(f"execution time : {datetime.now()-start_time}")
+        return JSONResponse(status_code=200,content={'message': "Topic list by Chapter Id", 'response': topics,"success":True})
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 
@@ -78,39 +144,67 @@ async def GetAllTopics(chapter_id:int=0):
 @router.get("/chapters/{student_id}/{subject_id}",description='Get All Chapters From A Subject', status_code=201)
 async def GetAllChapters(student_id:int=0,subject_id:int=0):
     try:
+        start_time=datetime.now()
+        r=redis.Redis()
         conn = Tortoise.get_connection("default")
-        query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and chapter_name is not null"
-        val = await conn.execute_query_dict(query)
-        #print(val)
-        #await conn.close()
-        if len(val)==0:
-            return JSONResponse(status_code=400, content={"msg":f"no Chapters with given subject_id : {subject_id}"})
-        return JSONResponse(status_code=200, content={'message': "Chapters list by subject Id", 'response': val,"success":True})
+        subject_cache={}
+        chapters=''
+        if r.exists(str(subject_id)+"_subject_id"):
+            subject_cache=json.loads(r.get(str(subject_id)+"_subject_id"))
+            if "chapters" in subject_cache:
+                chapters=subject_cache['chapters']
+            else:
+                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and chapter_name is not null"
+                chapters = await conn.execute_query_dict(query)
+                if len(chapters)!=0:
+                    subject_cache['chapters']=chapters
+                    r.setex(str(subject_id)+"_subject_id",timedelta(days=1),json.dumps(subject_cache))
+                else:
+                    return JSONResponse(status_code=400,
+                                        content={"msg": f"no Chapters with given subject_id : {subject_id}"})
+        else:
+            query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and chapter_name is not null"
+            chapters = await conn.execute_query_dict(query)
+            if len(chapters) != 0:
+                subject_cache['chapters'] = chapters
+                r.setex(str(subject_id) + "_subject_id", timedelta(days=1), json.dumps(subject_cache))
+            else:
+                return JSONResponse(status_code=400,
+                                    content={"msg": f"no Chapters with given subject_id : {subject_id}"})
+        print(f"execution time: {datetime.now()-start_time}")
+        return JSONResponse(status_code=200, content={'message': "Chapters list by subject Id", 'response': chapters,"success":True})
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":True})
 
 
 
-@router.get("/sub-topics/{topic_id}",description="Get All SubTopics From A Topic", status_code=201)
-async def GetSubTopic(topic_id:int=0):
-    try:
-        conn = Tortoise.get_connection("default")
-        query=f"select sub_topic_id,sub_topic_name from subject_sub_topic where topic_id={topic_id}"
-        val = await conn.execute_query_dict(query)
-        #await conn.close()
-        if len(val)==0:
-            return JSONResponse(status_code=400, content={"msg":f"no subtopic with the given topic_id : {topic_id}","success":False})
-        return JSONResponse(status_code=200, content={"message":"subtopic by topic_id","response":val,"success":True})
-    except IntegrityError as e:
-        return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 
 @router.get("/subject-topics/{exam_id}",description="Get All Subjects and All Topics in These Subjects From an Exam",status_code=201)
 async def GetSubjectTopic(exam_id:int):
     try:
+        start_time=datetime.now()
+        r=redis.Redis()
+        exam_cache={}
         conn = Tortoise.get_connection("default")
-        query = f'select esc.subject_id as subject_id,s.subject_name as subject_name,st.id as topic_id,st.topic_name as topic_name from subjects s join topics st on s.id=st.subject_id join exam_subject_chapters esc on esc.subject_id=s.id where esc.class_exam_id={exam_id} group by subject_name,topic_name'
-        val = await conn.execute_query_dict(query)
-        return JSONResponse(status_code=200, content={"message":"subject_topic","response": val,"success":True})
+        if r.exists(str(exam_id)+"_examid"):
+            exam_cache=json.loads(r.get(str(exam_id)+"_examid"))
+            if "subject_topics" in exam_cache:
+                subject_topics=exam_cache['subject_topics']
+            else:
+                query = f'select esc.subject_id as subject_id,s.subject_name as subject_name,st.id as topic_id,st.topic_name as topic_name from subjects s join topics st on s.id=st.subject_id join exam_subject_chapters esc on esc.subject_id=s.id where esc.class_exam_id={exam_id} group by subject_name,topic_name'
+                subject_topics = await conn.execute_query_dict(query)
+                exam_cache['subject_topics']=subject_topics
+                r.setex(str(exam_id)+"_examid",timedelta(days=1),json.dumps(exam_cache))
+        else:
+            query = f'select esc.subject_id as subject_id,s.subject_name as subject_name,st.id as topic_id,st.topic_name as topic_name from subjects s join topics st on s.id=st.subject_id join exam_subject_chapters esc on esc.subject_id=s.id where esc.class_exam_id={exam_id} group by subject_name,topic_name'
+            subject_topics = await conn.execute_query_dict(query)
+            if len(subject_topics) == 0:
+                return JSONResponse(status_code=400, content={"msg": f"no subjects & topics with given exam Id : {exam_id}",
+                                                              "success": False})
+            exam_cache['subject_topics'] = subject_topics
+            r.setex(str(exam_id) + "_examid", timedelta(days=1), json.dumps(exam_cache))
+        print(f"execution time : {datetime.now()-start_time}")
+        return JSONResponse(status_code=200, content={"message":"subject_topic","response": subject_topics,"success":True})
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 

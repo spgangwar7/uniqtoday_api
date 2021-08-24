@@ -35,6 +35,9 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         test_time = data.test_time
         time_taken = data.time_taken
         class_id = data.class_id
+        test_type=data.test_type
+        exam_mode=data.exam_mode
+        exam_type=data.exam_type
         all_questions_list =data.questions_list
         no_of_question = data.no_of_question
         answerList = data.answerList
@@ -58,7 +61,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             exam_cache['question_bank_name'] = classTablename
             r.set(str(class_id) + "_examid", json.dumps(exam_cache))
 
-        Query = f"SELECT question_id, subject_id,topic_id, marks,negative_marking," \
+        Query = f"SELECT question_id, subject_id,topic_id,chapter_id, marks,negative_marking," \
                 f" template_type,answers,question_options \
             FROM {classTablename} WHERE question_id IN {tuple(all_questions_list)}"
 
@@ -111,8 +114,9 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                 total_incorrectAttempt += 1
 
             subject_id = Question_attemt_record['subject_id'].loc[quesId]
+            chapter_id = Question_attemt_record['chapter_id'].loc[quesId]
             topic_id = Question_attemt_record['topic_id'].loc[quesId]
-            dict={'question_id': quesId, 'subject_id': subject_id, 'topic_id': topic_id, 'gain_mark': gain_mark,
+            dict={'question_id': quesId, 'subject_id': subject_id,"chapter_id":chapter_id, 'topic_id': topic_id, 'gain_mark': gain_mark,
                         "attempt_correct": correct_attempt, 'attemtpt_incorrect_cnt': incorrect_attempt, "attempt_cnt": 1,
                         "marks": marks, "negative_marking": negative_marking}
             dict.update(jsonable_encoder(val))
@@ -129,8 +133,8 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         total_exam_marks = int(new_answer_list[0]["marks"]) * no_of_question
         result_percentage = int(round((marks_gain / int(total_exam_marks)) * 100))
         if result_percentage < 0: result_percentage = 0
-        query_insert = f"INSERT INTO user_result (user_id,class_grade_id,no_of_question, correct_ans, incorrect_ans, unattempted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
-                        VALUES ({user_id},{class_id},{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count} )"
+        query_insert = f"INSERT INTO user_result (user_id,class_grade_id,test_type,exam_mode,no_of_question, correct_ans, incorrect_ans, unattempted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
+                        VALUES ({user_id},{class_id},'{test_type}','{exam_mode}',{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count} )"
         qryExecute=await conn.execute_query(query_insert)
         if not qryExecute:
             qryExecute=0
@@ -170,12 +174,12 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             answer_swap_cnt = int(quesDict['attemptCount'])
             if attempt_correct==1:
 
-                qry_update = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,topic_id,question_id,question_marks,gain_marks,time_taken,answer_swap_cnt,attempt_status,option_id) \
-                               VALUES ({class_id},{user_id},{resultId},{subject_id},{topic_id},{question_id},{question_marks}, {gain_marks}, '{time_taken_sec}',{answer_swap_cnt},'Correct','{answer}')"
+                qry_update = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,time_taken,answer_swap_cnt,attempt_status,option_id) \
+                               VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{question_id},{question_marks}, {gain_marks}, '{time_taken_sec}',{answer_swap_cnt},'Correct','{answer}')"
                 await conn.execute_query_dict(qry_update)
             else:
-                qry_update = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,topic_id,question_id,question_marks,gain_marks,time_taken,answer_swap_cnt,attempt_status,option_id) \
-                                               VALUES ({class_id},{user_id},{resultId},{subject_id},{topic_id},{question_id},{question_marks}, {gain_marks}, '{time_taken_sec}',{answer_swap_cnt},'Incorrect','{answer}' )"
+                qry_update = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status,option_id) \
+                                               VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{question_id},{question_marks}, {gain_marks},1,'{time_taken_sec}',{answer_swap_cnt},'Incorrect','{answer}' )"
                 await conn.execute_query_dict(qry_update)
 
         student_result={}
@@ -193,16 +197,17 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         r.setex(str(user_id) + "_sid" + "_result_data",timedelta(days=1),json.dumps(student_result))
         # inserting for unattempted quest
         for unattemptQues in unattempted_questions_list:
+            chapter_id = Question_attemt_record.loc[unattemptQues]['chapter_id']
             subject_id = Question_attemt_record.loc[unattemptQues]['subject_id']
             topic_id = Question_attemt_record.loc[unattemptQues]['topic_id']
             question_marks = int(new_answer_list[0]['marks'])
-            qry_insert2 = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,topic_id,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status) \
-                               VALUES ({class_id},{user_id},{resultId},{subject_id},{topic_id},{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
+            qry_insert2 = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status) \
+                               VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
             await conn.execute_query_dict(qry_insert2)
-
+            message_str=f'Result saved successfully. Result_ID: {resultId}'
         resp = {
 
-            "message":"result saved successfully",
+            "message":message_str,
             "success":True
 
             }
