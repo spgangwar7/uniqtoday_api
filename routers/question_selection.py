@@ -49,6 +49,13 @@ async def jwtAuth(conn):
     #    token_flag = True
     return token_flag
 
+async def update_db_exhaust_date(student_id):
+    conn = Tortoise.get_connection("default")
+    date_exhausted = (datetime.now()).strftime("%Y-%m-%d")
+    query_update = f'UPDATE student_preferences SET question_bank_exhausted_flag="Yes", ques_exhausted_date={date_exhausted} WHERE student_id = {student_id}'
+    await conn.execute_query_dict(query_update)
+    return (print('updated exhausted date in DB'))
+
 
 async def get_custom_from_DB2(df_j, subject_id, topic_list,chapter_id,quiz_bank):
     try:
@@ -400,6 +407,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
         if  not attempted_questions_list.empty:
 
             #criteria 2:  If student has attempted all questions atleast once then get questions skipped by student
+            await update_db_exhaust_date(student_id)
             skipped_questions_list=attempted_questions_list.loc[attempted_questions_list['attempt_status'] == "Unanswered"]
             skipped_question_ids=skipped_questions_list['question_id'].unique().tolist()
             final_question_list.extend(skipped_question_ids)
@@ -487,6 +495,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
             remaining_questions= question_cnt - len(final_question_list)
         if  not attempted_questions_list.empty:
             #criteria 2:  If student has attempted all questions atleast once then get questions skipped by student
+            await update_db_exhaust_date(student_id)
             skipped_questions_list=attempted_questions_list.loc[attempted_questions_list['attempt_status'] == "Unanswered"]
             skipped_question_ids=skipped_questions_list['question_id'].unique().tolist()
             final_question_list.extend(skipped_question_ids)
@@ -574,6 +583,7 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
             remaining_questions= question_cnt - len(final_question_list)
         if  not attempted_questions_list.empty:
             #criteria 2:  If student has attempted all questions atleast once then get questions skipped by student
+            await update_db_exhaust_date(student_id)
             skipped_questions_list=attempted_questions_list.loc[attempted_questions_list['attempt_status'] == "Unanswered"]
             skipped_question_ids=skipped_questions_list['question_id'].unique().tolist()
             final_question_list.extend(skipped_question_ids)
@@ -649,19 +659,19 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 quiz_bank = student_cache['quiz_bank']
                 #print(quiz_bank)
             else:
-                query = f'Select question_bank_name,time_allowed,questions_cnt,exam_paper_single_mult_flag from class_exams where id ={exam_id_input}'
+                query = f'Select question_bank_name from class_exams where id ={exam_id_input}'
                 df_quiz1 = await conn.execute_query_dict(query)
                 df_quiz = pd.DataFrame(df_quiz1)
                 quiz_bank = df_quiz['question_bank_name'].iloc[0]
                 student_cache['quiz_bank']=quiz_bank
-                r.set(str(student_id_input) + "_sid", json.dumps(student_cache))
+                r.setex(str(student_id_input) + "_sid", timedelta(days=1), json.dumps(student_cache))
         else:
-            query = f'Select question_bank_name,time_allowed,questions_cnt,exam_paper_single_mult_flag from class_exams where id ={exam_id_input}'
+            query = f'Select question_bank_name from class_exams where id ={exam_id_input}'
             df_quiz1 = await conn.execute_query_dict(query)
             df_quiz = pd.DataFrame(df_quiz1)
             quiz_bank = df_quiz['question_bank_name'].iloc[0]
             student_cache={"exam_id":exam_id_input,"quiz_bank":quiz_bank}
-            r.set(str(student_id_input)+"_sid", json.dumps(student_cache))
+            r.setex(str(student_id_input)+"_sid", timedelta(days=1), json.dumps(student_cache))
             #print("Student Data stored in redis")
 
 
@@ -676,14 +686,18 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 exam_time_per_ques = df_time1[0]['exam_time_per_ques']
                 exam_cache['exam_time_per_ques']=exam_time_per_ques
                 print(exam_cache)
-                r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id_input) + "_examid", timedelta(days=1), json.dumps(exam_cache))
         else:
-            query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
+            query = f'SELECT exam_time_per_ques,time_allowed,questions_cnt,question_bank_name from class_exams where id={exam_id_input}'
             df_time1 = await conn.execute_query_dict(query)
             exam_time_per_ques = df_time1[0]['exam_time_per_ques']
-            exam_cache={"exam_time_per_ques": exam_time_per_ques }
+            time_allowed = df_time1[0]['time_allowed']
+            questions_cnt = df_time1[0]['questions_cnt']
+            question_bank_name = df_time1[0]['question_bank_name']
+            exam_cache={"exam_time_per_ques": exam_time_per_ques,"time_allowed":time_allowed,
+                        "questions_cnt":questions_cnt,"question_bank_name":question_bank_name }
             print(df_time1)
-            r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
+            r.setex(str(exam_id_input) + "_examid", timedelta(days=1), json.dumps(exam_cache))
             #print("Data stored in redis: ")
 
         total_time = exam_time_per_ques * count
@@ -726,7 +740,6 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
                 qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
                 from {quiz_bank} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-                left join question_subtopic c on qb.question_id = c.question_id  \
                 where qb.question_id in {question_list_str}'
                 # print(query)
                 datalist1 = await conn.execute_query_dict(query)

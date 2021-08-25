@@ -205,6 +205,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                                VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
             await conn.execute_query_dict(qry_insert2)
             message_str=f'Result saved successfully. Result_ID: {resultId}'
+            background_tasks.add_task(save_student_summary, user_id, class_id)
         resp = {
 
             "message":message_str,
@@ -255,7 +256,7 @@ async def save_student_summary(student_id:int,exam_id:int):
         if resultdf.empty:
             return JSONResponse(status_code=400,content={"response":"invalid credentials","success":False})
         print(len(resultdf))
-        print(resultdf)
+        #print(resultdf)
         resultdf=resultdf.fillna(0)
 
         dfgrouponehot = pd.get_dummies(resultdf, columns=['attempt_status'], prefix=['attempt_status'])

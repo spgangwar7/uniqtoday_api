@@ -10,6 +10,7 @@ from routers.postExamAnalytics import router as postExamAnalytics
 from routers.subscriptions import router as subscriptions
 from routers.registration import router as registerations
 from routers.question_selection import router as question_selections
+from routers.assessmentQuestionSelection import router as assessmentQuestionSelection
 from routers.bookmarkQuestion import router as bookmarkQuestions
 from routers.testSeries import router as testSeries
 from tortoise.contrib.fastapi import register_tortoise
@@ -78,6 +79,7 @@ app.include_router(exams)
 app.include_router(student_save_result)
 app.include_router(postExamAnalytics)
 app.include_router(question_selections)
+app.include_router(assessmentQuestionSelection)
 app.include_router(registerations)
 app.include_router(testSeries)
 app.include_router(questionsReviews)

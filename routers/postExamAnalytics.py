@@ -12,9 +12,6 @@ from fastapi.encoders import jsonable_encoder
 from tortoise.exceptions import IntegrityError
 from fastapi.responses import JSONResponse
 from tortoise import Tortoise, fields, run_async
-from tortoise.models import Model
-from tortoise.transactions import in_transaction
-from tabulate import tabulate
 from datetime import datetime
 from schemas.SaveResult import SaveResult
 router = APIRouter(
