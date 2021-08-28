@@ -42,11 +42,9 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
         if r.exists(str(exam_id) + "_examid"):
             exam_cache = json.loads(r.get(str(exam_id) + "_examid"))
             # print("Redis exam data: "+str(exam_cache))
-            if "time_allowed" in exam_cache:
+            if "time_allowed" in exam_cache and "questions_cnt" in exam_cache and "question_bank_name" in exam_cache:
                 time_allowed = exam_cache['time_allowed']
-            if "questions_cnt" in exam_cache:
                 questions_cnt = exam_cache['questions_cnt']
-            if "question_bank_name" in exam_cache:
                 question_bank_name = exam_cache['question_bank_name']
             else:
                 query = f'SELECT exam_time_per_ques,time_allowed,questions_cnt,question_bank_name from class_exams where id={exam_id}'
@@ -65,15 +63,18 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
             exam_time_per_ques = df_time1[0]['exam_time_per_ques']
             time_allowed = df_time1[0]['time_allowed']
             questions_cnt = df_time1[0]['questions_cnt']
+
             question_bank_name = df_time1[0]['question_bank_name']
             exam_cache = {"exam_time_per_ques": exam_time_per_ques, "time_allowed": time_allowed,
                           "questions_cnt": questions_cnt, "question_bank_name": question_bank_name}
-            print(df_time1)
+
             r.setex(str(exam_id) + "_examid", timedelta(days=1), json.dumps(exam_cache))
             # print("Data stored in redis: ")
         #check if student has given any test before
-        check_test_query=f'SELECT id FROM user_result where user_id=30952;'
+
+        check_test_query=f'SELECT id FROM user_result where user_id={student_id}'
         test_status = await conn.execute_query_dict(check_test_query)
+
         if len(test_status) == 0:
             #########################################################################################################
             #case 1
@@ -118,7 +119,7 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                            WHERE b.last_test_date IS NULL and m.student_id={student_id} and m.ques_ans_incorrectly !=0 order by topic_id'
             topicslist = await conn.execute_query_dict(getTopicsQuery)
             topic_id_list = [d['topic_id'] for d in topicslist if 'topic_id' in d]
-            print(topic_id_list)
+
             if topic_id_list:
                 if len(topic_id_list) == 1:
                     topic_id_list = "(" + str(topic_id_list[0]) + ")"
@@ -132,7 +133,7 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                                  qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
                                  qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
                                  from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-                                 where qb.topic_id in {topic_id_list} order by rand() limit {questions_cnt} '
+                                 where qb.topic_id in {topic_id_list} order by rand() limit {questions_cnt}'
 
             result2 = await conn.execute_query_dict(query2)
             result2=pd.DataFrame(result2)
@@ -165,7 +166,7 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                     f"(ques_ans_correctly/question_attempted)*100 AS correct_pct,ques_ans_incorrectly," \
                     f"(ques_ans_incorrectly/question_attempted)*100 AS incorrect_pct FROM student_performance_summary " \
                     f"where student_id={student_id} GROUP BY topic_id)" \
-                    f" a WHERE a.incorrect_pct>50"
+                    f" a WHERE a.incorrect_pct>50 or a.correct_pct<50"
             topicslist = await conn.execute_query_dict(query)
             topic_id_list = [d['topic_id'] for d in topicslist if 'topic_id' in d]
             print(topic_id_list)
@@ -181,11 +182,12 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                                         "response": "Please check if the question_bank_exhausted_flag is set correctly for user",
                                         "success": False})
 
-            query3 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
-                                             qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
-                                             qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
-                                             from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-                                             where qb.topic_id in {topic_id_list} order by rand() limit {questions_cnt} '
+            query3 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level,' \
+                     f'qb.marks, qb.negative_marking, qb.question_options,  qb.answers,' \
+                     f'qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
+                     f'from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id ' \
+                     f'where qb.topic_id in {topic_id_list} order by rand() limit {questions_cnt}'
+
 
             result3 = await conn.execute_query_dict(query3)
             result3 = pd.DataFrame(result3)
