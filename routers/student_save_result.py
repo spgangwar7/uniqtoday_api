@@ -196,6 +196,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         student_result["not_answered"] = len(list(map(int, unattempted_questions_list)))
         r.setex(str(user_id) + "_sid" + "_result_data",timedelta(days=1),json.dumps(student_result))
         # inserting for unattempted quest
+        message_str=""
         for unattemptQues in unattempted_questions_list:
             chapter_id = Question_attemt_record.loc[unattemptQues]['chapter_id']
             subject_id = Question_attemt_record.loc[unattemptQues]['subject_id']
@@ -204,8 +205,8 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             qry_insert2 = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status) \
                                VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
             await conn.execute_query_dict(qry_insert2)
-            message_str=f'Result saved successfully. Result_ID: {resultId}'
-            background_tasks.add_task(save_student_summary, user_id, class_id)
+        message_str=f'Result saved successfully. Result_ID: {resultId}'
+        background_tasks.add_task(save_student_summary, user_id, class_id)
         resp = {
 
             "message":message_str,
