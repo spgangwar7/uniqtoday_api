@@ -151,6 +151,7 @@ async def get_analytics(user_id:int=0):
             class_grade_dict = val_t[0]
             class_grade_id = class_grade_dict["class_grade_id"]
         # print(class_grade_id)
+        # finding marks trend
         query2 = f'SELECT marks_gain,created_at as test_date FROM user_result where DATE(created_at) >= DATE(NOW()) - INTERVAL 28 DAY and user_id={user_id} and class_grade_id={class_exam_id[0]};'
         result = await conn.execute_query_dict(query2)
         resultdf = pd.DataFrame(result)
