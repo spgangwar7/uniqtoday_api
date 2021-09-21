@@ -39,19 +39,20 @@ async def StudentProfilingTest(exam_id:int=0):
                 summ = await conn.execute_query_dict(query)
                 question_bank_name = summ[0]['question_bank_name']
                 exam_cache['question_bank_name'] = question_bank_name
-                r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
         else:
             query = f'select question_bank_name from question_bank_tables where exam_id={exam_id}'
             summ = await conn.execute_query_dict(query)
             question_bank_name = summ[0]['question_bank_name']
             exam_cache['question_bank_name'] = question_bank_name
-            r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
-
+            r.setex(str(exam_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
+        """
         test_exam_Query=f'SELECT subject_id,questions_cnt,time_in_min FROM test_pattern_setup where class_id={exam_id} and test_name="Profiling"'
         test_exam=await conn.execute_query_dict(test_exam_Query)
         print(test_exam)
         for subject in test_exam:
             print(subject['subject_id'])
+        """
         query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id,' \
                  f'a.question, a.template_type, a.difficulty_level, a.language_id, a.marks, a.negative_marking, a.question_options, a.answers,' \
                  f'a.time_allowed,a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
@@ -115,13 +116,13 @@ async def StudentProfilingTestWeb(exam_id:int=0):
                 summ = await conn.execute_query_dict(query)
                 question_bank_name = summ[0]['question_bank_name']
                 exam_cache['question_bank_name'] = question_bank_name
-                r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id) + "_examid",timedelta(days=1), json.dumps(exam_cache))
         else:
             query = f'select question_bank_name from question_bank_tables where exam_id={exam_id}'
             summ = await conn.execute_query_dict(query)
             question_bank_name = summ[0]['question_bank_name']
             exam_cache['question_bank_name'] = question_bank_name
-            r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+            r.setex(str(exam_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
 
         query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id,' \
                  f'a.question, a.template_type, a.difficulty_level, a.language_id, a.marks, a.negative_marking, a.question_options, a.answers,' \

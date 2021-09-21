@@ -1,8 +1,10 @@
+import json
 import traceback
-from datetime import datetime,time,date
+from datetime import datetime, time, date, timedelta
 from http import HTTPStatus
 from typing import List
 import pandas as pd
+import redis
 from fastapi import APIRouter
 from fastapi.encoders import jsonable_encoder
 from tortoise.exceptions import IntegrityError
@@ -47,6 +49,7 @@ async def get_order_id(orderdetails:OrderSchema):
 @router.post('/verify-payment', description='Get Order ID')
 async def verify_payment(verifyPayment:VerifyPayment):
     try:
+        r=redis.Redis()
         conn = Tortoise.get_connection("default")
         _RAZORPAY_KEY = "rzp_test_foHLtdKSJjEDzv"
         _RAZORPAY_SECRET = "RFrAe68CEzVrQpuuHnlKJHcy"
@@ -64,6 +67,7 @@ async def verify_payment(verifyPayment:VerifyPayment):
         notes=orderDetails['notes']
         month=notes['month']
         exam_id=notes['exam_id']
+        subscription_id=notes['subscription_id']
         payment_date=datetime.fromtimestamp(orderDetails['created_at'])
         subscription_start_date=date.fromtimestamp(orderDetails['created_at'])
         expiry_date=date.today() + relativedelta(months=+int(month))
@@ -77,10 +81,28 @@ async def verify_payment(verifyPayment:VerifyPayment):
         exam_year=date.today().year
         query = f'insert into users_purchase (user_id,purchase_date,exam_year,subscription_id,subscription_start_date,subscription_end_date,\
                 subscription_type,amount,transaction_id,order_id,order_status,transaction_status,payment_by,created_on) values \
-                ("{user_id}","{subscription_start_date}","{exam_year}","{exam_id}","{subscription_start_date}","{expiry_date}","{subscription_type}", \
+                ("{user_id}","{subscription_start_date}","{exam_year}","{subscription_id}","{subscription_start_date}","{expiry_date}","{subscription_type}", \
                  "{amount}","{transaction_id}","{order_id}","{order_status}","{transaction_status}","{payment_by}","{subscription_start_date}")'
         result = await conn.execute_query_dict(query)
 
+        if r.exists(str(user_id) + "_sid"):
+            student_cache=json.loads(r.get(str(user_id) + "_sid"))
+            if str(exam_id) in student_cache:
+                r.delete(str(user_id) + "_sid")
+                student_cache = {
+                    "exam_id": exam_id
+                }
+                r.setex(str(user_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+            else:
+                student_cache = {
+                    "exam_id": exam_id
+                }
+                r.setex(str(user_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+        else:
+            student_cache = {
+                "exam_id": exam_id
+            }
+            r.setex(str(user_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
         query1 = f'update student_users set grade_id="{exam_id}" where id="{user_id}"'
         result1 = await conn.execute_query_dict(query1)
         query2 = f'update student_preferences set subscription_yn="Y",subscription_expiry_date="{expiry_date}" where student_id="{user_id}"'

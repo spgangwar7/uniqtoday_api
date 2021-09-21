@@ -1,5 +1,6 @@
 import json
 import traceback
+from datetime import timedelta
 from http import HTTPStatus
 from typing import List
 
@@ -53,13 +54,13 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                 class_exam_data = await conn.execute_query_dict(query_class_exam_data)
                 classTablename = class_exam_data[0].get("question_bank_name")
                 exam_cache['question_bank_name']=classTablename
-                r.set(str(class_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(class_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
         else:
             query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {class_id}"
             class_exam_data = await conn.execute_query_dict(query_class_exam_data)
             classTablename = class_exam_data[0].get("question_bank_name")
             exam_cache['question_bank_name'] = classTablename
-            r.set(str(class_id) + "_examid", json.dumps(exam_cache))
+            r.setex(str(class_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
 
         Query = f"SELECT qtable.question_id, qtable.subject_id,qtable.chapter_id,qtable.topic_id, subjects.subject_name, qtable.marks, qtable.negative_marking, template_type, answers,question_options \
             FROM {classTablename} qtable \
@@ -218,7 +219,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                 query3 = f'SELECT subject_id,subject_name FROM exam_subjects as es inner join subjects on es.subject_id=subjects.id where class_exam_id={class_id}'
                 subjectslist = await conn.execute_query_dict(query3)
                 exam_cache['subjectslist']=subjectslist
-                r.set(str(class_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(class_id) + "_examid",timedelta(days=1), json.dumps(exam_cache))
 
         subjectslist=pd.DataFrame(subjectslist)
         scoredf=pd.merge(subjectslist, class_score, on='subject_id',how="left")
@@ -290,13 +291,13 @@ async def save_student_summary(student_id:int,exam_id:int):
                 class_exam_data = await conn.execute_query_dict(query_class_exam_data)
                 classTablename = class_exam_data[0].get("question_bank_name")
                 exam_cache['question_bank_name']=classTablename
-                r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id) + "_examid",timedelta(days=1), json.dumps(exam_cache))
         else:
             query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
             class_exam_data = await conn.execute_query_dict(query_class_exam_data)
             classTablename = class_exam_data[0].get("question_bank_name")
             exam_cache['question_bank_name'] = classTablename
-            r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+            r.setex(str(exam_id) + "_examid", timedelta(days=1),json.dumps(exam_cache))
         result2=[]
 
         for result_dict in result:

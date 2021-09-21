@@ -52,7 +52,7 @@ async def jwtAuth(conn):
 async def update_db_exhaust_date(student_id):
     conn = Tortoise.get_connection("default")
     date_exhausted = (datetime.now()).strftime("%Y-%m-%d")
-    query_update = f'UPDATE student_preferences SET question_bank_exhausted_flag="Yes", ques_exhausted_date={date_exhausted} WHERE student_id = {student_id}'
+    query_update = f'UPDATE student_preferences SET question_bank_exhausted_flag="Yes", ques_exhausted_date="{date_exhausted}" WHERE student_id = {student_id}'
     await conn.execute_query_dict(query_update)
     return (print('updated exhausted date in DB'))
 
@@ -68,7 +68,7 @@ async def get_custom_from_DB2(df_j, subject_id, topic_list,chapter_id,quiz_bank)
         # question bank mapper
         # query = f'select id,language_id from student_users where id = {student_id_input}'
 
-        print(topic_list)
+        #print(topic_list)
         try:
             topic_id_list_int = json.loads(topic_list)
         except:
@@ -78,11 +78,11 @@ async def get_custom_from_DB2(df_j, subject_id, topic_list,chapter_id,quiz_bank)
 
         try:
             topic_id_list = [int(i) for i in topic_id_list_int]
-            print(topic_id_list)
+            #print(topic_id_list)
             # 1. Get questions which user has not answered before
             if topic_id_list[0] == 0:
                 #query when topic list is empty
-                print("Getting unaswered questions")
+                #print("Getting unaswered questions")
                 if chapter_id == 0:
                     query = f'SELECT b.question_id,b.subject_id,b.topic_id,b.difficulty_level,b.chapter_id as category FROM student_questions_attempted a INNER JOIN {quiz_bank} b ON a.question_id = b.question_id WHERE a.student_id ={student_id_input} and a.class_exam_id = {single_exam_id} and a.subject_id = {subject_id}  and a.attempt_status="Unanswered" ORDER BY RAND() limit {single_total_question_cnt}'
                 else:
@@ -96,7 +96,7 @@ async def get_custom_from_DB2(df_j, subject_id, topic_list,chapter_id,quiz_bank)
                 else:
                     query = f'SELECT b.question_id,b.subject_id,b.topic_id,b.difficulty_level,b.chapter_id as category FROM student_questions_attempted a INNER JOIN {quiz_bank} b ON a.question_id = b.question_id WHERE a.student_id ={student_id_input} and a.class_exam_id = {single_exam_id} and a.subject_id = {subject_id} and a.chapter_id = {chapter_id} and a.attempt_status="Unanswered"  and a.topic_id IN {topic_id_list} ORDER BY RAND() limit {single_total_question_cnt}'
                 #query = f'SELECT question_id,subject_id,topic_id,difficulty_level,chapter_id as category FROM question_bank_master where subject_id = {subject_id}  and chapter_id = {chapter_id} and topic_id IN {topic_id_list} ORDER BY RAND() limit {single_total_question_cnt}'
-            print(query)
+            #print(query)
             new_df = await conn.execute_query_dict(query)
             new_df=pd.DataFrame(new_df)
             new_df=new_df.reset_index(drop=True)
@@ -195,47 +195,48 @@ async def advance_question_selection_test2(aqst:AdvanceQuestionSelectiontest2):
         r = redis.Redis()
         if r.exists(str(student_id_input)+"_sid"):
             student_cache= json.loads(r.get(str(student_id_input)+"_sid"))
-            print("Redis student data: "+str(student_cache))
+            #print("Redis student data: "+str(student_cache))
             if "quiz_bank" in student_cache:
                 quiz_bank = student_cache['quiz_bank']
-                print(quiz_bank)
+                #print(quiz_bank)
             else:
                 query = f'Select question_bank_name,time_allowed,questions_cnt,exam_paper_single_mult_flag from class_exams where id ={exam_id_input}'
                 df_quiz1 = await conn.execute_query_dict(query)
                 df_quiz = pd.DataFrame(df_quiz1)
                 quiz_bank = df_quiz['question_bank_name'].iloc[0]
                 student_cache['quiz_bank']=quiz_bank
-                r.set(str(student_id_input) + "_sid", json.dumps(student_cache))
+                r.setex(str(student_id_input) + "_sid",timedelta(days=1), json.dumps(student_cache))
         else:
             query = f'Select question_bank_name,time_allowed,questions_cnt,exam_paper_single_mult_flag from class_exams where id ={exam_id_input}'
             df_quiz1 = await conn.execute_query_dict(query)
             df_quiz = pd.DataFrame(df_quiz1)
             quiz_bank = df_quiz['question_bank_name'].iloc[0]
             student_cache={"exam_id":exam_id_input,"quiz_bank":quiz_bank}
-            r.set(str(student_id_input)+"_sid", json.dumps(student_cache))
-            print("Student Data stored in redis")
+            r.setex(str(student_id_input)+"_sid", timedelta(days=1),json.dumps(student_cache))
+            #print("Student Data stored in redis")
 
 
         if r.exists(str(exam_id_input) + "_examid"):
             exam_cache = json.loads(r.get(str(exam_id_input) + "_examid"))
-            print("Redis exam data: "+str(exam_cache))
+            #print("Redis exam data: "+str(exam_cache))
             if "exam_time_per_ques" in exam_cache:
                 exam_time_per_ques = exam_cache['exam_time_per_ques']
             else:
                 query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
                 df_time1 = await conn.execute_query_dict(query)
                 df_time = pd.DataFrame(df_time1)
-                exam_time_per_ques = df_time.iloc[0]
+                exam_time_per_ques = df_time.iloc[0]['exam_time_per_ques']
+                #print(f'exam time per question: {exam_time_per_ques}')
                 exam_cache['exam_time_per_ques']=exam_time_per_ques
-                r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id_input) + "_examid",timedelta(days=1), json.dumps(exam_cache))
         else:
             query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
             df_time1 = await conn.execute_query_dict(query)
             class_exam_id = df_time1[0]['exam_time_per_ques']
             exam_cache={"exam_time_per_ques": exam_time_per_ques }
-            print(exam_time_per_ques)
-            r.set(str(exam_id_input) + "_examid", json.dumps(exam_cache))
-            print("Data stored in redis: ")
+            #print(exam_time_per_ques)
+            r.setex(str(exam_id_input) + "_examid",timedelta(days=1), json.dumps(exam_cache))
+            #print("Data stored in redis: ")
 
         total_time = exam_time_per_ques * count
 
@@ -273,10 +274,11 @@ async def advance_question_selection_test2(aqst:AdvanceQuestionSelectiontest2):
         # print(total_time)
         # based on test type apply filters to the question bank and fetch respective questions.
         # try:
+        #print(flatten)
         if len(flatten) == 1:
             quest = "(" + str(flatten[0]) + ")"
         else:
-            print(flatten)
+            #print(flatten)
             quest = tuple(flatten)
 
         # print("Time took for execution for this API: %s seconds " % (time.time() - start_time))
@@ -285,7 +287,6 @@ async def advance_question_selection_test2(aqst:AdvanceQuestionSelectiontest2):
         qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
         qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
         from {quiz_bank} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-        left join question_subtopic c on qb.question_id = c.question_id  \
         where qb.question_id in {quest}'
         #print(query)
         datalist1 = await conn.execute_query_dict(query)
@@ -324,19 +325,18 @@ async def planner_question_selection(plannerInput:PlannerQuestionSelection):
             que_bank = summ[0]['question_bank_name']
         except:
             print("invalid exam id")
-        print(que_bank)
+        #print(que_bank)
         query = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
         qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
         qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
         from {que_bank} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-        left join question_subtopic c on qb.question_id = c.question_id  \
         where chapter_id={chapter_id}  ORDER BY RAND() '
         """
-        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id, c.sub_topic_id,' \
+        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id, ' \
                  f'a.question, a.template_type, a.difficulty_level, a.language_id, a.marks, a.negative_marking, a.question_options, a.answers,' \
                  f'a.time_allowed,   a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
                  f'FROM {que_bank} a left join question_bank_passage_inst b ON a.passage_inst_id = b.id ' \
-                 f'left join question_subtopic c on a.question_id = c.question_id where a.question_id in ' \
+                 f' where a.question_id in ' \
                  f'(select question_id from student_profiling_questions where exam_id = {exam_id}) limit {count}'
         """
         summary1 = await conn.execute_query_dict(query)
@@ -370,7 +370,7 @@ async def planner_question_selection(plannerInput:PlannerQuestionSelection):
 async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
     try:
         conn = Tortoise.get_connection("default")
-        print("Getting subject questions")
+        #print("Getting subject questions")
         final_question_list=[]
 
         #criteria 1:  fresh questions are given to student which he has not seen before
@@ -380,7 +380,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
         attempted_questions_list=pd.DataFrame(attempted_questions_list)
 
         if attempted_questions_list.empty:
-            print("No attempted questions found ")
+            #print("No attempted questions found ")
             attempted_question_ids = []
             unseen_questions_query=f'SELECT question_id FROM {quiz_bank} where subject_id={subject_id} order by rand() limit {question_cnt}'
 
@@ -398,7 +398,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
         question_list1=[d['question_id'] for d in question_list1 if 'question_id' in d]
         #print(question_list1)
         final_question_list.extend(question_list1)
-        print(len(final_question_list))
+        #print(len(final_question_list))
         if (len(final_question_list)==question_cnt):
             return final_question_list
 
@@ -418,7 +418,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
             remaining_questions= question_cnt - len(final_question_list)
 
@@ -433,7 +433,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
             remaining_questions= question_cnt - len(final_question_list)
         #criteria 4: If questions are less then get random questions
@@ -449,7 +449,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
                 question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
                 # print(question_list1)
                 final_question_list.extend(question_list1)
-                print(len(final_question_list))
+                #print(len(final_question_list))
                 return final_question_list
 
     except Exception as e:
@@ -460,7 +460,7 @@ async def get_subject_questions(subject_id, quiz_bank,student_id,question_cnt):
 async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
     try:
         conn = Tortoise.get_connection("default")
-        print("Getting chapter questions")
+        #print("Getting chapter questions")
         final_question_list=[]
 
         #criteria 1:  fresh questions are given to student which he has not seen before
@@ -470,7 +470,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
         attempted_questions_list=pd.DataFrame(attempted_questions_list)
 
         if  attempted_questions_list.empty:
-            print("No attempted questions found ")
+            #print("No attempted questions found ")
             attempted_question_ids=[]
             unseen_questions_query = f'SELECT question_id FROM {quiz_bank} where  chapter_id={chapter_id} order by rand() limit {question_cnt}'
 
@@ -487,7 +487,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
         question_list1=[d['question_id'] for d in question_list1 if 'question_id' in d]
         #print(question_list1)
         final_question_list.extend(question_list1)
-        print(len(final_question_list))
+        #print(len(final_question_list))
         if (len(final_question_list)==question_cnt):
             return final_question_list
 
@@ -506,7 +506,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
             remaining_questions= question_cnt - len(final_question_list)
 
@@ -521,7 +521,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
         remaining_questions= question_cnt - len(final_question_list)
         #criteria 4: If questions are less then get random questions
@@ -537,7 +537,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
                 question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
                 # print(question_list1)
                 final_question_list.extend(question_list1)
-                print(len(final_question_list))
+                #print(len(final_question_list))
                 return final_question_list
 
     except Exception as e:
@@ -548,7 +548,7 @@ async def get_chapter_questions(chapter_id, quiz_bank,student_id,question_cnt):
 async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt):
     try:
         conn = Tortoise.get_connection("default")
-        print("Getting topic questions")
+        #print("Getting topic questions")
         final_question_list=[]
 
         #criteria 1:  fresh questions are given to student which he has not seen before
@@ -558,12 +558,12 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
         attempted_questions_list=pd.DataFrame(attempted_questions_list)
 
         if attempted_questions_list.empty:
-            print("No attempted questions found ")
+            #print("No attempted questions found ")
             attempted_question_ids=[]
             unseen_questions_query = f'SELECT question_id FROM {quiz_bank} where  topic_id in {topic_id_list} order by rand() limit {question_cnt}'
 
         else:
-            print("Attempted questions found ")
+            #print("Attempted questions found ")
             attempted_question_ids = attempted_questions_list['question_id'].unique().tolist()
             if len(attempted_question_ids) == 1:
                 attempted_question_ids = "(" + str(attempted_question_ids[0]) + ")"
@@ -575,7 +575,7 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
             question_list1=[d['question_id'] for d in question_list1 if 'question_id' in d]
             #print(question_list1)
             final_question_list.extend(question_list1)
-            print(len(final_question_list))
+            #print(len(final_question_list))
             if (len(final_question_list)==question_cnt):
                 return final_question_list
 
@@ -594,7 +594,7 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
             remaining_questions= question_cnt - len(final_question_list)
 
@@ -609,7 +609,7 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
                 final_question_list=final_question_list[0:question_cnt]
             if (len(final_question_list) == question_cnt):
                 return final_question_list
-            print(len(final_question_list))
+            #print(len(final_question_list))
 
         remaining_questions= question_cnt - len(final_question_list)
         #criteria 4: If questions are less then get random questions
@@ -625,7 +625,7 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
                 question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
                 # print(question_list1)
                 final_question_list.extend(question_list1)
-                print(len(final_question_list))
+                #print(len(final_question_list))
                 return final_question_list
 
     except Exception as e:
@@ -685,7 +685,7 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 df_time1 = await conn.execute_query_dict(query)
                 exam_time_per_ques = df_time1[0]['exam_time_per_ques']
                 exam_cache['exam_time_per_ques']=exam_time_per_ques
-                print(exam_cache)
+                #print(exam_cache)
                 r.setex(str(exam_id_input) + "_examid", timedelta(days=1), json.dumps(exam_cache))
         else:
             query = f'SELECT exam_time_per_ques,time_allowed,questions_cnt,question_bank_name from class_exams where id={exam_id_input}'
@@ -696,7 +696,7 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
             question_bank_name = df_time1[0]['question_bank_name']
             exam_cache={"exam_time_per_ques": exam_time_per_ques,"time_allowed":time_allowed,
                         "questions_cnt":questions_cnt,"question_bank_name":question_bank_name }
-            print(df_time1)
+            #print(df_time1)
             r.setex(str(exam_id_input) + "_examid", timedelta(days=1), json.dumps(exam_cache))
             #print("Data stored in redis: ")
 
@@ -715,18 +715,18 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
             else:
                 topic_id_list = tuple(topic_id_list)
         if subject_id== 0 and chapter_id == 0:
-            print("Getting questions as per topic list")
-            print(topic_id_list)
+            #print("Getting questions as per topic list")
+            #print(topic_id_list)
             questions_list=await get_topicid_questions(topic_id_list, quiz_bank, student_id_input, count)
 
         if subject_id == 0 and len(topic_id_list)==0:
-            print("Getting questions as per chapter_id")
+            #print("Getting questions as per chapter_id")
             questions_list=await get_chapter_questions(chapter_id, quiz_bank, student_id_input, count)
 
         if chapter_id == 0 and len(topic_id_list)==0:
-            print("Getting questions as per subject_id")
+            #print("Getting questions as per subject_id")
             questions_list=await get_subject_questions(subject_id, quiz_bank, student_id_input, count)
-
+        print(questions_list)
         if questions_list:
             total_time = exam_time_per_ques * len(questions_list)
 
@@ -757,7 +757,7 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 "message": "No questions found for this criteria",
                 "success": False
             }
-            return resp, 400
+            return resp
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)

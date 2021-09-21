@@ -11,5 +11,5 @@ class StudentSignup(BaseModel):
     mobile:int
 
 class StudentLogin(BaseModel):
-    mobile_otp:int
-    mobile:int
+    otp:int
+    email_or_mobile:str

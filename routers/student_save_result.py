@@ -12,7 +12,7 @@ from fastapi.encoders import jsonable_encoder
 from tortoise.exceptions import IntegrityError
 from fastapi.responses import JSONResponse
 from tortoise import Tortoise, fields, run_async
-from datetime import datetime,timedelta
+from datetime import datetime,date,timedelta
 from schemas.SaveResult import SaveResult
 
 router = APIRouter(
@@ -39,6 +39,11 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         exam_mode=data.exam_mode
         exam_type=data.exam_type
         all_questions_list =data.questions_list
+        all_questions_list_str=""
+        if len(all_questions_list) == 1:
+            all_questions_list_str = "(" + str(all_questions_list[0]) + ")"
+        else:
+            all_questions_list_str = tuple(all_questions_list)
         no_of_question = data.no_of_question
         answerList = data.answerList
         exam_cache={}
@@ -53,24 +58,24 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                 class_exam_data = await conn.execute_query_dict(query_class_exam_data)
                 classTablename = class_exam_data[0].get("question_bank_name")
                 exam_cache['question_bank_name']=classTablename
-                r.set(str(class_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(class_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
         else:
             query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {class_id}"
             class_exam_data = await conn.execute_query_dict(query_class_exam_data)
             classTablename = class_exam_data[0].get("question_bank_name")
             exam_cache['question_bank_name'] = classTablename
-            r.set(str(class_id) + "_examid", json.dumps(exam_cache))
+            r.setex(str(class_id) + "_examid",timedelta(days=1), json.dumps(exam_cache))
 
         Query = f"SELECT question_id, subject_id,topic_id,chapter_id, marks,negative_marking," \
                 f" template_type,answers,question_options \
-            FROM {classTablename} WHERE question_id IN {tuple(all_questions_list)}"
+            FROM {classTablename} WHERE question_id IN {all_questions_list_str}"
 
         Question_attemt_record = await conn.execute_query_dict(Query)
         Question_attemt_recorddf = pd.DataFrame(Question_attemt_record)
         Question_attemt_recorddf=Question_attemt_recorddf.fillna(0)
         Question_attemt_record=Question_attemt_recorddf.set_index('question_id')
         answerList_copy = answerList.copy()
-
+        print(Question_attemt_record)
         total_correctAttempt = 0
         total_incorrectAttempt = 0
         marks_gain = 0
@@ -151,10 +156,10 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             if r.exists(str(user_id)+"_sid"):
                 student_cache=json.loads(r.get(str(user_id)+"_sid"))
                 student_cache['result_id']=resultId
-                r.set(str(user_id)+"_sid",json.dumps(student_cache))
+                r.setex(str(user_id)+"_sid",timedelta(days=1),json.dumps(student_cache))
             else:
                 student_cache['result_id']=resultId
-                r.set(str(user_id)+"_sid",json.dumps(student_cache))
+                r.setex(str(user_id)+"_sid",timedelta(days=1),json.dumps(student_cache))
 
         # Inserting on Db student_questions_attempted for each of ques
         unattempted_questions_list = all_questions_list.copy()
@@ -205,8 +210,17 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             qry_insert2 = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status) \
                                VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
             await conn.execute_query_dict(qry_insert2)
+        today_date = datetime.strftime(date.today(), '%y-%m-%d')
+        if test_type=="Profiling":
+            query="update student_preferences set prof_asst_test={},prof_test_date={},prof_test_marks={} where student_id={}".format(2,"'"+today_date+"'",marks_gain,user_id)
+            await conn.execute_query(query)
+        elif test_type=="Scholarship":
+            query="update student_preferences set scholar_test_date={},scholar_test_status={},scholarship_test_marks={} where student_id={}".format("'"+today_date+"'",1,marks_gain,user_id)
+            await conn.execute_query(query)
+
         message_str=f'Result saved successfully. Result_ID: {resultId}'
-        background_tasks.add_task(save_student_summary, user_id, class_id)
+        #background_tasks.add_task(save_student_summary, user_id, class_id)
+
         resp = {
 
             "message":message_str,
@@ -238,13 +252,13 @@ async def save_student_summary(student_id:int,exam_id:int):
                 class_exam_data = await conn.execute_query_dict(query_class_exam_data)
                 classTablename = class_exam_data[0].get("question_bank_name")
                 exam_cache['question_bank_name']=classTablename
-                r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+                r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
         else:
             query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
             class_exam_data = await conn.execute_query_dict(query_class_exam_data)
             classTablename = class_exam_data[0].get("question_bank_name")
             exam_cache['question_bank_name'] = classTablename
-            r.set(str(exam_id) + "_examid", json.dumps(exam_cache))
+            r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
         result2=[]
 
         query = f'SELECT id,class_exam_id,student_id,student_result_id,sqa.subject_id,sqa.chapter_id,sqa.topic_id,exam_type,' \

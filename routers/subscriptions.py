@@ -10,6 +10,9 @@ from fastapi.responses import JSONResponse
 from tortoise import Tortoise, fields, run_async
 from schemas.Subscriptions import SavePurchaseDetails,SaveTrialSubscription
 import schedule
+from datetime import datetime,timedelta
+import json
+import redis
 
 router = APIRouter(
     prefix='/api',
@@ -20,11 +23,21 @@ router = APIRouter(
 async def mySubscriptions(user_id:int=0):
     try:
         conn = Tortoise.get_connection("default")
-        query = f'select purchase.*,sale.subscription_name from users_purchase as purchase ' \
-            f'left join subscriptions_for_sale as sale on sale.id=purchase.subscription_id where purchase.user_id={user_id} order by purchase.user_pur_seq'
+        query = f'select purchase.user_pur_seq,purchase.user_id,purchase.purchase_date,purchase.exam_year,' \
+                f'purchase.subscription_id,purchase.subscription_start_date,' \
+                f'purchase.subscription_end_date,purchase.subscription_type,purchase.amount,purchase.discount_code,' \
+                f'purchase.transaction_id,purchase.order_id,purchase.order_status,purchase.payment_by,purchase.created_on' \
+                f',sale.subscription_name from users_purchase as purchase ' \
+                f'left join subscriptions_for_sale as sale on sale.id=purchase.subscription_id where purchase.user_id={user_id} order by purchase.user_pur_seq'
         val = await conn.execute_query_dict(query)
         val=pd.DataFrame(val)
-        return JSONResponse(status_code=200,content={'order_details': val.to_json(orient='records',date_format="iso"),"success":True})
+        val['purchase_date']=pd.to_datetime(val['purchase_date']).dt.strftime("%d-%m-%y")
+        val['subscription_start_date'] = pd.to_datetime(val['subscription_start_date']).dt.strftime("%d-%m-%y")
+        val['subscription_end_date'] = pd.to_datetime(val['subscription_end_date']).dt.strftime("%d-%m-%y")
+        val['created_on'] = pd.to_datetime(val['created_on']).dt.strftime("%d-%m-%y")
+
+
+        return JSONResponse(status_code=200,content={'order_details': val.to_dict('records'),"success":True})
     except Exception as e:
         return JSONResponse(status_code=400,content={"error": f"{e}","success":False})
 
@@ -38,17 +51,18 @@ async def subscriptionPackages(student_id:int=0):
         query = f'select sbsc.exam_year as exam_year,sbsc.id as subscript_id,sbsc.subscription_name,sbsc.subscription_details,sbsc.subs_price as subs_price, sbsc.subs_dis_price as subs_dis_price,subs_valid_upto,sbsc.subs_status,sbsc.class_exam_id,sbsc.subs_type from subscriptions_for_sale as sbsc where sbsc.exam_year in {(exam_year,exam_year+1)} order by sbsc.exam_year asc '
         all_sub = await conn.execute_query_dict(query)
         all_sub_df=pd.DataFrame(all_sub)
-        print(all_sub_df)
-        all_sub=all_sub_df.to_dict('records')
+        all_sub_df['subs_valid_upto']=pd.to_datetime(all_sub_df['subs_valid_upto']).dt.strftime("%d-%m-%y")
         if student_id!=0:
             query1 = f'select user_pur_seq,user_id,subscription_id,subscription_start_date,subscription_end_date,subscription_type from users_purchase as purch where purch.user_id={student_id} and purch.subscription_end_date >= NOW() order by purch.user_pur_seq desc'
             pur_sub =await conn.execute_query_dict(query1)
-            #print(query1)
             pur_sub_df=pd.DataFrame(pur_sub)
-            return {'message':'Subscription Packages','Exam Year':exam_year,'all_packages':all_sub_df.to_json(orient='records',date_format="iso"),'purchased_packages':pur_sub_df.to_json(orient='records',date_format="iso"),'success':True}
+            if pur_sub_df.empty:
+                return JSONResponse(status_code=200,content={'message': 'Subscription Packages', 'Exam Year': exam_year, 'all_packages': all_sub_df.to_dict('records'), 'success': True})
+            pur_sub_df['subscription_start_date']=pd.to_datetime(pur_sub_df['subscription_start_date']).dt.strftime("%d-%m-%y")
+            pur_sub_df['subscription_end_date'] = pd.to_datetime(pur_sub_df['subscription_end_date']).dt.strftime("%d-%m-%y")
+            return {'message':'Subscription Packages','Exam Year':exam_year,'all_packages':all_sub_df.to_dict('records'),'purchased_packages':pur_sub_df.to_dict('records'),'success':True}
 
-        #return {'message': 'Subscription Packages', 'Exam Year': exam_year, 'all_packages': all_sub, 'success': True}
-        return JSONResponse(status_code=200,content={'message': 'Subscription Packages', 'Exam Year': exam_year, 'all_packages': all_sub_df.to_json(orient='records',date_format="iso"), 'success': True})
+        return JSONResponse(status_code=200,content={'message': 'Subscription Packages', 'Exam Year': exam_year, 'all_packages': all_sub_df.to_dict('records'), 'success': True})
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
@@ -59,12 +73,17 @@ async def subscriptionPackageDetail(package_id:int=0):
     try:
         conn=Tortoise.get_connection("default")
         today_date =datetime.today().strftime('%Y-%m-%d')
-        query = f'select * from subscriptions_for_sale where id="{package_id}"'
+        query = f'select id,subscription_name,subscription_details,class_exam_id,subs_price,subs_type,exam_year,subs_dis_price,' \
+                f'subs_thumbnail_image_path,course_ids,subject_ids,series_ids,subs_valid_upto,subs_status,' \
+                f'created_by,created_at,updated_at from subscriptions_for_sale where id="{package_id}"'
         package_detail = await conn.execute_query_dict(query)
         package_detail_df=pd.DataFrame(package_detail)
-        print(package_detail_df['subs_type'].iloc[0])
+        package_detail_df['subs_valid_upto']=pd.to_datetime(package_detail_df['subs_valid_upto']).dt.strftime('%d-%m-%y')
+        package_detail_df['created_at']=pd.to_datetime(package_detail_df['created_at']).dt.strftime('%d-%m-%y')
+        package_detail_df['updated_at'] = pd.to_datetime(package_detail_df['updated_at']).dt.strftime('%d-%m-%y')
         if package_detail_df['subs_type'].iloc[0]=='O':
             expirydate=package_detail_df['subs_valid_upto'].iloc[0]
+            expirydate=datetime.strptime(expirydate,'%d-%m-%y')
             todaysdate=datetime.today()
             num_months = (expirydate.year - todaysdate.year) * 12 + (expirydate.month - todaysdate.month)
             package_detail_df['months']=num_months
@@ -79,6 +98,7 @@ async def subscriptionPackageDetail(package_id:int=0):
 @router.post("/save-trial-subscription", description="Save Trial Subscription")
 async def saveTrialSubscription(save_pd:SaveTrialSubscription):
     try:
+        r=redis.Redis()
         conn=Tortoise.get_connection("default")
         student_id =save_pd.student_id
         amount =0
@@ -100,6 +120,24 @@ async def saveTrialSubscription(save_pd:SaveTrialSubscription):
                 await conn.execute_query_dict(query1)
                 query2 = f'update student_users set grade_id="{exam_id}" where id="{student_id}"'
                 result1 = await conn.execute_query_dict(query2)
+                if r.exists(str(student_id) + "_sid"):
+                    student_cache = json.loads(r.get(str(student_id) + "_sid"))
+                    if str(exam_id) in student_cache:
+                        r.delete(str(student_id) + "_sid")
+                        student_cache = {
+                            "exam_id": exam_id
+                        }
+                        r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+                    else:
+                        student_cache = {
+                            "exam_id": exam_id
+                        }
+                        r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+                else:
+                    student_cache = {
+                        "exam_id": exam_id
+                    }
+                    r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
                 return JSONResponse(status_code=200,content={"message": "Subscription Packages details stored", 'success': True})
             except Exception as e:
                 return JSONResponse(status_code=400,content={"error":f"{e}","success":False})

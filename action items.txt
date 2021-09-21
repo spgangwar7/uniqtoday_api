@@ -1,0 +1,7 @@
+Tasks to be completed
+
+1. Download pdf
+2. Update profile picture
+3. Leaderbord
+4. Rabbit MQ implementation
+5. Notifications API

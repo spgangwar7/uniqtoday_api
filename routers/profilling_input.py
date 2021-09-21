@@ -27,11 +27,11 @@ async def student_profiling_input(exam_id:int=0,count:int=0):
         except:
             print("invalid exam id")
         print(que_bank)
-        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id, c.sub_topic_id,' \
+        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id , a.topic_id,' \
                  f'a.question, a.template_type, a.difficulty_level, a.language_id, a.marks, a.negative_marking, a.question_options, a.answers,' \
                  f'a.time_allowed,   a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
                  f'FROM {que_bank} a left join question_bank_passage_inst b ON a.passage_inst_id = b.id ' \
-                 f'left join question_subtopic c on a.question_id = c.question_id where a.question_id in ' \
+                 f' where a.question_id in ' \
                  f'(select question_id from student_profiling_questions where exam_id = {exam_id}) ORDER BY RAND() limit {count} '
 
         sql_time = f'SELECT prof_test_time_in_min FROM student_config_master WHERE exam_id = {exam_id}'
@@ -79,11 +79,11 @@ async def student_profiling_input2(exam_id:int=0,count:int=0):
         except:
             print("invalid exam id")
         print(que_bank)
-        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id, a.topic_id, c.sub_topic_id,' \
+        query1 = f'select a.question_id, a.class_id,  a.subject_id,a.chapter_id, a.topic_id,' \
                  f'a.question, a.template_type, a.difficulty_level, a.language_id, a.marks, a.negative_marking, a.question_options, a.answers,' \
                  f'a.time_allowed,   a.passage_inst_ind, a.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
                  f'FROM {que_bank} a left join question_bank_passage_inst b ON a.passage_inst_id = b.id ' \
-                 f'left join question_subtopic c on a.question_id = c.question_id where a.question_id in ' \
+                 f' where a.question_id in ' \
                  f'(select question_id from student_profiling_questions where exam_id = {exam_id}) limit {count}'
 
         sql_time = f'SELECT prof_test_time_in_min FROM student_config_master WHERE exam_id = {exam_id}'

@@ -1,10 +1,15 @@
 import uvicorn
+import firebase_admin
+from firebase_admin import credentials
+from celery import Celery
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from pydantic import BaseModel
+from queues.worker import add,initializeCelery
 from db.sparkSession import spark_session
 from routers.users import router as users
 from routers.exams import router as exams
+from routers.notification import router as notification
 from routers.student_save_result import router as student_save_result
 from routers.postExamAnalytics import router as postExamAnalytics
 from routers.subscriptions import router as subscriptions
@@ -37,7 +42,9 @@ from routers.goalSetting import router as goalSetting
 from routers.predictStudentsEffort import router as predictStudentsEffort
 from routers.studentSelectionInCe import router as studentSelectionInCe
 from routers.liveExams import router as liveExams
-
+from routers.assessmentQuestionsPredictor import router as assessmentQuestionsPredictor
+from routers.webinar import router as webinar
+from routers.newAdaptiveAPI import router as newAdaptiveAPI
 import db.models
 from os import path
 
@@ -49,6 +56,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+#cred = credentials.Certificate("/home/ubuntu/UNIQ_API_UAT/uniq-notifications-firebase.json")
+cred = credentials.Certificate("E://Thomson//uniq-notifications-firebase.json")
+firebase_admin.initialize_app(cred)
+
 class UNIQ_Live:
     DB_HOST="thomson-digital-db.cluster-ch6wrof78zwh.ap-south-1.rds.amazonaws.com"
     DB_USER="admin"
@@ -63,7 +75,14 @@ class UNIQ_UAT:
     DB_NAME="learntoday_uat"
     DB_URL="mysql://admin:5DBYs1ou3ACxlRjBUmfn@database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com:3306/learntoday_uat"
 
-db_cofig=UNIQ_UAT()
+class UNIQ_LOCAL_TEST:
+    DB_HOST="localhost"
+    DB_USER="root"
+    DB_PASS="root"
+    DB_NAME="learntoday_uat"
+    DB_URL="mysql://root:root@localhost:3306/learntoday_uat"
+
+db_cofig=UNIQ_LOCAL_TEST()
 db_url=db_cofig.DB_URL
 register_tortoise(
     app,
@@ -71,6 +90,9 @@ register_tortoise(
     modules={"models": ["db.models"]},
     #add_exception_handlers=True,
 )
+
+
+
 app.include_router(users)
 app.include_router(subscriptions)
 app.include_router(payments)
@@ -85,6 +107,7 @@ app.include_router(testSeries)
 app.include_router(questionsReviews)
 app.include_router(profilingTest)
 app.include_router(scholarshipTest)
+app.include_router(notification)
 app.include_router(referrals)
 app.include_router(todayfeelings)
 app.include_router(stage_at_signup)
@@ -97,20 +120,24 @@ app.include_router(studentDashboard)
 app.include_router(subjectResources)
 app.include_router(analytics)
 app.include_router(liveExams)
-app.include_router(adaptiveQuestions)
-app.include_router(adaptiveQuestionsOld)
+app.include_router(webinar)
+#app.include_router(adaptiveQuestions)
+#app.include_router(adaptiveQuestionsOld)
 app.include_router(weakTopicPredictions)
 app.include_router(goalSetting)
 app.include_router(predictStudentsEffort)
 app.include_router(studentSelectionInCe)
-
-
+app.include_router(assessmentQuestionsPredictor)
+app.include_router(newAdaptiveAPI)
 
 @app.get('/')
 async def welcome():
     return {"message":"Fastapi Running"}
 
+
 if __name__=="__main__":
     import sys
     sys.path.append(path.join(path.dirname(__file__), '..'))
     uvicorn.run("main:app",host="0.0.0.0",port=8080,debug=False)
+    #initializeCelery()
+

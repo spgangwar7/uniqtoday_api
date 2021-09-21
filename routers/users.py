@@ -42,10 +42,19 @@ async def update_user(userp: UpdateUsers):
         query = f"update student_users set first_name='{userp.first_name}',user_name='{userp.user_name}',last_name='{userp.last_name}',email='{userp.email}' ,mobile='{userp.mobile}' where id={userp.id}"
         print(query)
         result=await conn.execute_query(query)
-        return JSONResponse(status_code=200,content={"response":"user updated successfully","success":True})
+        resp={
+           "user_info":{
+               "first_name": userp.first_name,
+               "user_name": userp.user_name,
+               "last_name": userp.last_name,
+               "email": userp.email,
+               "mobile": userp.mobile
+           },
+            "response":"user updated successfully",
+            "success":True
 
-        #return await User_Pydantic.from_tortoise_orm(user_obj)
-
+        }
+        return JSONResponse(status_code=200,content=resp)
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
@@ -54,14 +63,12 @@ async def update_user(userp: UpdateUsers):
 @router.get('/user-subscription/{student_id}',description="get all the subscriptions of a user")
 async def users_subscription(student_id:int=0):
     conn=Tortoise.get_connection('default')
-    #query = f'SELECT subscription_name, a.purchase_date,a.subscription_start_date, a.subscription_end_date,a.exam_year from users_purchase a, subscriptions_for_sale b  where user_id = {student_id}'
-
-    query=f"select sf.subscription_name,up.purchase_date,up.subscription_start_date,up.subscription_end_date from users_purchase up join subscriptions_for_sale sf on up.subscription_id=sf.id where up.user_id={student_id}"
-
+    query=f"select sf.subscription_name,DATE_FORMAT(up.purchase_date,'%d-%m-%y') as purchase_date,DATE_FORMAT(up.subscription_start_date,'%d-%m-%y') as subscription_start_date,DATE_FORMAT(up.subscription_end_date,'%d-%m-%y') as subscription_end_date from users_purchase up join subscriptions_for_sale sf on up.subscription_id=sf.id where up.user_id={student_id}"
     res = await conn.execute_query_dict(query)
-    res=pd.DataFrame(res)
-    #res['name']=res['user_name']
-    return JSONResponse(status_code=200,content={"response":res.to_json(orient="records", date_format='iso'),"success":True})
+    if not res:
+        return JSONResponse(status_code=400,content={'response':f"User don't have any subscription","success":False})
+
+    return JSONResponse(status_code=200,content={"response":res,"success":True})
 
 """
 @router.post("/update-profile-picture/")

@@ -34,7 +34,7 @@ async def student_planner(studentp: StudentPlanners):
                 "message":"Planner already exists for the user for this week",
                 "success":False
             }
-            return resp,400
+            return resp
         exam_id=studentp.exam_id
         chapter_id=json.loads(studentp.chapter_id)
         chapter_id_list = [int(i) for i in chapter_id]
@@ -103,8 +103,11 @@ async def get_student_planner(student_id:int=0):
         query=f'select sp.id,sp.exam_id,sp.subject_id,question_count,test_time_in_min,sp.chapter_id, esc.chapter_name ,date_from,date_to from student_planner as sp join exam_subject_chapters as esc on sp.chapter_id=esc.chapter_id where student_id={student_id} and date_from="{monday.date()}"'
         result= await conn.execute_query_dict(query)
         result=pd.DataFrame(result)
-        result["date_from"] = pd.to_datetime(result["date_from"]).dt.strftime('%Y-%m-%d')
-        result["date_to"] = pd.to_datetime(result["date_to"]).dt.strftime('%Y-%m-%d')
+        if result.empty:
+            return JSONResponse(status_code=400,content={"message": "Planner does not exist for this user", "success": False})
+        else:
+            result["date_from"] = pd.to_datetime(result["date_from"]).dt.strftime('%Y-%m-%d')
+            result["date_to"] = pd.to_datetime(result["date_to"]).dt.strftime('%Y-%m-%d')
 
         #print(result)
         result=result.fillna(0)
