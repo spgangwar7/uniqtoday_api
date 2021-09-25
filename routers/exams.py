@@ -108,25 +108,57 @@ async def GetAllTopics(subject_id:int=0):
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 
 
-@router.get("/topics-by-chapter-id/{chapter_id}",description='Get All Topics From A Chapter', status_code=201)
-async def GetAllTopics(chapter_id:int=0):
+@router.get("/topics-by-chapter-id/{student_id}/{chapter_id}",description='Get All Topics From A Chapter', status_code=201)
+async def GetAllTopics(student_id:int=0,chapter_id:int=0):
     try:
         start_time=datetime.now()
         conn = Tortoise.get_connection("default")
         r=redis.Redis()
         chapter_cache={}
         topics=''
+        class_exam_id=""
+        if r.exists(str(student_id) + "_sid"):
+            student_cache = json.loads(r.get(str(student_id) + "_sid"))
+            if "exam_id" in student_cache:
+                class_exam_id = student_cache['exam_id']
+            else:
+                query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
+                class_exam_id = await conn.execute_query_dict(query)
+                if len(class_exam_id) == 0:
+                    resp = {
+                        "message": "No exam Found for this user",
+                        "success": False
+                    }
+                    return resp, 400
+                class_exam_id = int(class_exam_id[0]['grade_id'])
+
+                student_cache['exam_id'] = class_exam_id
+                r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+        else:
+            query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
+            class_exam_id = await conn.execute_query_dict(query)
+            if len(class_exam_id) == 0:
+                resp = {
+                    "message": "No exam Found for this user",
+                    "success": False
+                }
+                return resp, 400
+            class_exam_id = int(class_exam_id[0]['grade_id'])
+            student_cache={'exam_id':class_exam_id}
+            r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+
+
         if r.exists(str(chapter_id)+"_chapter_id"):
             chapter_cache=json.loads(r.get(str(chapter_id)+"_chapter_id"))
             if 'topics' in chapter_cache:
                 topics=chapter_cache['topics']
             else:
-                query = f"select id ,topic_name from topics where chapter_id={chapter_id}"
+                query = f"select id ,topic_name from topics where chapter_id={chapter_id} and class_id={class_exam_id}"
                 topics = await conn.execute_query_dict(query)
                 chapter_cache['topics']=topics
                 r.setex(str(chapter_id)+"_chapter_id",timedelta(days=1),json.dumps(chapter_cache))
         else:
-            query = f"select id ,topic_name from topics where chapter_id={chapter_id}"
+            query = f"select id ,topic_name from topics where chapter_id={chapter_id} and class_id={class_exam_id}"
             topics = await conn.execute_query_dict(query)
             if len(topics)!=0:
                 chapter_cache['topics'] = topics
@@ -149,12 +181,43 @@ async def GetAllChapters(student_id:int=0,subject_id:int=0):
         conn = Tortoise.get_connection("default")
         subject_cache={}
         chapters=''
+        class_exam_id=""
+        if r.exists(str(student_id) + "_sid"):
+            student_cache = json.loads(r.get(str(student_id) + "_sid"))
+            if "exam_id" in student_cache:
+                class_exam_id = student_cache['exam_id']
+            else:
+                query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
+                class_exam_id = await conn.execute_query_dict(query)
+                if len(class_exam_id) == 0:
+                    resp = {
+                        "message": "No exam Found for this user",
+                        "success": False
+                    }
+                    return resp, 400
+                class_exam_id = int(class_exam_id[0]['grade_id'])
+
+                student_cache['exam_id'] = class_exam_id
+                r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+        else:
+            query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
+            class_exam_id = await conn.execute_query_dict(query)
+            if len(class_exam_id) == 0:
+                resp = {
+                    "message": "No exam Found for this user",
+                    "success": False
+                }
+                return resp, 400
+            class_exam_id = int(class_exam_id[0]['grade_id'])
+            student_cache = {'exam_id': class_exam_id}
+            r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
+
         if r.exists(str(subject_id)+"_subject_id"):
             subject_cache=json.loads(r.get(str(subject_id)+"_subject_id"))
             if "chapters" in subject_cache:
                 chapters=subject_cache['chapters']
             else:
-                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and chapter_name is not null"
+                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id{class_exam_id} and chapter_name is not null"
                 chapters = await conn.execute_query_dict(query)
                 if len(chapters)!=0:
                     subject_cache['chapters']=chapters
@@ -163,7 +226,7 @@ async def GetAllChapters(student_id:int=0,subject_id:int=0):
                     return JSONResponse(status_code=400,
                                         content={"msg": f"no Chapters with given subject_id : {subject_id}"})
         else:
-            query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and chapter_name is not null"
+            query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id={class_exam_id} and chapter_name is not null"
             chapters = await conn.execute_query_dict(query)
             if len(chapters) != 0:
                 subject_cache['chapters'] = chapters
@@ -214,6 +277,7 @@ async def subject_rating(s_data:SubjectRating):
     conn = Tortoise.get_connection("default")
     getJson = jsonable_encoder(s_data)
     subjects_rating=getJson['subjects_rating']
+    print(subjects_rating)
     student_id = s_data.student_id
     try:
         query=f"update student_preferences set subjects_rating = '{subjects_rating}' where student_id={student_id}"

@@ -25,6 +25,15 @@ class AdaptiveQuestionsChapterPractice(BaseModel):
     student_id:int
     chapter_id :int
     session_id:int
+    end_test:str
     questions_list:List[int]
     answerList:List[answer_list]
 
+class AdaptiveQuestionsTopicPractice(BaseModel):
+    exam_id:int
+    student_id:int
+    topic_id:int
+    session_id:int
+    end_test:str
+    questions_list:List[int]
+    answerList:List[answer_list]

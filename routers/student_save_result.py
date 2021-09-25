@@ -29,6 +29,7 @@ def is_json(myjson):
 @router.post('/save-result', description='Save result', status_code=201)
 async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
     try:
+        print(data.dict())
         start_time=datetime.now()
         conn = Tortoise.get_connection("default")
         user_id = data.user_id

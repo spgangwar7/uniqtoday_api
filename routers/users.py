@@ -63,7 +63,7 @@ async def update_user(userp: UpdateUsers):
 @router.get('/user-subscription/{student_id}',description="get all the subscriptions of a user")
 async def users_subscription(student_id:int=0):
     conn=Tortoise.get_connection('default')
-    query=f"select sf.subscription_name,DATE_FORMAT(up.purchase_date,'%d-%m-%y') as purchase_date,DATE_FORMAT(up.subscription_start_date,'%d-%m-%y') as subscription_start_date,DATE_FORMAT(up.subscription_end_date,'%d-%m-%y') as subscription_end_date from users_purchase up join subscriptions_for_sale sf on up.subscription_id=sf.id where up.user_id={student_id}"
+    query=f"select sf.subscription_name,DATE_FORMAT(up.purchase_date,'%d-%m-%Y') as purchase_date,DATE_FORMAT(up.subscription_start_date,'%d-%m-%Y') as subscription_start_date,DATE_FORMAT(up.subscription_end_date,'%d-%m-%Y') as subscription_end_date from users_purchase up join subscriptions_for_sale sf on up.subscription_id=sf.id where up.user_id={student_id}"
     res = await conn.execute_query_dict(query)
     if not res:
         return JSONResponse(status_code=400,content={'response':f"User don't have any subscription","success":False})

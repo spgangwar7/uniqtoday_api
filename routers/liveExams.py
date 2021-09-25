@@ -27,6 +27,7 @@ async def getAllLiveExams():
         query = 'select * from ct_exams_list where grade_id = 1 and exam_type="Live" and exam_date >= curdate()'
         val = await conn.execute_query_dict(query)
         val=pd.DataFrame(val)
+        print(val)
         val['start_time'] = val['start_time'].apply(td_to_str)
         val['end_time'] = val['end_time'].fillna(pd.Timedelta(0))
         val['end_time'] = val['end_time'].apply(td_to_str)
@@ -49,14 +50,14 @@ async def getAllLiveExams():
 @router.get('/live-exam-schedule/{exam_id}',description='get all exams schedules for today or in future')
 async def liveExamSchedule(exam_id:int=0):
     conn=Tortoise.get_connection('default')
-    today_date=datetime.today().strftime('%d-%m-%y')
+    today_date=datetime.today().strftime('%y-%m-%d')
     query=f"SELECT es.id as schedule_id,es.class_exam_id as exam_id,ce.class_exam_cd as exam_name,es.exam_type,es.subject_id,s.subject_name,es.chapter_id,es.unit_id," \
           f"es.topic_id,es.skill_id,DATE_FORMAT(es.start_date,'%d-%m-%y') as start_date," \
           f"DATE_FORMAT(es.end_date,'%d-%m-%y') as end_date,DATE_FORMAT(es.result_date,'%d-%m-%y') as result_date," \
           f"es.questions_count,es.STATUS FROM exam_schedule es " \
           f"inner join class_exams as ce on es.class_exam_id=ce.id " \
           f"inner join subjects s on es.subject_id=s.id" \
-          f" WHERE DATE_FORMAT(start_date,'%d-%m-%y') >= {today_date} and es.exam_type='Live' and es.class_exam_id={exam_id}"
+          f" WHERE start_date >= '{today_date}' and es.exam_type='Live' and es.class_exam_id={exam_id}"
     res=await conn.execute_query_dict(query)
     if not res:
         return JSONResponse(status_code=400,content={'response':f"no live exam scheduled","success":False})

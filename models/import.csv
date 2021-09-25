@@ -1,0 +1,145 @@
+﻿class_exam_cd,exam_id,uni_name,unit_id,subject_name,subject_id,chapter_name,chapter_id,topic_id,topic_name,topic_sequence,topic_priority
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3448,Basics of Sets,1,7
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3449,Types of Sets,2,5
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3450,Algebra of Sets,3,2
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3451,Interval and Wavy Curves Method,6,4
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3452,Logarithm and its Properties,7,3
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3453,Basics of Relations,4,6
+JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3454,Types of Relations,5,1
+JEE,1,Algebra,15,Mathematics,1,Statistics,291,3457,Measures of Central Tendency,1,2
+JEE,1,Algebra,15,Mathematics,1,Statistics,291,3458,Measures of Dispersion,2,1
+JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3459,Basics of Mathematical Reasoning,1,3
+JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3460,Definition of Logical Connectives/Operations,2,2
+JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3461,Algebra of Statements,3,1
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3462,Arithmetic Progressions or AP,1,4
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3463,Geometric Progressions or GP,2,5
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3464,Harmonic Progressions or HP,3,6
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3465,Arithmetico-Geometric Progressions or AGP,4,3
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3466,"A.M., G.M.,H.M. Relations",5,2
+JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3467,Miscellaneous Series,6,1
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3468,Fundamental Principle of Counting,1,3
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3469,Permutations,2,2
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3470,Combinations,3,1
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3471,Circular Permutations,4,5
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3472,Selection of Mixed Objects and Divisor Concepts,5,4
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3473,"Division, Distribution and Multinomial Theorem",6,6
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3474,Geometrical Application of Permutations and Combinations,7,7
+JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3475,Derangements and Other Miscellaneous Concepts,8,8
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3476,Basics of Complex Numbers,1,6
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3477,Algebra of Complex Numbers,2,5
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3478,Representation of Complex Numbers,3,4
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3479,"Properties of Modulus, Conjugate and Argument",4,3
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3481,De Moivre's Theorems and Roots of Unity,5,1
+JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3483,Geometry of Complex Numbers and Other Miscellaneous Concepts,6,2
+JEE,1,Algebra,15,Mathematics,1,Probability,296,3484,Basics of Probability,1,1
+JEE,1,Algebra,15,Mathematics,1,Probability,296,3485,Addition Theorem of Probability,2,4
+JEE,1,Algebra,15,Mathematics,1,Probability,296,3486,Conditional Probability and Independent & Dependent Events,3,3
+JEE,1,Algebra,15,Mathematics,1,Probability,296,3487,Bayes' Theorem and Total Probability Theorem,4,2
+JEE,1,Algebra,15,Mathematics,1,Probability,296,3488,Bernoulli Trials and Binomial Distribution,5,5
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3489,Basic Concepts and Important Definitions,1,6
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3490,Quadratic Equation and its Roots,2,3
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3491,Nature of Roots and Common Roots,3,1
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3492,Range and Graph of Quadratic Expressions,4,5
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3493,Location of Roots,5,2
+JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3494,Higher Degree Polynomials and Other Miscellaneous Concepts,6,4
+JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3495,Binomial Theorem for Positive Integral Exponent,1,2
+JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3496,Special Terms in Binomial Expansion for Positive Integral Exponent,2,1
+JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3497,Series involving Binomial Coefficients,3,3
+JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3498,Binomial Theorem for Negative or Fractional Exponent,4,4
+JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3499,Multinomial Theorem,5,5
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3500,Basics of Matrices,1,7
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3501,Algebra of Matrices,2,6
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3502,Symmetric and Skew-Symmetric Matrices,3,5
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3503,Determinant of a Square Matrix and its Properties,4,1
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3505,Adjoint and Inverse of a Matrix,5,2
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3506,Systems of Linear Equations,6,3
+JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3507,Characteristic Equation and Other Miscellaneous Concepts,7,4
+JEE,1,Trigonometry,16,Mathematics,1,Heights and Distances,303,3518,Heights and Distances,1,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3519,Basics of Ellipse,1,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3520,Ellipse and a Point and Ellipse and a Line,2,3
+JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3521,Tangent and Normal of Ellipse,3,2
+JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3522,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Ellipse",4,4
+JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3523,Interaction between Conics and Properties of Ellipse,5,5
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3524,Basics of Hyperbola,1,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3526,Hyperbola and a Point and Hyperbola and a Line,2,6
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3527,Tangent and Normal of Hyperbola,3,2
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3528,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Hyperbola",4,3
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3529,Interaction between Two Conics and Properties of Hyperbola,6,5
+JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3530,Rectangular Hyperbola,5,4
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3542,Sections of a Cone,1,6
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3543,Basics of Parabola,2,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3544,Parabola and a Point & Parabola and a Line,3,5
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3545,Tangent of Parabola,4,2
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3546,Normal of Parabola,5,4
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3547,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Parabola",6,3
+JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3548,Interaction between Conics and Properties of Parabola,7,7
+JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3556,Basics of Functions and Classification of Functions,1,2
+JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3557,Elementary Functions,2,1
+JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3558,Transformation of Graphs,3,5
+JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3559,"Even, Odd and Periodic Function",4,3
+JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3561,"Composite Function, Inverse of a Function and Other Function Concepts",5,4
+JEE,1,Differential Calculus,18,Mathematics,1,Limits,310,3563,Basics of Limits,1,3
+JEE,1,Differential Calculus,18,Mathematics,1,Limits,310,3564,Standard Methods of Evaluation of Limits,2,2
+JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3569,Basics of Differentiation,1,3
+JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3570,Rules of Differentiation,2,1
+JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3571,Higher Order Derivatives and Other Derivative Concepts,3,2
+JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3579,Basics of Definite Integrals,1,3
+JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3580,Properties of Definite Integrals,2,1
+JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3581,Other Definite Integration Concepts,3,2
+JEE,1,Integral Calculus,19,Mathematics,1,Area under Curves,316,3582,Area Bounded by Curves,1,1
+JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3583,Basics of Differential Equations,1,4
+JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3585,Variable Separable and Homogeneous Differential Equations,2,1
+JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3587,Linear Differential Equation and Exact Differential Equations,3,2
+JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3589,Application of Differential Equations and Other Differential Equation Concepts,4,3
+JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3590,Basics of Vectors,1,3
+JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3592,Scalar and Vector Products,2,1
+JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3594,Scalar and Vector Triple Products,3,2
+JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3595,Vector Equations and Other Vector Concepts,4,4
+JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3606,Basics of Indefinite Integrals,1,4
+JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3607,Methods of Integration,2,1
+JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3608,Special Algebraic Integrations,3,2
+JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3609,Special Trigonometric Integrations,4,3
+JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3769,Derivative as Rate of Change,1,4
+JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3770,Tangents and Normal,2,2
+JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3771,Monotonicity and Concavity,3,1
+JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3772,Maxima and Minima,4,3
+JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3773,Continuity of a Function,1,2
+JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3774,Differentiability or Derivability of a Function,2,1
+JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3775,Functional Relations and Mean Value Theorems,3,3
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3780,Basics of Trigonometry,1,7
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3781,Trigonometric Identities for Compound Angles (A+-B formula),2,1
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3782,Trigonometric Identities for Multiple and Sub-multiple Angles,3,2
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3783,Trigonometric Identities for Product to Sum or Difference,4,3
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3784,Trigonometric Identities for Sum or Difference to Product,5,4
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3785,Other Trigonometric Identities and Trigonometric Series,6,5
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3786,Range of Trigonometric Expressions,7,6
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3787,Trigonometric Functions and Graphs,8,8
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Equations and Inequalities,300,3789,Trigonometric Equations,1,1
+JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Equations and Inequalities,300,3790,Trigonometric Inequalities,2,2
+JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3791,Basics of Inverse Trigonometric Functions,1,3
+JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3792,Standard Properties of Inverse Trigonometric Functions,2,1
+JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3793,Identities of Inverse Trigonometric Functions and Other Miscellaneous Concepts,3,2
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3794,Relations Between Sides and Angles of a Triangle,1,1
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3795,Half-Angle Formula and the Area of a Triangle,2,2
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3796,"Inradius, Exradii and Circumradius",3,3
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3797,"Length of Medians, Altitudes and Angle Bisectors",4,4
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3798,Distances of the Centres of a Triangle from Its Vertices and Sides,5,5
+JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3799,Distance between Various Centres and Other Miscellaneous Concepts,6,6
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3800,Point in Cartesian Plane,1,8
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3801,Straight Line and its Equations,2,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3802,Interaction between Two Lines,3,2
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3803,Straight Line and a Point,4,7
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3804,Special Points in Triangles,5,3
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3805,Concurrency of Three Lines and Angle Bisectors,6,6
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3806,"Family of Lines, Shifting of Origin and Transformation of Axes",7,5
+JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3807,Pair of Straight Lines,8,4
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3808,Equation of Circle,1,1
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3809,Circle and a Point and Circle and a Line,2,6
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3810,Tangent and Normal of a Circle,3,2
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3811,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Circle",4,3
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3812,Interaction between Two Circles,5,5
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3813,Family of Circles,6,4
+JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3814,Other Concepts related to a Circle,7,7
+JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3962,Basics of 3D Geometry,1,3
+JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3963,Lines in 3D,2,2
+JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3964,Planes in 3D,3,1

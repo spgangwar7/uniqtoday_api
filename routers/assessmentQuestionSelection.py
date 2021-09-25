@@ -94,13 +94,13 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
 
 
                 result1 = await conn.execute_query_dict(query1)
-                questions.append(result1)
+                questions=questions+result1
             if not questions:
                 return JSONResponse(status_code=400,
                                     content={"response": "insufficent data or something wrong", "success": False})
 
             # Subject List by exam ID
-            query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} and subject_id in {(subject_ids)} group by exam_subjects.subject_id'
+            query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} and subject_id in {tuple(subject_ids)} group by exam_subjects.subject_id'
             subject_list = await conn.execute_query_dict(query)
             response = {"time_allowed": int(time_allowed), "Subjects": subject_list, "questions_list": questions,
                         "success": True}
@@ -125,19 +125,16 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                 else:
                     topic_id_list = tuple(topic_id_list)
             else:
-                print("Please check if the question_bank_exhausted_flag is set correctly for user")
-                return JSONResponse(status_code=400,
-                                    content={"response": "Please check if the question_bank_exhausted_flag is set correctly for user", "success": False})
-            questions=[]
-            for i in range(len(subject_ids)):
-                query2 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
-                                                 qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
-                                                 qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
-                                                 from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
-                                                 where qb.subject_id={int(subject_ids[i])} and qb.topic_id in {topic_id_list} order by rand() limit {int(cutt_off)}'
+                questions=[]
+                for i in range(len(subject_ids)):
+                    query2 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
+                                                     qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
+                                                     qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
+                                                     from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
+                                                     where qb.subject_id={int(subject_ids[i])}  order by rand() limit {int(cutt_off)}'
 
-                result2 = await conn.execute_query_dict(query2)
-                questions.append(result2)
+                    result2 = await conn.execute_query_dict(query2)
+                    questions=questions+result2
 
             if not questions:
                 return JSONResponse(status_code=400,
@@ -170,25 +167,20 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                 else:
                     topic_id_list = tuple(topic_id_list)
             else:
-                print("Please check if the question_bank_exhausted_flag is set correctly for user")
-                return JSONResponse(status_code=400,
-                                    content={
-                                        "response": "Please check if the question_bank_exhausted_flag is set correctly for user",
-                                        "success": False})
 
-            questions=[]
-            for i in range(len(subject_ids)):
-                query3 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level,' \
-                         f'qb.marks, qb.negative_marking, qb.question_options,  qb.answers,' \
-                         f'qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
-                         f'from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id ' \
-                         f'where qb.subject_id={int(subject_ids[i])} and qb.topic_id in {topic_id_list} order by rand() limit {int(cutt_off)}'
+                questions=[]
+                for i in range(len(subject_ids)):
+                    query3 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level,' \
+                             f'qb.marks, qb.negative_marking, qb.question_options,  qb.answers,' \
+                             f'qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type ' \
+                             f'from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id ' \
+                             f'where qb.subject_id={int(subject_ids[i])} order by rand() limit {int(cutt_off)}'
 
-                result3 = await conn.execute_query_dict(query3)
-                questions.append(result3)
-            if not questions:
-                return JSONResponse(status_code=400,
-                                    content={"response": "insufficent data or something wrong", "success": False})
+                    result3 = await conn.execute_query_dict(query3)
+                    questions=questions+result3
+                if not questions:
+                    return JSONResponse(status_code=400,
+                                        content={"response": "insufficent data or something wrong", "success": False})
             # Subject List by exam ID
             query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} and subject_id in {tuple(subject_ids)} group by exam_subjects.subject_id'
             subject_list = await conn.execute_query_dict(query)

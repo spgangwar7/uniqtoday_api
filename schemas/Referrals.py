@@ -7,12 +7,12 @@ class ReferStudent(BaseModel):
 
 class UpdateReferStudent(BaseModel):
     student_id:int
-    exam_id:int
+    referral_code:str
     email:str
     user_name:str
     phone:int
 
-class sendReferralEmail(BaseModel):
+class SendReferralEmail(BaseModel):
     receiver_email:str
     sender_user_id:int
     link:str

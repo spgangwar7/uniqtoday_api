@@ -614,13 +614,21 @@ async def get_topicid_questions(topic_id_list, quiz_bank,student_id,question_cnt
         remaining_questions= question_cnt - len(final_question_list)
         #criteria 4: If questions are less then get random questions
         if not final_question_list:
-            final_question_list=[]
+            random_questions_query = f'SELECT question_id FROM {quiz_bank} where  topic_id in {topic_id_list} order by rand() limit {remaining_questions}'
+            print(random_questions_query)
+            question_list1 = await conn.execute_query_dict(random_questions_query)
+            question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
+            # print(question_list1)
+            final_question_list.extend(question_list1)
+            # print(len(final_question_list))
+            return final_question_list
         else:
             if len(final_question_list) == 1:
                 final_question_list_str = "(" + str(final_question_list[0]) + ")"
             else:
                 final_question_list_str = tuple(final_question_list)
                 random_questions_query = f'SELECT question_id FROM {quiz_bank} where question_id not in {final_question_list_str} and topic_id in {topic_id_list} order by rand() limit {remaining_questions}'
+                print(random_questions_query)
                 question_list1 = await conn.execute_query_dict(random_questions_query)
                 question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
                 # print(question_list1)
@@ -663,7 +671,7 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 df_quiz1 = await conn.execute_query_dict(query)
                 df_quiz = pd.DataFrame(df_quiz1)
                 quiz_bank = df_quiz['question_bank_name'].iloc[0]
-                student_cache['quiz_bank']=quiz_bank
+                student_cache={"quiz_bank":quiz_bank}
                 r.setex(str(student_id_input) + "_sid", timedelta(days=1), json.dumps(student_cache))
         else:
             query = f'Select question_bank_name from class_exams where id ={exam_id_input}'
@@ -684,7 +692,7 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 query = f'SELECT exam_time_per_ques from class_exams where id={exam_id_input}'
                 df_time1 = await conn.execute_query_dict(query)
                 exam_time_per_ques = df_time1[0]['exam_time_per_ques']
-                exam_cache['exam_time_per_ques']=exam_time_per_ques
+                exam_cache={"exam_time_per_ques":exam_time_per_ques}
                 #print(exam_cache)
                 r.setex(str(exam_id_input) + "_examid", timedelta(days=1), json.dumps(exam_cache))
         else:

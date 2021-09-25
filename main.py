@@ -82,7 +82,7 @@ class UNIQ_LOCAL_TEST:
     DB_NAME="learntoday_uat"
     DB_URL="mysql://root:root@localhost:3306/learntoday_uat"
 
-db_cofig=UNIQ_LOCAL_TEST()
+db_cofig=UNIQ_UAT()
 db_url=db_cofig.DB_URL
 register_tortoise(
     app,
