@@ -7,14 +7,12 @@ import numpy as np
 import pandas as pd
 import redis
 from fastapi import APIRouter,BackgroundTasks
-from IPython.display import display, HTML
 from fastapi.encoders import jsonable_encoder
-from tortoise.exceptions import IntegrityError
 from fastapi.responses import JSONResponse
-from tortoise import Tortoise, fields, run_async
+from tortoise import Tortoise
 from datetime import datetime,date,timedelta
 from schemas.SaveResult import SaveResult
-
+from queues.worker import save_summary_task
 router = APIRouter(
     prefix='/api',
     tags=['Save Result'],
@@ -39,6 +37,8 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         test_type=data.test_type
         exam_mode=data.exam_mode
         exam_type=data.exam_type
+        planner_id=data.planner_id
+        live_exam_id=data.live_exam_id
         all_questions_list =data.questions_list
         all_questions_list_str=""
         if len(all_questions_list) == 1:
@@ -76,11 +76,12 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         Question_attemt_recorddf=Question_attemt_recorddf.fillna(0)
         Question_attemt_record=Question_attemt_recorddf.set_index('question_id')
         answerList_copy = answerList.copy()
-        print(Question_attemt_record)
+        #print(Question_attemt_record)
         total_correctAttempt = 0
         total_incorrectAttempt = 0
         marks_gain = 0
         ans_swap_count = 0
+        marks=0
         new_answer_list=[]
         for val in answerList_copy:
             dict={}
@@ -136,11 +137,30 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         pd.options.display.width = None
         #print(new_answer_listdf)
         unattmepted_ques_cnt = no_of_question - (total_correctAttempt + total_incorrectAttempt)
-        total_exam_marks = int(new_answer_list[0]["marks"]) * no_of_question
-        result_percentage = int(round((marks_gain / int(total_exam_marks)) * 100))
+        if answerList_copy:
+            marks = int(new_answer_list[0]["marks"])
+            total_exam_marks=int(Question_attemt_recorddf['marks'].sum())
+            if total_exam_marks==0:
+                result_percentage=0
+            else:
+                result_percentage = int(round((marks_gain / int(total_exam_marks)) * 100))
+            correct_score=int(marks * total_correctAttempt)
+            incorrect_score=int(new_answer_list[0]["negative_marking"] * total_incorrectAttempt)
+        else:
+            marks=Question_attemt_record.iloc[0]["marks"]
+            correct_score=int(marks * total_correctAttempt)
+            incorrect_score=int(Question_attemt_record.iloc[0]["negative_marking"] * total_incorrectAttempt)
+            total_exam_marks=int(Question_attemt_recorddf['marks'].sum())
+            result_percentage=0
+
         if result_percentage < 0: result_percentage = 0
-        query_insert = f"INSERT INTO user_result (user_id,class_grade_id,test_type,exam_mode,no_of_question, correct_ans, incorrect_ans, unattempted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
-                        VALUES ({user_id},{class_id},'{test_type}','{exam_mode}',{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count} )"
+        query_insert=""
+        if test_type=="Live":
+            query_insert = f"INSERT INTO user_result (user_id,class_grade_id,test_type,exam_mode,no_of_question, correct_ans, incorrect_ans, unattempted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count,live_exam_id ) \
+                                   VALUES ({user_id},{class_id},'{test_type}','{exam_mode}',{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count},{live_exam_id} )"
+        else:
+            query_insert = f"INSERT INTO user_result (user_id,class_grade_id,test_type,exam_mode,no_of_question, correct_ans, incorrect_ans, unattempted_ques_cnt, marks_gain, test_time, time_taken, result_percentage, ans_swap_count ) \
+                            VALUES ({user_id},{class_id},'{test_type}','{exam_mode}',{no_of_question},{total_correctAttempt},{total_incorrectAttempt},{unattmepted_ques_cnt},{marks_gain},'{test_time}','{time_taken}', {result_percentage}, {ans_swap_count} )"
         qryExecute=await conn.execute_query(query_insert)
         if not qryExecute:
             qryExecute=0
@@ -189,12 +209,12 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
                 await conn.execute_query_dict(qry_update)
 
         student_result={}
+        student_result["correct_score"] = correct_score
         student_result["result_id"]=resultId
         student_result["no_of_question"] = int(no_of_question)
         student_result["correct_count"] = int(total_correctAttempt)
-        student_result["correct_score"] = int(new_answer_list[0]["marks"] * total_correctAttempt)
         student_result["wrong_count"] = int(total_incorrectAttempt)
-        student_result["incorrect_score"] = int(new_answer_list[0]["negative_marking"] * total_incorrectAttempt)
+        student_result["incorrect_score"] = incorrect_score
         student_result["total_exam_marks"] = int(total_exam_marks)
         student_result["total_get_marks"] = marks_gain
         student_result["result_time_taken"] = time_taken
@@ -207,7 +227,7 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
             chapter_id = Question_attemt_record.loc[unattemptQues]['chapter_id']
             subject_id = Question_attemt_record.loc[unattemptQues]['subject_id']
             topic_id = Question_attemt_record.loc[unattemptQues]['topic_id']
-            question_marks = int(new_answer_list[0]['marks'])
+            question_marks = marks
             qry_insert2 = f"INSERT INTO student_questions_attempted(class_exam_id,student_id,student_result_id,subject_id,chapter_id,topic_id,exam_type,question_id,question_marks,gain_marks,negative_marks_cnt,time_taken,answer_swap_cnt,attempt_status) \
                                VALUES ({class_id},{user_id},{resultId},{subject_id},{chapter_id},{topic_id},'{exam_type}',{unattemptQues},{question_marks}, 0, 0, '00:00:00',0,'Unanswered')"
             await conn.execute_query_dict(qry_insert2)
@@ -218,13 +238,18 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         elif test_type=="Scholarship":
             query="update student_preferences set scholar_test_date={},scholar_test_status={},scholarship_test_marks={} where student_id={}".format("'"+today_date+"'",1,marks_gain,user_id)
             await conn.execute_query(query)
+        elif test_type=="Planner":
+            query=f"update student_planner set test_completed_yn='Y' where student_id={user_id} and id={planner_id}"
+            await conn.execute_query(query)
 
         message_str=f'Result saved successfully. Result_ID: {resultId}'
         #background_tasks.add_task(save_student_summary, user_id, class_id)
-
+        task=save_summary_task.delay(user_id, class_id)
+        print(task.id)
         resp = {
 
             "message":message_str,
+            "result_id":resultId,
             "success":True
 
             }
@@ -234,105 +259,3 @@ async def save_result(data:SaveResult,background_tasks: BackgroundTasks):
         print(e)
         traceback.print_tb(e.__traceback__)
         return JSONResponse(status_code=400,content={"error": f"{e}","success":False})
-
-@router.post('/save-student-summary', description='Save Student summary', status_code=201)
-async def save_student_summary(student_id:int,exam_id:int):
-    try:
-        start_time=datetime.now()
-        conn = Tortoise.get_connection("default")
-        #Initializing Redis
-        r = redis.Redis()
-        exam_cache={}
-        classTablename=""
-        if r.exists(str(exam_id) + "_examid"):
-            exam_cache = json.loads(r.get(str(exam_id) + "_examid"))
-            if "question_bank_name" in exam_cache:
-                classTablename = exam_cache['question_bank_name']
-            else:
-                query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
-                class_exam_data = await conn.execute_query_dict(query_class_exam_data)
-                classTablename = class_exam_data[0].get("question_bank_name")
-                exam_cache['question_bank_name']=classTablename
-                r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
-        else:
-            query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
-            class_exam_data = await conn.execute_query_dict(query_class_exam_data)
-            classTablename = class_exam_data[0].get("question_bank_name")
-            exam_cache['question_bank_name'] = classTablename
-            r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
-        result2=[]
-
-        query = f'SELECT id,class_exam_id,student_id,student_result_id,sqa.subject_id,sqa.chapter_id,sqa.topic_id,exam_type,' \
-                f'sqa.question_id,attempt_status,sqa.gain_marks,unit_id,skill_id,difficulty_level,major_concept_id,sqa.created_on FROM ' \
-                f'student_questions_attempted as sqa left join {classTablename} as qbj on sqa.question_id=qbj.question_id ' \
-                f'where student_id={student_id} and class_exam_id={exam_id}'
-        result= await conn.execute_query_dict(query)
-        resultdf=pd.DataFrame(result)
-        resultdf["created_on"]=pd.to_datetime(resultdf["created_on"]).dt.strftime('%Y-%m-%d')
-        if resultdf.empty:
-            return JSONResponse(status_code=400,content={"response":"invalid credentials","success":False})
-        print(len(resultdf))
-        #print(resultdf)
-        resultdf=resultdf.fillna(0)
-
-        dfgrouponehot = pd.get_dummies(resultdf, columns=['attempt_status'], prefix=['attempt_status'])
-        #dfgrouponehot = dfgrouponehot.fillna(0)
-        if 'attempt_status_Correct' not in dfgrouponehot:
-            dfgrouponehot['attempt_status_Correct'] = 0
-        if 'attempt_status_Incorrect' not in dfgrouponehot:
-            dfgrouponehot['attempt_status_Incorrect'] = 0
-        if 'attempt_status_Unanswered' not in dfgrouponehot:
-            dfgrouponehot['attempt_status_Unanswered'] = 0
-        #print(dfgrouponehot.isnull().sum(axis = 0))
-        pivotdf = dfgrouponehot.pivot_table(
-            values=['attempt_status_Correct', 'attempt_status_Incorrect', 'attempt_status_Unanswered'],
-            index=['student_id', 'class_exam_id', 'subject_id', 'unit_id', 'chapter_id', 'topic_id', 'skill_id',
-                   'difficulty_level', 'major_concept_id', 'created_on', 'gain_marks'],
-            columns=[],
-            aggfunc='sum')
-        await del_question(student_id)
-        newdf = pd.DataFrame(pivotdf.to_records())
-
-        newdf=newdf.to_dict('records')
-        for dict in newdf:
-            student_id=dict['student_id']
-            class_exam_id=dict['class_exam_id']
-            subject_id=dict['subject_id']
-            unit_id=dict['unit_id']
-            chapter_id=dict['chapter_id']
-            topic_id=dict['topic_id']
-            skill_id=dict['skill_id']
-            difficulty_level=dict['difficulty_level']
-            major_concept_id=dict['major_concept_id']
-            created_on=dict['created_on']
-            gain_marks=dict['gain_marks']
-            attempt_status_Correct=dict['attempt_status_Correct']
-            attempt_status_Incorrect=dict['attempt_status_Incorrect']
-            attempt_status_Unanswered=dict['attempt_status_Unanswered']
-            quesattempted=int(attempt_status_Correct)+int(attempt_status_Incorrect)+int(attempt_status_Unanswered)
-            query_insert = f'INSERT INTO student_performance_summary (student_id, exam_id, subject_id, unit_id, chapter_id, \
-            topic_id, skill_id, ques_difficulty_level, major_concept_id,last_test_date,question_attempted, ques_ans_correctly, \
-            ques_ans_incorrectly, ques_unattempted_cnt,marks) VALUES ({student_id},{class_exam_id},{subject_id},{unit_id}, \
-            {chapter_id},{topic_id},{skill_id},{difficulty_level},{major_concept_id},"{created_on}",{quesattempted},{attempt_status_Correct}, \
-            {attempt_status_Incorrect},{attempt_status_Unanswered},{gain_marks})'
-            await conn.execute_query_dict(query_insert)
-
-        resp={"response":"Records inserted in db successfully"
-            ,"success":True}
-        print(f"execution time is {(datetime.now()-start_time)}")
-
-        return resp
-    except Exception as e:
-        print(e)
-        traceback.print_tb(e.__traceback__)
-        return JSONResponse(status_code=400,content={"error":f"{e}","success":False})
-
-
-async def del_question(student_id):
-    try:
-        conn = Tortoise.get_connection("default")
-        del_query = f'DELETE FROM student_performance_summary WHERE student_id={student_id}'
-        await conn.execute_query_dict(del_query)
-    except Exception as e:
-        print(e)
-        traceback.print_tb(e.__traceback__)

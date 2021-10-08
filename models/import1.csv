@@ -1,0 +1,601 @@
+class_exam_cd,exam_id,uni_name,unit_id,subject_name,subject_id,chapter_name,chapter_id,topic_id,topic_name,topic_priority,topic_sequence
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3136,Coordination Compounds and its Terminologies,9,1
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3137,Werner's Theory,7,2
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3138,Ligands and their Types,8,3
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3139,Chelation,4,4
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3140,Nomenclature of Coordination Compounds,5,5
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3141,Isomerism and its Types in Coordination Compounds,3,6
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3142,Valence Bond Theory,2,7
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3143,Crystal Field Theory,1,8
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3144,Chelation and Stability in Coordination Compounds,6,4
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3145,Applications of Coordination Compounds,11,10
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Coordination Compounds,264,3146,Metal Carbonyls,10,11
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3147,Introduction of d- and f-Block Elements,8,1
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3148,Properties of d-Block Elements,5,2
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3149,Important Compounds of Transition Metals,4,3
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3150,Introduction of Lanthanoids,6,4
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3151,Properties of Lanthanoids,1,5
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3152,Introduction of Actinoids,7,6
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3153,Properties of Actinoids,2,7
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3154,Lanthanoids and Actinoids,3,8
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,The d- and f-Block Elements,266,3155,d-Block and f-Block Elements Uses,9,9
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3156,p-Block Elements,13,1
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3157,General Introduction of Group 15 Elements,11,2
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3158,Physical Properties of Group 15 Elements,5,3
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3159,Chemical Properties of Group 15 Elements,1,4
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3161,General Introduction of Group 16 Elements,10,5
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3162,Physical and Chemical Properties of Group 16 Elements,2,6
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3163,Important Compounds of Group 15 and 16 Elements,8,7
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3164,General Introduction of Group 17 Elements,11,8
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3165,Physical and Chemical Properties of Group 17 Elements,3,9
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3166,Important Compounds of Group 17 and 18 Elements,7,10
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3167,General Introduction of Group 18 Elements,12,11
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3168,Physical Properties of Group 18 Elements,6,12
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3169,Chemical Properties of Group 18 Elements,4,13
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",265,3171,Uses of Group 17 and 18 Elements,14,14
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3172,Occurrence of Elements,8,1
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3173,Concentration of Ores,5,2
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3174,Conversion of Ores into Oxide,6,3
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3175,Thermodynamic and Electrochemical Principles in Metallurgy,1,4
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3176,Ellingham Diagrams,2,5
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3177,Reduction of the Ores,7,6
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3178,Refining of the Ores,3,7
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,General Principles and Processes of Isolation of Metals (Metallurgy),267,3179,Extraction of Important Elements,4,8
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Qualitative Analysis,268,3180,Basic Terminologies in Qualitative Analysis,4,1
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Qualitative Analysis,268,3181,Preliminary Test for Radicals,3,2
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Qualitative Analysis,268,3182,Systematic Analysis of Anionic Radicals,1,3
+JEE,1,Inorganic Chemistry(IOC-2),2,Chemistry,3,Qualitative Analysis,268,3183,Systematic Analysis of Cationic Radicals,2,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3185,Rate of a Chemical Reaction and its measurement,7,1
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3186,Factors Influencing Rate of Reaction,3,2
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3187,Arrhenius Collision Theory,4,3
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3188,Mechanism of a Chemical Reaction and its application,5,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3189,Determination of Order of Reaction,2,5
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3190,Integrated Rate Equations of different orders,1,6
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Chemical Kinetics,286,3191,Radioactivity and its applications,6,7
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3192,Solutions-Properties and its Types,8,1
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3193,Osmosis and Osmotic Pressure,3,2
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3194,Concentration Terms for Solutions,9,3
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3195,Solubility,7,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3196,Vapour Pressure of Liquid Solutions,5,5
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3197,Raoult's Law and its applications,4,6
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3198,Ideal and Non-ideal Solutions and its properties,6,7
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3199,Colligative Properties,1,8
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3200,Relative Lowering of Vapour Pressure,9,9
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3201,Elevation in Boiling Point,10,10
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3202,Depression in Freezing Point,11,11
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solutions and Colligative properties,285,3203,Van't Hoff's Factor and its applications,2,12
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3204,Types of Solids and their properties,9,1
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3205,Crystal Lattice and Unit cells,8,2
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3206,Crystalline Solids and their Properties,7,3
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3207,Ionic Compounds,6,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3208,Calculations for Standard Cubical Unit Lattice,1,5
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3209,Packing Efficiency,4,6
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3210,Voids and its types,5,7
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3211,Defects in Solids,2,8
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Solid State,288,3212,Electrical and Magnetic Properties of Solids,3,9
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3213,Electrolytic and Metallic Conduction,10,1
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3214,Electrodes and Electrochemical Series,9,2
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3215,Electrolytic Cells and Electrolysis,6,3
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3216,Faraday's First and Second Law of Electrolysis,2,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3217,Conductance in Electrolytic Solutions,7,5
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3218,Kohlrausch's Law,4,6
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3219,Electrochemical Cells,8,7
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3220,Electrode Potential and Standard Electrode Potential,3,8
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3221,Nernst Equation and Its Application,1,9
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3222,Corrosion and Prevention,12,10
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3223,Thermodynamics of Cell and its applications,5,11
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Electrochemistry,287,3224,Types of Batteries,11,12
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3226,Adsorption,7,1
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3227,Catalysis,6,2
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3228,Colloids and its preparation,1,3
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3229,Types of Colloids,2,4
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3231,Purification and Properties of Colloidal Solutions,3,5
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3233,Emulsions,4,7
+JEE,1,Physical Chemistry(PC-2),14,Chemistry,3,Surface Chemistry,289,3234,Application of Colloids,8,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3235,Introduction to Amines,11,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3236,Preparation of Amines,5,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3237,Physical Properties of Amines,8,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3238,Chemical Properties of Amines,2,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3239,Chemical Reactions of Amines,1,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3240,Introduction to Diazonium Salts,7,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3241,Preparation of Diazonium Salts,6,7
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3242,Properties of Diazonium Salts,4,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3243,Chemical Reactions of Diazonium Salts,3,9
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,3244,Application of Diazonium Salts in Synthetic Organic Chemistry,9,10
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Chemistry in Everyday Life,277,3246,Drugs and their types,1,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Chemistry in Everyday Life,277,3247,Drug-Target Interaction,2,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Chemistry in Everyday Life,277,3248,Drug Action,3,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Chemistry in Everyday Life,277,3249,Chemicals in Food products,4,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Chemistry in Everyday Life,277,3250,Cleansing Action,5,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3251,"General Introduction of Alcohols, Phenols, and Ethers",12,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3252,Preparation of Alcohols,4,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3253,Physical Properties of Alcohols,9,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3254,Chemical Properties of Alcohols,1,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3255,Important Alcoholic compounds,10,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3256,Tests of Alcohols,5,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3257,Preparation of Phenols,11,7
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3258,Physical Properties of Phenols,8,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3259,Chemical Properties of Phenols,2,9
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3260,Preparation and Properties of Ethers,6,10
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3261,Physical Properties of Ethers,7,11
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Alcohols, Phenols and Ethers",272,3262,Chemical Properties of Ethers,3,12
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3263,"Introduction to Aldehydes, Ketones and Carboxylic Acids",8,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3264,Preparation of Aldehydes and Ketones,4,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3265,Physical and Chemical Properties of Aldehydes and Ketones,6,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3266,Chemical Reactions of Aldehydes and Ketones,2,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3267,"Uses of Aldehydes, Ketones and Carboxylic Acids",9,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3268,Introduction to Carboxylic Acids,7,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3269,Preparation of Carboxylic Acids and its Derivatives,3,7
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3270,Physical Properties of Carboxylic Acids and its Derivatives,5,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",273,3271,Chemical Properties of Carboxylic Acids and its Derivatives,1,9
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3273,Haloalkanes and Haloarenes-Introduction,8,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3274,Classification of Haloalkanes and Haloarenes,10,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3275,Nomenclature of Haloalkanes and Haloarenes,9,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3276,Nature of C - X Bond in Haloalkanes,7,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3277,Preparations of Haloalkanes,4,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3278,Preparation of Haloarenes,5,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3279,Physical Properties of Haloalkanes and Haloarenes,6,7
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3280,Chemical Reactions of Haloalkanes,1,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3281,Nucleophilic Substitution Reactions of Haloalkanes and Haloarenes,3,9
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3282,Chemical Reactions of Haloarenes,2,10
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Haloalkanes and Haloarenes,271,3283,Polyhalogen Compounds,11,11
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3284,Carbohydrates,1,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3285,Glucose,2,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3286,Proteins and Amino Acids,3,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3287,Enzymes,5,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3288,Vitamins,6,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3289,Nucleic Acids,5,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Biomolecules,275,3290,Hormones,7,7
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3291,Polymers and its classification,6,1
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3292,Classification of Polymers,4,2
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3293,Methods of Polymerisation,5,3
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3294,Important Polymers,1,4
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3295,Natural and Synthetic Rubbers,2,5
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3296,Molecular Masses calculation of Polymers,3,6
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Polymers,276,3297,Biodegradable Polymers,7,7
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3298,Introduction of Hydrocarbons,14,1
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3299,Preparation of Alkanes,6,2
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3300,Physical Properties of Alkanes,10,3
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3301,Chemical Properties of Alkanes,2,4
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3302,Preparation of Alkenes,7,5
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3303,Physical Properties of Alkenes,11,6
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3304,Chemical Properties of Alkenes,3,7
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3305,Preparation of Alkynes,8,8
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3306,Physical Properties of Alkynes,12,9
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3307,Chemical Properties of Alkynes,4,10
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3308,Introduction of Arenes or Aromatic Hydrocarbons,13,11
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3309,Preparation Method of Aromatic Hydrocarbons,5,12
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3310,Physical Properties of Aromatic Hydrocarbons,9,13
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,3311,Chemical Properties of Aromatic Hydrocarbons,1,14
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3312,General Introduction of Organic Chemistry,18,1
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3313,Concepts in Organic Reaction Mechanism,17,2
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3314,Homolytic and Heterolytic Fission,16,3
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3315,Electronic Effects and its applications in acids and bases,8,4
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3316,Reaction Intermediates,4,5
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3317,Application of Electronic Effect,5,6
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3318,Resonance and its applications,6,7
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3319,Types of Organic Reactions,19,8
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3320,Aromaticity and its applications,7,9
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3321,Classification of Organic Compounds,13,10
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3322,IUPAC Nomenclature of Organic Compounds,12,11
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3323,Nomenclature of Organic Compounds,11,12
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3324,Isomerism in Organic Compounds,1,13
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3325,Structural Isomerism and its types,3,14
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3326,Stereoisomerism and its classification,2,15
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3327,Purification Processes and methods of purification,9,16
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3328,Methods of Purification of Organic Compounds,10,17
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3329,Qualitative Analysis of Organic Compounds,14,18
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,269,3330,Quantitative Analysis of Organic Compounds,15,19
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3332,Uncertainty in Measurement,8,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3333,Laws of Chemical Combination,7,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3334,Dalton's Atomic Theory,6,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3335,Atomic and Molecular Mass,9,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3336,Mole Concept,3,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3337,Calculation of Empirical and Molecular Formulae,5,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3338,Percentage Composition,4,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3339,Chemical Equations and Stoichiometry and its applications,2,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Some Basic Concepts of Chemistry,278,3340,Concentration Terms,1,9
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3341,Basics of Thermodynamics,8,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3343,First Law of Thermodynamics and its applications,1,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3344,Enthalpy Change of a Reaction,6,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3345,Different Types of Enthalpies,5,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3346,Hess's Law of Constant Heat Summation,7,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3348,Spontaneity and its applications,4,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3349,Entropy and Second Law of Thermodynamics,2,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Thermodynamics,284,3350,Relation between the Gibbs Energy Change and Equilibrium,3,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3351,Ionic Equilibrium in Solution,8,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3352,Acids and Bases ionization,5,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3353,Solubility Equilibria of Sparingly Soluble Salts,3,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3354,"Acids, Bases and Salts",7,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3355,Ionic Product of Water,6,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3356,pH Scale and its applications,4,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3357,Buffer Solutions and its applications,2,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,3358,Hydrolysis of Salts and pH calculation of their Solutions,1,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3359,States of Matter,10,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3360,Measurable Properties of Gases,11,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3361,Intermolecular Forces,9,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3362,Gaseous Laws and Ideal Gas Equation,4,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3363,Dalton's Law of Partial Pressure,3,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3364,Kinetic Theory of Gases and Molecular Speeds,1,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3365,Real Gas,5,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3366,Compressibility Factor,6,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3367,Van Der Waals Equation and its various forms,7,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3368,Liquefaction of Gases and its applications,8,9
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,States of Matter: Gases and Liquids,281,3369,Vapour Pressure of Liquid,2,10
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3371,Basics of Equilibrium,9,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3372,Types of Equilibrium,8,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3373,Equilibrium in Physical Processes,7,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3374,Chemical Equilibrium and its properties,6,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3375,Law of Chemical Equilibrium and Equilibrium Constants,4,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3376,Equilibrium Constants and its application,3,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3377,Application of Equilibrium Constant,5,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3378,Le chatelier's principle,2,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Chemical Equilibrium,282,3379,Thermodynamics of Equilibrium and its applications,1,9
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3380,Redox Reactions and its types,8,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3381,Oxidation and Reduction,7,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3382,Calculation of Oxidation Number,5,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3383,Types of Redox Reactions,6,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3384,Balancing of Redox Reactions,3,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3385,Redox Reactions and and its applications in Titration,1,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3386,Redox Reactions and Electrode Processes,2,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Redox Reactions,279,3387,Equivalent Concept,4,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3388,Models of Atoms,9,1
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3389,Discovery of electrons. protons and neutrons,8,2
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3390,Electromagnetic Radiation and its nature,7,3
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3391,Electromagnetic Spectrum,6,4
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3392,Particle Nature of Light,5,5
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3393,Photoelectric Effect and its applications,4,6
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3394,Bohr's Model for Hydrogen Atom,2,7
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3395,Quantum Mechanical Model of the Atom,1,8
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Structure of Atom,280,3396,Rules for filling of Electrons in Orbitals,3,9
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3397,Environmental Pollution,2,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3398,Atmospheric Pollution,3,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3399,Water Pollution,4,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3400,Soil Pollution,5,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3401,Industrial Waste,6,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3402,Techniques to Control Environmental Pollution,7,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Environmental Chemistry,263,3403,Green Chemistry,1,7
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3404,History of The Periodic Table,9,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3405,Classification of Periodic Table,8,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3406,Modern Periodic Law,7,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3407,Electronic Configurations and Types of Elements in Periodic Table,1,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3408,Periodic Trends,2,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3409,Radius and Its Types,3,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Classification of Elements and Periodicity in Properties,258,3410,Ionization Enthalpy and its Applications,6,7
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3411,Octet Rule,9,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3412,Covalent Bonding,8,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3413,Ionic Bond,7,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3414,Bond Parameters and its applications,5,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3415,Dipole Moment,6,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3416,Hydrogen Bonding and its Application,4,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3417,Hybridisation and its Applications,1,7
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3418,The Valence Shell Electron Pair Repulsion (VSEPR) Theory,2,8
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Chemical Bonding and Molecular Structure,259,3419,Molecular Orbital Theory (MOT) and its applications,3,9
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3420,Introduction of Group 13 Elements,8,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3421,Physical Properties of Group 13 Elements,6,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3422,Chemical Properties of Group 13 Elements,1,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3423,Important Compounds of Group 13 Elements,4,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3424,Uses of Group 13 and 14 Elements,9,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3425,Introduction of Group 14 Elements,7,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3426,Physical Properties of Group 14 Elements,5,7
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3427,Chemical Properties of Group 14 Elements,2,8
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The P-Block elements (Group 13 and 14),262,3428,Important Compounds of Group 14 Elements,3,9
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3430,Chemical Properties of Group 1 Elements,2,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3431,Uses of Group 1 and 2 Elements,8,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3432,Important Compounds of Group 1 Elements,4,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3433,Anomalous Properties of Lithium and Beryllium,5,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3434,General Introduction of Group 2 Elements,7,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3435,Physical Properties of Group 2 Elements,6,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3436,Chemical Properties of Group 2 Elements,1,7
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,3437,Important Compounds of Group 2 Elements,3,8
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3440,Properties of Hydrogen,1,1
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3441,Dihydrogen and its preparation,2,2
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3443,Hydrides,3,3
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3444,Water- Structure and Properties,4,4
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3445,Hard and Soft Water,7,5
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3446,Heavy Water,6,6
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,Hydrogen,260,3447,Hydrogen Peroxide and its uses,5,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3965,Environmental Pollution,2,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3966,Atmospheric Pollution,3,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3967,Water Pollution,4,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3968,Soil Pollution,5,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3969,Industrial Waste,6,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3970,Techniques to Control Environmental Pollution,7,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Environmental Chemistry,365,3971,Green Chemistry,1,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3972,History of The Periodic Table,9,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3973,Classification of Periodic Table,8,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3974,Modern Periodic Law,7,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3975,Electronic Configurations and Types of Elements in Periodic Table,1,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3976,Periodic Trends,2,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3977,Radius and Its Types,3,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3978,Ionization Enthalpy and its Applications,6,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3979,Electron Gain Enthalpy and its Applications,5,8
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Classification of Elements and Periodicity in Properties,360,3980,Electronegativity and its Applications,4,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3981,Octet Rule,9,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3982,Covalent Bonding,8,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3983,Ionic Bond,7,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3984,Bond Parameters and its applications,5,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3985,Dipole Moment,6,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3986,Hydrogen Bonding and its Application,4,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3987,Hybridisation and its Applications,1,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3988,The Valence Shell Electron Pair Repulsion (VSEPR) Theory,2,8
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Chemical Bonding and Molecular Structure,361,3989,Molecular Orbital Theory (MOT) and its applications,3,9
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3990,Introduction of Group 13 Elements,8,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3991,Physical Properties of Group 13 Elements,6,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3992,Chemical Properties of Group 13 Elements,1,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3993,Important Compounds of Group 13 Elements,4,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3995,Introduction of Group 14 Elements,7,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3996,Physical Properties of Group 14 Elements,5,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3997,Chemical Properties of Group 14 Elements,2,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3998,Important Compounds of Group 14 Elements,3,8
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The P-Block elements (Group 13 and 14),364,3999,Uses of Group 13 and 14 Elements,9,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4000,Chemical Properties of Group 1 Elements,2,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4002,Important Compounds of Group 1 Elements,4,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4003,Anomalous Properties of Lithium and Beryllium,5,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4004,General Introduction of Group 2 Elements,7,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4005,Physical Properties of Group 2 Elements,6,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4006,Chemical Properties of Group 2 Elements,1,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4007,Important Compounds of Group 2 Elements,3,7
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4008,Uses of Group 1 and 2 Elements,8,8
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4010,Properties of Hydrogen,1,1
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4011,Dihydrogen and its preparation,2,2
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4013,Hydrides,3,3
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4014,Water- Structure and Properties,4,4
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4015,Hard and Soft Water,7,5
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4016,Heavy Water,6,6
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,Hydrogen,362,4017,Hydrogen Peroxide and its uses,5,7
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4018,Coordination Compounds and its Terminologies,9,1
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4019,Werner's Theory,7,2
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4020,Ligands and their type,8,3
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4021,Chelation and Stability in Coordination Compounds,6,4
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4022,Nomenclature of Coordination Compounds,5,5
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4023,Isomerism and its Types in Coordination Compounds,3,6
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4024,Valence Bond Theory,2,7
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4025,Crystal Field Theory,1,8
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4026,Stability in Coordination Compounds,4,9
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4027,Applications of Coordination Compounds,11,10
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Coordination Chemistry,366,4028,Metal Carbonyls,10,11
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4029,Introduction of d- and f-Block Elements,8,1
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4030,Properties of d-Block Elements,5,2
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4031,Important Compounds of Transition Metals,4,3
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4032,Introduction of Lanthanoids,6,4
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4033,Properties of Lanthanoids,1,5
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4034,Introduction of Actinoids,7,6
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4035,Properties of Actinoids,2,7
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4036,Lanthanoids and Actinoids,3,8
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,The d- and f-Block Elements,367,4037,d-Block and f-Block Elements Uses,9,9
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4038,p-Block Elements,13,1
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4039,Introduction of Group 15 Elements,9,2
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4040,Physical Properties of Group 15 Elements,5,3
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4041,Chemical Properties of Group 15 Elements,1,4
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4042,Important Compounds of Group 15 Elements,10,5
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4043,General Introduction of Group 16 Elements,10,5
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4044,Physical and Chemical Properties of Group 16 Elements,2,6
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4045,Important Compounds of Group 15 and 16 Elements,8,7
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4046,General Introduction of Group 17 Elements,11,8
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4047,Physical and Chemical Properties of Group 17 Elements,3,9
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4049,General Introduction of Group 18 Elements,12,11
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4050,Physical Properties of Group 18 Elements,6,12
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4051,Chemical Properties of Group 18 Elements,4,13
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4052,Important Compounds of Group 17 and 18 Elements,7,10
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,"The P-Block Elements (Group-15, 16, 17, 18)",368,4053,Uses of Group 17 and 18 Elements,14,14
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4054,Occurrence of Elements,8,1
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4055,Concentration of Ores,5,2
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4056,Conversion of Ores into Oxide,6,3
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4057,Thermodynamic and Electrochemical Principles in Metallurgy,1,4
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4058,Ellingham Diagrams,2,5
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4059,Reduction of the Ores,7,6
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4060,Refining of the Ores,3,7
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Metallurgy,369,4061,Extraction of Important Elements,4,8
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Qualitative Analysis,370,4062,Basic Terminologies in Qualitative Analysis,4,1
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Qualitative Analysis,370,4063,Preliminary Test for Radicals,3,2
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Qualitative Analysis,370,4064,Systematic Analysis of Anionic Radicals,1,3
+NEET,2,Inorganic Chemistry(IOC-2),35,Chemistry,3,Qualitative Analysis,370,4065,Systematic Analysis of Cationic Radicals,2,4
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4066,Introduction of Hydrocarbons,14,1
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4067,Preparation of Alkanes,6,2
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4068,Physical Properties of Alkanes,10,3
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4069,Chemical Properties of Alkanes,2,4
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4070,Preparation of Alkenes,7,5
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4071,Physical Properties of Alkenes,11,6
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4072,Chemical Properties of Alkenes,3,7
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4073,Preparation of Alkynes,8,8
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4074,Physical Properties of Alkynes,12,9
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4075,Chemical Properties of Alkynes,4,10
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4076,Introduction of Arenes or Aromatic Hydrocarbons,13,11
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4077,Preparation of Aromatic Hydrocarbons,5,12
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4078,Physical Properties of Aromatic Hydrocarbons,9,13
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Hydrocarbons,372,4079,Chemical Properties of Aromatic Hydrocarbons,1,14
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4080,General Introduction of Organic Chemistry,18,1
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4081,Concepts in Organic Reaction Mechanism,17,2
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4082,Homolytic and Heterolytic Fission,16,3
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4083,Electronic Effects and its applications in acids and bases,8,4
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4084,Reaction Intermediates,4,5
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4085,Application of Electronic Effect,5,6
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4086,Resonance and its applications,6,7
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4087,Types of Organic Reactions,19,8
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4088,Aromaticity and its applications,7,9
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4089,Classification of Organic Compounds,13,10
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4090,IUPAC Nomenclature of Organic Compounds,12,11
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4091,Nomenclature of Organic Compounds,11,12
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4092,Isomerism in Organic Compounds,1,13
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4093,Structural Isomerism and its Types,3,14
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4094,Stereoisomerism and its classification,2,15
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4095,Purification Processes and methods of purification,9,16
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4096,Methods of Purification of Organic Compounds,10,17
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4097,Qualitative Analysis of Organic Compounds,14,18
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Organic Chemistry- Some Basic Principles and Techniques,371,4098,Quantitative Analysis of Organic Compounds,15,19
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4099,Introduction of Amines,10,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4100,Preparation of Amines,5,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4101,Physical Properties of Amines,8,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4102,Chemical Properties of Amines,2,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4103,Chemical Reactions of Amines,1,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4104,Introduction to Diazonium Salts,7,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4105,Preparation of Diazonium Salts,6,7
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4106,Properties of Diazonium Salts,4,8
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4107,Chemical Reactions of Diazonium Salts,3,9
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Amines,376,4108,Applications of Diazonium Salts in Synthetic Organic Chemistry,9,10
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Chemistry in Everyday Life,379,4110,Drugs and their types,1,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Chemistry in Everyday Life,379,4111,Drug-Target Interaction,2,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Chemistry in Everyday Life,379,4112,Drug Action,3,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Chemistry in Everyday Life,379,4113,Chemicals in Food products,4,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Chemistry in Everyday Life,379,4114,Cleansing Action,5,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4115,"General Introduction of Alcohols, Phenols, and Ethers",12,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4116,Preparation of Alcohols,4,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4117,Physical Properties of Alcohols,9,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4118,Chemical Properties of Alcohols,1,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4119,Important Alcoholic compounds,10,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4120,Tests of Alcohols,5,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4121,Preparation of Phenols,11,7
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4122,Physical Properties of Phenols,8,8
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4123,Chemical Properties of Phenols,2,9
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4124,Preparation and Properties of Ethers,6,10
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4125,Physical Properties of Ethers,7,11
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Alcohols, Phenols and Ethers",374,4126,Chemical Properties of Ethers,3,12
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4127,"Introduction to Aldehydes, Ketones and Carboxylic Acids",8,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4128,Preparation of Aldehydes and Ketones,4,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4129,Physical and Chemical Properties of Aldehydes and Ketones,6,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4130,Chemical Reactions of Aldehydes and Ketones,2,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4131,"Uses of Aldehydes, Ketones and Carboxylic Acids",9,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4132,Introduction to Carboxylic Acids,7,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4133,Preparation of Carboxylic Acids and its Derivatives,3,7
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4134,Physical Properties of Carboxylic Acids and its Derivatives,5,8
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,"Aldehydes, Ketones and Carboxylic Acids",375,4135,Chemical Properties of Carboxylic Acids and its Derivatives,1,9
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4137,Haloalkanes and Haloarenes-Introduction,8,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4138,Classification of Haloalkanes and Haloarenes,10,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4139,Nomenclature of Haloalkanes and Haloarenes,9,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4140,Nature of C - X Bond in Haloalkanes,7,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4141,Preparations of Haloalkanes,4,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4142,Preparation of Haloarenes,5,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4143,Physical Properties of Haloalkanes and Haloarenes,6,7
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4144,Chemical Reactions of Haloalkanes,1,8
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4145,Nucleophilic Substitution Reactions of Haloalkanes and Haloarenes,3,9
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4146,Chemical Reactions of Haloarenes,2,10
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Haloalkanes and Haloarenes,373,4147,Polyhalogen Compounds,11,11
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4148,Carbohydrates,1,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4149,Glucose,2,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4150,Proteins and Amino Acids,3,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4151,Enzymes,5,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4152,Vitamins,6,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4153,Nucleic Acids,5,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Biomolecules,377,4154,Hormones,7,7
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4155,Polymers and its classification,6,1
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4156,Classification of Polymers,4,2
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4157,Methods of Polymerisation,5,3
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4158,Important Polymers,1,4
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4159,Natural and Synthetic Rubbers,2,5
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4160,Molecular Masses calculation of Polymers,3,6
+NEET,2,Organic Chemistry(OC-2),37,Chemistry,3,Polymers,378,4161,Biodegradable Polymers,7,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4163,Uncertainty in Measurement,8,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4164,Laws of Chemical Combination,7,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4165,Dalton's Atomic Theory,6,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4166,Atomic and Molecular Mass,9,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4167,Mole Concept,3,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4168,Calculation of Empirical and Molecular Formulae,5,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4169,Percentage Composition,4,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4170,Chemical Equations and Stoichiometry and its applications,2,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Some Basic Concepts of Chemistry,380,4171,Concentration Terms,1,9
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4172,Basics of Thermodynamics,8,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4174,First Law of Thermodynamics and its applications,1,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4175,Enthalpy Change of a Reaction,6,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4176,Different Types of Enthalpies,5,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4177,Hess's Law of Constant Heat Summation,7,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4179,Spontaneity and its applications,4,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4180,Entropy and Second Law of Thermodynamics,2,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Thermodynamics,386,4181,Relation between the Gibbs Energy Change and Equilibrium,3,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4182,Ionic Equilibrium in Solution,8,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4183,Acids and Bases ionization,5,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4184,Solubility Equilibria of Sparingly Soluble Salts,3,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4185,"Acids, Bases and Salts",7,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4186,Ionic Product of Water,6,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4187,pH Scale and its applications,4,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4188,Buffer Solutions and its applications,2,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Ionic Equilibrium,385,4189,Hydrolysis of Salts and pH calculation of their Solutions,1,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4192,Intermolecular Forces,9,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4193,Gaseous Laws and Ideal Gas Equation,4,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4194,Dalton's Law of Partial Pressure,3,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4195,Kinetic Theory of Gases and Molecular Speeds,1,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4196,Real Gas,5,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4197,Compressibility Factor,6,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4198,Van Der Waals Equation and its various forms,7,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4199,Liquefaction of Gases and its applications,8,9
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,States of Matter: Gases and Liquids,383,4200,Vapour Pressure of Liquid,2,10
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4202,Basics of Equilibrium,9,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4203,Types of Equilibrium,8,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4204,Equilibrium in Physical Processes,7,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4205,Chemical Equilibrium and its Properties,6,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4206,Law of Chemical Equilibrium and Equilibrium Constants,4,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4207,Equilibrium Constants and its applications,3,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4208,Application of Equilibrium Constant,5,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4209,Le chatelier's principle,2,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Chemical Equilibrium,384,4210,Thermodynamics of Equilibrium and its applications,1,9
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4211,Redox Reactions and its types,8,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4212,Oxidation and Reduction,7,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4213,Calculation of Oxidation Number,5,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4214,Types of Redox Reactions,6,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4215,Balancing of Redox Reactions,3,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4216,Redox Reactions and its applications in Titration,1,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4217,Redox Reactions and Electrode Processes,2,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Redox Reactions,381,4218,Equivalent Concept,4,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4219,Models of Atoms,9,1
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4220,Discovery of electrons. protons and neutrons,8,2
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4221,Electromagnetic Radiation and its nature,7,3
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4222,Electromagnetic Spectrum,6,4
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4223,Particle Nature of Light,5,5
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4224,Photoelectric Effect and its applications,4,6
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4225,Bohr's Model for Hydrogen Atom,2,7
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4226,Quantum Mechanical Model of the Atom,1,8
+NEET,2,Physical Chemistry(PC-1),38,Chemistry,3,Structure of Atom,382,4227,Rules for filling of Electrons in Orbitals,3,9
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4229,Rate of a Chemical Reaction and its measurement,7,1
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4230,Factors Influencing Rate of Reaction,3,2
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4231,Arrhenius Collision Theory,4,3
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4232,Mechanism of a Chemical Reaction and its application,5,4
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4233,Determination of Order of Reaction,2,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4234,Integrated Rate Equations of different orders,1,6
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Chemical Kinetics,388,4235,Radioactivity and its applications,6,7
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4236,Solutions-Properties and its Types,8,1
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4237,Osmosis and Osmotic Pressure,3,2
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4238,Concentration Terms of Solutions,9,3
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4239,Solubility,7,4
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4240,Vapour Pressure of Liquid Solutions,5,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4241,Raoult's Law and its applications,4,6
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4242,Ideal and Non-ideal Solutions and its properties,6,7
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4243,Colligative Properties,1,8
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4244,Relative Lowering of Vapour Pressure,9,9
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4245,Elevation in Boiling Point,10,10
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4246,Depression in Freezing Point,11,11
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solutions and Colligative properties,387,4247,Van't Hoff's Factor and its applications,2,12
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4248,Types of Solids and their properties,9,1
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4249,Crystal Lattice and Unit cells,8,2
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4250,Crystalline Solids and their Properties,7,3
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4251,Ionic Compounds,6,4
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4252,Calculations for Standard Cubical Unit Lattice,1,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4253,Packing Efficiency,4,6
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4254,Voids and its types,5,7
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4255,Defects in Solids,2,8
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Solid State,390,4256,Electrical and Magnetic Properties of Solids,3,9
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4257,Electrolytic and Metallic Conduction,10,1
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4258,Electrodes and Electrochemical Series,9,2
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4259,Electrolytic Cells and Electrolysis,6,3
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4260,Faraday's First and Second Law of Electrolysis,2,4
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4261,Conductance in Electrolytic Solutions,7,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4262,Kohlrausch's Law,4,6
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4263,Electrochemical Cells,8,7
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4264,Electrode Potential and Standard Electrode Potential,3,8
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4265,Nernst Equation and Its Application,1,9
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4266,Corrosion and Prevention,12,10
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4267,Thermodynamics of Cell and its applications,5,11
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Electrochemistry,389,4268,Types of Batteries,11,12
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4270,Adsorption,7,1
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4271,Catalysis,6,2
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4272,Colloids and its preparation,1,3
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4273,Types of Colloids,2,4
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4274,Preparation of Colloids,3,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4275,Purification and properties of Colloidal Solutions,3,5
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4277,Emulsions,4,7
+NEET,2,Physical Chemistry(PC-2),39,Chemistry,3,Surface Chemistry,391,4278,Application of Colloids,8,8
+JEE,1,Organic Chemistry(OC-2),12,Chemistry,3,Amines,274,4317,Isocyanides,10,11
+JEE,1,Organic Chemistry(OC-1),11,Chemistry,3,Hydrocarbons,270,4318,Isomerism in Alkanes,15,15
+JEE,1,Physical Chemistry(PC-1),13,Chemistry,3,Ionic Equilibrium,283,4330,Indicators,9,9
+JEE,1,Inorganic Chemistry(IOC-1),1,Chemistry,3,The s-Block Elements,261,4333,Physical and Chemical Properties of Group 1 Elements,9,9
+NEET,2,Inorganic Chemistry(IOC-1),34,Chemistry,3,The s-Block Elements,363,4334,Physical and Chemical Properties of Group 1 Elements,2,1
+NEET,2,Organic Chemistry(OC-1),36,Chemistry,3,Stereochemistry and related concepts,629,4579,"Specific rotation, racemisation and racemic mixture",1,1

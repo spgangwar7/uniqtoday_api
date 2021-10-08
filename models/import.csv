@@ -1,145 +1,255 @@
-﻿class_exam_cd,exam_id,uni_name,unit_id,subject_name,subject_id,chapter_name,chapter_id,topic_id,topic_name,topic_sequence,topic_priority
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3448,Basics of Sets,1,7
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3449,Types of Sets,2,5
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3450,Algebra of Sets,3,2
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3451,Interval and Wavy Curves Method,6,4
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3452,Logarithm and its Properties,7,3
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3453,Basics of Relations,4,6
-JEE,1,Algebra,15,Mathematics,1,"Set, Relation, Interval and Logarithm",290,3454,Types of Relations,5,1
-JEE,1,Algebra,15,Mathematics,1,Statistics,291,3457,Measures of Central Tendency,1,2
-JEE,1,Algebra,15,Mathematics,1,Statistics,291,3458,Measures of Dispersion,2,1
-JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3459,Basics of Mathematical Reasoning,1,3
-JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3460,Definition of Logical Connectives/Operations,2,2
-JEE,1,Algebra,15,Mathematics,1,Mathematical Reasoning,292,3461,Algebra of Statements,3,1
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3462,Arithmetic Progressions or AP,1,4
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3463,Geometric Progressions or GP,2,5
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3464,Harmonic Progressions or HP,3,6
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3465,Arithmetico-Geometric Progressions or AGP,4,3
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3466,"A.M., G.M.,H.M. Relations",5,2
-JEE,1,Algebra,15,Mathematics,1,Sequences and Series,293,3467,Miscellaneous Series,6,1
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3468,Fundamental Principle of Counting,1,3
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3469,Permutations,2,2
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3470,Combinations,3,1
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3471,Circular Permutations,4,5
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3472,Selection of Mixed Objects and Divisor Concepts,5,4
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3473,"Division, Distribution and Multinomial Theorem",6,6
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3474,Geometrical Application of Permutations and Combinations,7,7
-JEE,1,Algebra,15,Mathematics,1,Permutation and Combination,294,3475,Derangements and Other Miscellaneous Concepts,8,8
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3476,Basics of Complex Numbers,1,6
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3477,Algebra of Complex Numbers,2,5
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3478,Representation of Complex Numbers,3,4
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3479,"Properties of Modulus, Conjugate and Argument",4,3
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3481,De Moivre's Theorems and Roots of Unity,5,1
-JEE,1,Algebra,15,Mathematics,1,Complex Numbers,295,3483,Geometry of Complex Numbers and Other Miscellaneous Concepts,6,2
-JEE,1,Algebra,15,Mathematics,1,Probability,296,3484,Basics of Probability,1,1
-JEE,1,Algebra,15,Mathematics,1,Probability,296,3485,Addition Theorem of Probability,2,4
-JEE,1,Algebra,15,Mathematics,1,Probability,296,3486,Conditional Probability and Independent & Dependent Events,3,3
-JEE,1,Algebra,15,Mathematics,1,Probability,296,3487,Bayes' Theorem and Total Probability Theorem,4,2
-JEE,1,Algebra,15,Mathematics,1,Probability,296,3488,Bernoulli Trials and Binomial Distribution,5,5
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3489,Basic Concepts and Important Definitions,1,6
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3490,Quadratic Equation and its Roots,2,3
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3491,Nature of Roots and Common Roots,3,1
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3492,Range and Graph of Quadratic Expressions,4,5
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3493,Location of Roots,5,2
-JEE,1,Algebra,15,Mathematics,1,Quadratic Equations,297,3494,Higher Degree Polynomials and Other Miscellaneous Concepts,6,4
-JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3495,Binomial Theorem for Positive Integral Exponent,1,2
-JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3496,Special Terms in Binomial Expansion for Positive Integral Exponent,2,1
-JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3497,Series involving Binomial Coefficients,3,3
-JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3498,Binomial Theorem for Negative or Fractional Exponent,4,4
-JEE,1,Algebra,15,Mathematics,1,Binomial Theorem,298,3499,Multinomial Theorem,5,5
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3500,Basics of Matrices,1,7
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3501,Algebra of Matrices,2,6
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3502,Symmetric and Skew-Symmetric Matrices,3,5
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3503,Determinant of a Square Matrix and its Properties,4,1
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3505,Adjoint and Inverse of a Matrix,5,2
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3506,Systems of Linear Equations,6,3
-JEE,1,Algebra,15,Mathematics,1,Matrices and Determinants,299,3507,Characteristic Equation and Other Miscellaneous Concepts,7,4
-JEE,1,Trigonometry,16,Mathematics,1,Heights and Distances,303,3518,Heights and Distances,1,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3519,Basics of Ellipse,1,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3520,Ellipse and a Point and Ellipse and a Line,2,3
-JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3521,Tangent and Normal of Ellipse,3,2
-JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3522,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Ellipse",4,4
-JEE,1,Coordinate Geometry,17,Mathematics,1,Ellipse,304,3523,Interaction between Conics and Properties of Ellipse,5,5
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3524,Basics of Hyperbola,1,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3526,Hyperbola and a Point and Hyperbola and a Line,2,6
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3527,Tangent and Normal of Hyperbola,3,2
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3528,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Hyperbola",4,3
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3529,Interaction between Two Conics and Properties of Hyperbola,6,5
-JEE,1,Coordinate Geometry,17,Mathematics,1,Hyperbola,305,3530,Rectangular Hyperbola,5,4
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3542,Sections of a Cone,1,6
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3543,Basics of Parabola,2,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3544,Parabola and a Point & Parabola and a Line,3,5
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3545,Tangent of Parabola,4,2
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3546,Normal of Parabola,5,4
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3547,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Parabola",6,3
-JEE,1,Coordinate Geometry,17,Mathematics,1,Parabola,307,3548,Interaction between Conics and Properties of Parabola,7,7
-JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3556,Basics of Functions and Classification of Functions,1,2
-JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3557,Elementary Functions,2,1
-JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3558,Transformation of Graphs,3,5
-JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3559,"Even, Odd and Periodic Function",4,3
-JEE,1,Differential Calculus,18,Mathematics,1,Function,309,3561,"Composite Function, Inverse of a Function and Other Function Concepts",5,4
-JEE,1,Differential Calculus,18,Mathematics,1,Limits,310,3563,Basics of Limits,1,3
-JEE,1,Differential Calculus,18,Mathematics,1,Limits,310,3564,Standard Methods of Evaluation of Limits,2,2
-JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3569,Basics of Differentiation,1,3
-JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3570,Rules of Differentiation,2,1
-JEE,1,Differential Calculus,18,Mathematics,1,Differential Coefficient,312,3571,Higher Order Derivatives and Other Derivative Concepts,3,2
-JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3579,Basics of Definite Integrals,1,3
-JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3580,Properties of Definite Integrals,2,1
-JEE,1,Integral Calculus,19,Mathematics,1,Definite Integration,315,3581,Other Definite Integration Concepts,3,2
-JEE,1,Integral Calculus,19,Mathematics,1,Area under Curves,316,3582,Area Bounded by Curves,1,1
-JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3583,Basics of Differential Equations,1,4
-JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3585,Variable Separable and Homogeneous Differential Equations,2,1
-JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3587,Linear Differential Equation and Exact Differential Equations,3,2
-JEE,1,Integral Calculus,19,Mathematics,1,Differential Equations,317,3589,Application of Differential Equations and Other Differential Equation Concepts,4,3
-JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3590,Basics of Vectors,1,3
-JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3592,Scalar and Vector Products,2,1
-JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3594,Scalar and Vector Triple Products,3,2
-JEE,1,Vector and 3D,20,Mathematics,1,Vector Algebra,318,3595,Vector Equations and Other Vector Concepts,4,4
-JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3606,Basics of Indefinite Integrals,1,4
-JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3607,Methods of Integration,2,1
-JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3608,Special Algebraic Integrations,3,2
-JEE,1,Integral Calculus,19,Mathematics,1,Indefinite Integration,314,3609,Special Trigonometric Integrations,4,3
-JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3769,Derivative as Rate of Change,1,4
-JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3770,Tangents and Normal,2,2
-JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3771,Monotonicity and Concavity,3,1
-JEE,1,Differential Calculus,18,Mathematics,1,Application of Derivatives,313,3772,Maxima and Minima,4,3
-JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3773,Continuity of a Function,1,2
-JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3774,Differentiability or Derivability of a Function,2,1
-JEE,1,Differential Calculus,18,Mathematics,1,Continuity and Differentiability,311,3775,Functional Relations and Mean Value Theorems,3,3
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3780,Basics of Trigonometry,1,7
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3781,Trigonometric Identities for Compound Angles (A+-B formula),2,1
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3782,Trigonometric Identities for Multiple and Sub-multiple Angles,3,2
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3783,Trigonometric Identities for Product to Sum or Difference,4,3
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3784,Trigonometric Identities for Sum or Difference to Product,5,4
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3785,Other Trigonometric Identities and Trigonometric Series,6,5
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3786,Range of Trigonometric Expressions,7,6
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Ratios and Identities,301,3787,Trigonometric Functions and Graphs,8,8
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Equations and Inequalities,300,3789,Trigonometric Equations,1,1
-JEE,1,Trigonometry,16,Mathematics,1,Trigonometric Equations and Inequalities,300,3790,Trigonometric Inequalities,2,2
-JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3791,Basics of Inverse Trigonometric Functions,1,3
-JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3792,Standard Properties of Inverse Trigonometric Functions,2,1
-JEE,1,Trigonometry,16,Mathematics,1,Inverse Trigonometric Functions,302,3793,Identities of Inverse Trigonometric Functions and Other Miscellaneous Concepts,3,2
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3794,Relations Between Sides and Angles of a Triangle,1,1
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3795,Half-Angle Formula and the Area of a Triangle,2,2
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3796,"Inradius, Exradii and Circumradius",3,3
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3797,"Length of Medians, Altitudes and Angle Bisectors",4,4
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3798,Distances of the Centres of a Triangle from Its Vertices and Sides,5,5
-JEE,1,Trigonometry,16,Mathematics,1,Solution of Triangle or Properties of Triangle,325,3799,Distance between Various Centres and Other Miscellaneous Concepts,6,6
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3800,Point in Cartesian Plane,1,8
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3801,Straight Line and its Equations,2,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3802,Interaction between Two Lines,3,2
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3803,Straight Line and a Point,4,7
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3804,Special Points in Triangles,5,3
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3805,Concurrency of Three Lines and Angle Bisectors,6,6
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3806,"Family of Lines, Shifting of Origin and Transformation of Axes",7,5
-JEE,1,Coordinate Geometry,17,Mathematics,1,Points and Straight Line,306,3807,Pair of Straight Lines,8,4
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3808,Equation of Circle,1,1
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3809,Circle and a Point and Circle and a Line,2,6
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3810,Tangent and Normal of a Circle,3,2
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3811,"Pair of Tangent, Chord of Contact and Chord with Midpoint for Circle",4,3
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3812,Interaction between Two Circles,5,5
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3813,Family of Circles,6,4
-JEE,1,Coordinate Geometry,17,Mathematics,1,Circle,308,3814,Other Concepts related to a Circle,7,7
-JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3962,Basics of 3D Geometry,1,3
-JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3963,Lines in 3D,2,2
-JEE,1,Vector and 3D,20,Mathematics,1,3D Geometry,324,3964,Planes in 3D,3,1
+class_exam_cd,exam_id,uni_name,unit_id,subject_name,subject_id,chapter_name,chapter_id,topic_id,topic_name,topic_priority,topic_sequence
+NEET,2,Diversity In The Living World,49,Biology,4,The living world,622,4335,What is 'living' ?,4,1
+NEET,2,Diversity In The Living World,49,Biology,4,The living world,622,4336,Diversity in the living world,3,2
+NEET,2,Diversity In The Living World,49,Biology,4,The living world,622,4337,Taxonomic categories,2,3
+NEET,2,Diversity In The Living World,49,Biology,4,The living world,622,4338,Taxonomical aids,1,4
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4339,Kingdom Classification,5,1
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4340,Kingdom Monera,1,2
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4341,Kingdom Protista,4,3
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4342,Kingdom Fungi,2,4
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4343,Kingdom Plantae,6,6
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4344,Kingdom Animalia,7,7
+NEET,2,Diversity In The Living World,49,Biology,4,Biological Classification,624,4345,"Viruses, Viroids and Lichens",3,5
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4346,Classification system,4,1
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4347,Algae (Thallophytes),3,2
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4348,Bryophytes,5,3
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4349,Pteridophytes,7,4
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4350,Gymnosperms,6,5
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4351,Angiosperms,1,6
+NEET,2,Diversity In The Living World,49,Biology,4,Plant Kingdom,587,4352,Plant life cycles and Alternation of generation,2,7
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4353,Basis of Classification,2,1
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4354,Classification of Animals :,3,2
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4355,1. Phylum Porifera,10,3
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4356,2. Phylum Coelenterata (Cnidaria),5,4
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4357,3. Phylum Ctenophora,6,5
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4358,4. Phylum Platyhelminthes,7,6
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4359,5. Phylum Aschelminthes,8,7
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4360,6. Phylum Annelida,9,8
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4361,7. Phylum Arthropoda,4,9
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4362,8. Phylum Mollusca,11,10
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4363,9. Phylum Echinodermata,12,11
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4364,10. Phylum Hemichordata,13,12
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4365,11. Phylum Chordata,1,13
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4366,The Root,8,2
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4367,The Stem,6,1
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4368,The Leaf,7,3
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4369,The Inflorescence,3,5
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4370,The Flower,2,4
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4371,The Fruit,1,7
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4372,The Seed,4,6
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Morphology of flowering plants,589,4373,Description of Some Important families,5,8
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Anatomy of Flowering Plants,625,4374,The tissues,1,2
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Anatomy of Flowering Plants,625,4375,The tissue system,4,1
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Anatomy of Flowering Plants,625,4376,Anatomy of Dicotyledonous and Monocotyledonous plants,2,3
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Anatomy of Flowering Plants,625,4377,Secondary growth,3,4
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Structural Organization in Animals,590,4379,Organ and Organ system,2,2
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Structural Organization in Animals,590,4380,Earthworm,3,3
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Structural Organization in Animals,590,4381,Cockroach,4,4
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Structural Organization in Animals,590,4382,Frog,5,5
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell-The Unit of Life,626,4383,What is a cell ?,4,2
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell-The Unit of Life,626,4384,Cell Theory,3,3
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell-The Unit of Life,626,4385,An Overview of cell,5,1
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell-The Unit of Life,626,4386,Prokaryotic cells,2,4
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell-The Unit of Life,626,4387,Eukaryotic cells,1,5
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4388,How to Analyse Chemical Composition,7,1
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4389,Primary and Secondary metabolites,8,2
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4390,Biomacromolecules,6,3
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4391,Proteins,4,4
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4392,Polysaccharides,3,5
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4393,Nucleic Acids,2,6
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4394,Structure of proteins,5,7
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4395,Nature of bond linking monomers in a polymer,9,8
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4396,Dynamic state of body constituents - Concept of Metabolism,10,9
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4397,Metabolic basis for living,11,10
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4398,The living state,12,11
+NEET,2,Cell : Structure and Functions,51,Biology,4,Biomolecules,591,4399,Enzymes,1,12
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell cycle and cell division,592,4400,Cell cycle,2,1
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell cycle and cell division,592,4401,M phase,3,2
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell cycle and cell division,592,4402,Significance of Mitosis,4,3
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell cycle and cell division,592,4403,Meiosis,1,4
+NEET,2,Cell : Structure and Functions,51,Biology,4,Cell cycle and cell division,592,4404,Significance of Meiosis,5,5
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4405,Means of Transport,2,1
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4406,Plant-Water Relations,1,2
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4407,Long Distance Transport of Water,4,3
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4408,Transpiration,3,4
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4409,Uptake and Transport of Mineral Nutrients,5,5
+NEET,2,Plant Physiology,52,Biology,4,Transport in Plants,593,4410,Phloem transport: Flow from source to sink,6,6
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4411,Methods to study the mineral requirements of plants,5,1
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4412,Essential mineral elements,2,2
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4413,Mechanism of Absorption of elements,3,3
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4414,Translocation of Solutes,4,4
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4415,Soil as reservoir of essential elements,6,5
+NEET,2,Plant Physiology,52,Biology,4,Mineral Nutrition,594,4416,Metabolism of Nitrogen,1,6
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4417,What do we Know (Prior Knowledge),1,1
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4418,Early Experiments,2,2
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4419,Where does Photosynthesis take place (Site of Photosynthesis),3,3
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4420,How many Pigments are Involved in Photosynthesis (Pigments of Photosynthesis),4,4
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4421,What is Light Reaction?,5,5
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4422,The Electron Transport,9,6
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4423,Where are the ATP and NADPH used ?,10,7
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4424,The C4 pathway,6,8
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4425,Photorespiration,7,9
+NEET,2,Plant Physiology,52,Biology,4,Photosynthesis In Higher Plants,595,4426,Factors affecting Photosynthesis,8,10
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4427,Do plants breathe ?,7,1
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4428,Glycolysis,1,2
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4429,Fermentation,2,3
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4430,Aerobic Respiration,3,4
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4431,The Respiratory Balance Sheet,4,5
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4432,Amphibolic pathway,5,6
+NEET,2,Plant Physiology,52,Biology,4,Respiration in Plants,596,4433,Respiratory Quotient,6,7
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4434,Growth,5,1
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4435,"Differentiation, Dedifferentiation and Redifferentiation",4,2
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4436,Development,6,3
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4437,Plant growth regulators,1,4
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4438,Photoperiodism,2,5
+NEET,2,Plant Physiology,52,Biology,4,Plant Growth and Development,597,4439,Vernalisation,3,6
+NEET,2,Human Physiology,53,Biology,4,Digestion and Absorption,598,4440,Digestive system,1,1
+NEET,2,Human Physiology,53,Biology,4,Digestion and Absorption,598,4441,Digestion of Food,2,2
+NEET,2,Human Physiology,53,Biology,4,Digestion and Absorption,598,4442,Absorption of Digested Products,4,3
+NEET,2,Human Physiology,53,Biology,4,Digestion and Absorption,598,4443,Disorders of Digestive system,3,4
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4444,Respiratory Organs,5,1
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4445,Mechanism of Breathing,1,2
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4446,Exchange of gases,2,3
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4447,Transport of Gases,3,4
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4448,Regulation of Respiration,6,5
+NEET,2,Human Physiology,53,Biology,4,Breathing and Exchange of Gases,599,4449,Disorders of Respiratory system,4,6
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4450,Blood,1,1
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4451,Lymph,6,2
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4452,Circulatory Pathways,2,3
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4453,Double Circulation,3,4
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4454,Regulation of cardiac Activity,5,5
+NEET,2,Human Physiology,53,Biology,4,Body Fluids and Circulation,600,4455,Disorders of Circulatory system,4,6
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4456,Types of Excretory products,9,1
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4457,Human Excretory system,1,2
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4458,Urine Formation,2,3
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4459,Function of the Tubules,3,4
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4460,Mechanism of Concentration of the Filtrate,4,5
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4461,Regulation of Kidney function,5,6
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4462,Micturition,6,7
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4463,Role of other Organs in Excretion,7,8
+NEET,2,Human Physiology,53,Biology,4,Excretory Products and their Elimination,601,4464,Disorders of the excretory system,8,9
+NEET,2,Human Physiology,53,Biology,4,Locomotion and Movement,602,4465,Types of Movement,5,1
+NEET,2,Human Physiology,53,Biology,4,Locomotion and Movement,602,4466,Muscles,1,2
+NEET,2,Human Physiology,53,Biology,4,Locomotion and Movement,602,4467,Skeletal system,2,3
+NEET,2,Human Physiology,53,Biology,4,Locomotion and Movement,602,4468,Joints,3,4
+NEET,2,Human Physiology,53,Biology,4,Locomotion and Movement,602,4469,Disorders of Muscular and Skeletal system,4,5
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4470,Neural system,4,2
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4471,Human Neural System,5,4
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4472,Neuron as structural and functional unit of neural system,1,1
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4473,Central nervous system,2,3
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4474,Peripheral Nervous system,6,5
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4475,Reflex action and Reflex arc,7,6
+NEET,2,Human Physiology,53,Biology,4,Neural Control and Coordination,603,4476,Sensory reception and processing,3,7
+NEET,2,Human Physiology,53,Biology,4,Chemical Coordination and Integration,604,4477,Endocrine glands and hormones,2,1
+NEET,2,Human Physiology,53,Biology,4,Chemical Coordination and Integration,604,4478,Human Endocrine system,1,2
+NEET,2,Human Physiology,53,Biology,4,Chemical Coordination and Integration,604,4479,"Hormones of heart, Kidney and gastrointestinal tract",3,3
+NEET,2,Human Physiology,53,Biology,4,Chemical Coordination and Integration,604,4480,Mechanism of hormone action,4,4
+NEET,2,Reproduction,54,Biology,4,Reproduction in organisms,605,4481,Asexual Reproduction,1,1
+NEET,2,Reproduction,54,Biology,4,Reproduction in organisms,605,4482,Sexual Reproduction,2,2
+NEET,2,Reproduction,54,Biology,4,Sexual reproduction in flowering plants,606,4483,Flower,3,1
+NEET,2,Reproduction,54,Biology,4,Sexual reproduction in flowering plants,606,4484,Pre-fertilization : Structure and Events,1,2
+NEET,2,Reproduction,54,Biology,4,Sexual reproduction in flowering plants,606,4485,Double Fertilisation,2,3
+NEET,2,Reproduction,54,Biology,4,Sexual reproduction in flowering plants,606,4486,Post-Fertilisation : Structure and Events,4,4
+NEET,2,Reproduction,54,Biology,4,Sexual reproduction in flowering plants,606,4487,Apomixis and Polyembryony,5,5
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4488,The Male reproductive system,4,1
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4489,The Female reproductive system,5,2
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4490,Gametogenesis,6,3
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4491,Menstrual cycle,1,4
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4492,Fertilisation and Implantation,2,5
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4493,Pregnancy and Embryonic development,3,6
+NEET,2,Reproduction,54,Biology,4,Human Reproduction,607,4494,Parturition and Lactation,7,7
+NEET,2,Reproduction,54,Biology,4,Reproductive Health,608,4495,Reproductive health - Problems and strategies,5,1
+NEET,2,Reproduction,54,Biology,4,Reproductive Health,608,4496,Population explosion and birth control,1,2
+NEET,2,Reproduction,54,Biology,4,Reproductive Health,608,4497,Medical termination of pregnancy,4,3
+NEET,2,Reproduction,54,Biology,4,Reproductive Health,608,4498,Sexually transmitted diseases,2,4
+NEET,2,Reproduction,54,Biology,4,Reproductive Health,608,4499,Infertility,3,5
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4500,Genetic terminologies,8,1
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4501,Mendel's Laws of inheritance,7,2
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4502,Inheritance of one gene,6,3
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4503,Inheritance of two genes,5,4
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4504,Post-Mendelian Inheritance,4,5
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4505,Sex determination,3,6
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4506,Mutation,2,7
+NEET,2,Genetics and Evolution,55,Biology,4,Principles of inheritance and variation,609,4507,Genetic disorders,1,8
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4508,The DNA,9,1
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4509,The search for genetic material,7,2
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4510,RNA world,10,3
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4511,Replication,1,4
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4512,Transcription,2,5
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4513,Genetic code,8,6
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4514,Translation,6,7
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4515,Regulation of gene expression,5,8
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4516,Translation,6,7
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4517,Human Genome Project,4,9
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4518,Rice Genome Project,11,11
+NEET,2,Genetics and Evolution,55,Biology,4,Molecular basis of Inheritance,610,4519,DNA fingerprinting,3,10
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4520,Origin of life,7,1
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4521,Evolution of life forms - a theory,6,2
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4522,What are the evidences for evolution ?,3,3
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4523,What is adaptive radiation ?,2,4
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4524,Biological evolution,8,5
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4525,Mechanism of evolution,1,6
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4526,Hardy-Weinberg principle,4,7
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4527,A brief account of evolution,9,8
+NEET,2,Genetics and Evolution,55,Biology,4,Evolution,611,4528,Origin and Evolution of Man,5,9
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4529,Common diseases in humans,1,1
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4530,Immunity,3,3
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4531,AIDS,4,4
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4532,Cancer,5,5
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4533,Drugs and Alcohol abuse,6,6
+NEET,2,Biology in Human Welfare,56,Biology,4,Strategies for Enhancement in Food Production,613,4534,Animal Husbandry,1,1
+NEET,2,Biology in Human Welfare,56,Biology,4,Strategies for Enhancement in Food Production,613,4535,Plant breeding,2,2
+NEET,2,Biology in Human Welfare,56,Biology,4,Strategies for Enhancement in Food Production,613,4536,Single Cell Protein,3,3
+NEET,2,Biology in Human Welfare,56,Biology,4,Strategies for Enhancement in Food Production,613,4537,Tissue Culture,4,4
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4538,Microbes in household products,2,1
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4539,Microbes in Industrial products,1,2
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4540,Microbes in sewage treatment,3,3
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4541,Microbes in production of biogas,6,4
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4542,Microbes as biocontrol agents,5,5
+NEET,2,Biology in Human Welfare,56,Biology,4,Microbes in Human Welfare,614,4543,Microbes as biofertilizers,4,6
+NEET,2,Biotechnology,57,Biology,4,Biotechnology : Principles and Processes,615,4544,Principles of Biotechnology,4,1
+NEET,2,Biotechnology,57,Biology,4,Biotechnology : Principles and Processes,615,4545,Tools of Recombinant DNA technology,1,2
+NEET,2,Biotechnology,57,Biology,4,Biotechnology : Principles and Processes,615,4546,Techniques used in RDT,2,3
+NEET,2,Biotechnology,57,Biology,4,Biotechnology : Principles and Processes,615,4547,Processes of Recombinant DNA Technology,3,4
+NEET,2,Biotechnology,57,Biology,4,Biotechnology and its applications,616,4548,Biotechnological Applications in Agriculture,1,1
+NEET,2,Biotechnology,57,Biology,4,Biotechnology and its applications,616,4549,Biotechnological Applications in Medicine,2,2
+NEET,2,Biotechnology,57,Biology,4,Biotechnology and its applications,616,4550,Transgenic animals,3,3
+NEET,2,Biotechnology,57,Biology,4,Biotechnology and its applications,616,4551,Ethical issues,4,4
+NEET,2,Ecology,58,Biology,4,Organisms and Populations,617,4552,Environment,3,1
+NEET,2,Ecology,58,Biology,4,Organisms and Populations,617,4553,Organism and its environment,2,2
+NEET,2,Ecology,58,Biology,4,Organisms and Populations,617,4554,Populations,1,3
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4555,Ecosystem- Structure and Function,3,1
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4556,Productivity,6,2
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4557,Decomposition,7,3
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4558,Energy flow,1,4
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4559,Ecological pyramids,2,5
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4560,Ecological succession,5,6
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4561,Nutrient cycling,4,7
+NEET,2,Ecology,58,Biology,4,Ecosystem,618,4562,Ecosystem services,8,8
+NEET,2,Ecology,58,Biology,4,Biodiversity and Conservation,619,4563,Biodiversity,2,1
+NEET,2,Ecology,58,Biology,4,Biodiversity and Conservation,619,4564,Biodiversity and conservation,1,2
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4565,Air pollution and its control,3,1
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4566,Water Pollution and its control,4,2
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4567,Solid wastes,5,3
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4568,Agro-chemicals and their effects,8,4
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4569,Radioactive waste,9,5
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4570,Greenhouse effect and global warming,1,6
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4571,Ozone depletion in the stratosphere,2,7
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4572,Degradation by Improper resource utilisation and maintenance,6,7
+NEET,2,Ecology,58,Biology,4,Environmental Issues,620,4573,Deforestation,7,8
+NEET,2,Structural Organization in Plants and Animals,50,Biology,4,Structural Organization in Animals,590,4575,Animal Tissues,1,1
+NEET,2,Diversity In The Living World,49,Biology,4,Animal Kingdom,588,4576,Types and Patterns of cleavage,14,14
+NEET,2,Biology in Human Welfare,56,Biology,4,Human Health and Disease,612,4577,Nutritional deficiency diseases,2,2
+,,,,,,,,,,,
+JEE,1,Electrostatics and Current Electricity,8,Physics,2,Current Electricity,249,4578,Electrolytic Cell,,
+,,,,,,,,,,,
+,,,,,,,,,,,
+JEE,1,Differential Calculus,18,Mathematics,1,Limits,310,4582,Advance Methods of Evaluation of Limits,8,8
+JEE,1,MECHANICS -1,3,Physics,2,Motion in a plane,228,4583,General 2-D motion,,
+NEET,2,MECHANICS -1,40,Physics,2,Motion in a plane,330,4585,General 2-D Motion,,
+JEE,1,MODERN PHYSICS,7,Physics,2,Atoms,243,4586,"Isotopes, IsoBars, IsoElectronic & Isotones",,
+NEET,2,MODERN PHYSICS,44,Physics,2,Atoms,345,4587,"Isotopes, IsoBars, IsoElectronic & Isotones",,
+JEE,1,OPTICS,6,Physics,2,Wave Optics,241,4588,Scaterring of Light,,
+NEET,2,OPTICS,43,Physics,2,Wave Optics,343,4589,Scaterring of Light,,
+JEE,1,MECHANICS -1,3,Physics,2,Vectors,226,4590,Scalars and Vectors,,
+NEET,2,MECHANICS -1,40,Physics,2,Vectors,328,4591,Scalars and Vectors,,

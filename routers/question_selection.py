@@ -753,7 +753,13 @@ async def custom_question_selection_test(aqst:AdvanceQuestionSelectiontest2):
                 datalist1 = await conn.execute_query_dict(query)
                 data1 = pd.DataFrame(datalist1)
                 data1 = data1.fillna(0)
-                l1 = str(total_time)
+                filt1 = (data1['difficulty_level'] >= 1) & (data1['difficulty_level'] <= 9)
+                data1.loc[filt1, 'time_allowed'] = 1
+                filt2 = (data1['difficulty_level'] >= 10) & (data1['difficulty_level'] <= 18)
+                data1.loc[filt2, 'time_allowed'] = 2
+                filt3 = (data1['difficulty_level'] >= 19) & (data1['difficulty_level'] <= 27)
+                data1.loc[filt3, 'time_allowed'] = 3
+                l1 = int(data1['time_allowed'].sum())
                 l2 = data1.to_dict(orient='records')
 
                 response = {"time_allowed": l1, "questions": l2, "success": True}

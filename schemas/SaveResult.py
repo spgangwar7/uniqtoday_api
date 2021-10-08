@@ -19,4 +19,6 @@ class SaveResult(BaseModel):
     test_type:str
     exam_mode:str
     exam_type:str
+    planner_id:int
+    live_exam_id:int
 

@@ -124,7 +124,7 @@ async def LiveExamTest(exam_id:int=0):
         query = f'select subjects.id,subjects.subject_name from subjects join exam_subjects on  exam_subjects.subject_id=subjects.id where  exam_subjects.class_exam_id={exam_id} and subject_id in {subject_id_list} group by exam_subjects.subject_id'
         subject_list = await conn.execute_query_dict(query)
 
-        response={"time_allowed": total_questions, "Subjects": subject_list, "questions_list": grouped,
+        response={"time_allowed": total_questions, "Subjects": subject_list, "questions_list": grouped,"exam_id":exam_id,
                                  "success": True}
         #r.setex(str(exam_id) + "_profilingTestMobile", timedelta(days=1), json.dumps(response))
     print("Time took for execution for this API: %s seconds " % (datetime.now() - start_time))

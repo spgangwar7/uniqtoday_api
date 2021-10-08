@@ -1,11 +1,16 @@
+import logging
+import os
 import traceback
 from http import HTTPStatus
 from typing import List
+
+import boto3
 import pandas as pd
+from botocore.exceptions import ClientError
 from fastapi.responses import FileResponse
 from tortoise import Tortoise
 from tortoise.queryset import QuerySet
-from fastapi import APIRouter,File, UploadFile
+from fastapi import APIRouter, File, UploadFile, Form
 from fastapi.encoders import jsonable_encoder
 from db.engine import db_connection
 from models.UserModel import User_Pydantic, UserIn_Pydantic, User
@@ -70,20 +75,57 @@ async def users_subscription(student_id:int=0):
 
     return JSONResponse(status_code=200,content={"response":res,"success":True})
 
-"""
-@router.post("/update-profile-picture/")
-async def update_profile_picture(student_id:int=0,file: UploadFile = File(...)):
-    import os.path
-    extension = os.path.splitext(file.filename)[1]
-    print(extension)
-    if extension!= ".jpg" or ".jpeg" or ".png" or ".tif" or ".tiff":
-        return {"message":"Please upload a valid image file","success":False}
-    file_name = f'images/profile/' + str(student_id)+extension
-    with open(file_name, 'wb+') as f:
-        f.write(file.file.read())
-        f.close()
-    return {"message":"File uploaded successfully","filename": file_name,"success":True}
 
+from dotenv import load_dotenv
+load_dotenv()  # take environment variables from .env.
+FILESYSTEM_DRIVER = os.environ.get("FILESYSTEM_DRIVER")
+AWS_BUCKET= os.environ.get("AWS_BUCKET")
+AWS_ACCESS_KEY_ID= os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY= os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_DEFAULT_REGION= os.environ.get("AWS_DEFAULT_REGION")
+
+@router.post("/update-profile-picture")
+async def update_profile_picture(student_id:str= Form(...),file: UploadFile = File(...),file_extension:str=Form(...)):
+    try:
+        conn=Tortoise.get_connection('default')
+        import os.path
+        import time
+        extension = os.path.splitext(file_extension)[1]
+        print(student_id)
+        print(file)
+        print(extension)
+        time_str=int(time.time())
+        extension_list=[".jpg" , ".jpeg" , ".png" , ".tif" , ".tiff"]
+        s3_client = boto3.client(
+            's3',
+            aws_access_key_id=AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+        )
+
+        if extension not in extension_list:
+            return {"message":"Please upload a valid image file","success":False}
+        folder_name='./images/profile'
+        file_name =  str(time_str)+"_"+str(student_id)+extension
+        url = f"https://{AWS_BUCKET}.s3.{AWS_DEFAULT_REGION}.amazonaws.com/{file_name}"
+        try:
+            file_name_upload = f'{folder_name}/{file_name}'
+            with open(file_name_upload, 'wb+') as f:
+                f.write(file.file.read())
+                f.close()
+            response = s3_client.upload_file(file_name_upload, AWS_BUCKET, file_name,ExtraArgs={'ACL':'public-read'})
+            query = f"update student_users set user_profile_img='{url}' where id={student_id}"
+            await conn.execute_query(query)
+            os.remove(file_name_upload)
+        except ClientError as e:
+            logging.error(e)
+            return False
+
+        return JSONResponse(status_code=200,content={"message":"File uploaded successfully","filename": url,"success":True})
+    except Exception as e:
+        print(e)
+        traceback.print_tb(e.__traceback__)
+        return JSONResponse(status_code=400, content={'error': f"{e}", "success": False})
+"""
 @router.get("/profile-picture/{student_id}")
 async def get_profile_picture(student_id:int=0):
     import os.path

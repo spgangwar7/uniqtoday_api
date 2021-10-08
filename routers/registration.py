@@ -153,9 +153,9 @@ async def MobileOtp(email_or_mobile:str):
             mobile_otp) + " is your UNIQ verification code valid for 10 minutes only, one time use. Please DO NOT share this OTP with anyone to ensure account's security."
 
         url = f"http://smsjust.com/sms/user/urlsms.php?username={username}&pass={password}&senderid={senderId}&message={message}&dest_mobileno={mobile}&msgtype=TXT&dlttempid={massageTemplateId}&response=Y"
-
+        print(url)
         response = requests.get(url)
-
+        print(response.content)
         query = f'update student_users set mobile_otp={mobile_otp} where mobile={mobile}'
         await conn.execute_query_dict(query)
 

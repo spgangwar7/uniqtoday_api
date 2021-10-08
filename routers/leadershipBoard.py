@@ -16,7 +16,6 @@ router = APIRouter(
     prefix='/api',
     tags=['Leadership Board'],
 )
-
 @router.post("/update-leadershipBoard/{exam_id}")
 async def updateLeadershipBoard(exam_id:int=0):
     try:
@@ -35,15 +34,21 @@ async def updateLeadershipBoard(exam_id:int=0):
         year=datetime.now().year
         print(f"month: {month}, year: {year}")
         for data in res:
-            query=f"INSERT INTO leadership_board(user_id,month,year,class_exam_id,marks,user_rank,created_at,updated_at)values({int(data['user_id'])},{month},{year},{exam_id},{int(data['score'])},{int(data['rank'])},NOW(),NOW())"
-            #print(query)
-            await conn.execute_query(query)
+            query = f"SELECT id,user_id FROM leadership_board WHERE user_id = {int(data['user_id'])} limit 1"
+            res=await conn.execute_query_dict(query)
+            if not res:
+                query=f"INSERT INTO leadership_board(user_id,month,year,class_exam_id,marks,user_rank,created_at,updated_at)values({int(data['user_id'])},{month},{year},{exam_id},{int(data['score'])},{int(data['rank'])},NOW(),NOW())"
+                await conn.execute_query(query)
+            else:
+                query=f"update leadership_board set month={month},year={year},class_exam_id={exam_id},marks={int(data['score'])},user_rank={int(data['rank'])},created_at={'NOW()'},updated_at={'NOW()'} where user_id={int(data['user_id'])}"
+                await conn.execute_query(query)
         print(f"execution time for this api is: {(datetime.now()-start_time)}")
         return JSONResponse(status_code=200,content={"response":f"Leadership board updated for exam_id {exam_id}","success":True})
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
         return JSONResponse(status_code=400, content={"error": f"{e}", "success": False})
+
 
 @router.get('/get-leadershipBoard/{user_id}/{exam_id}', description='Get Leadership Board by userId', status_code=201)
 async def getleadership_board(user_id:int=0,exam_id:int=0):
@@ -89,7 +94,7 @@ async def searchFriend(exam_id:int=0,friend_name:str=None):
     conn=Tortoise.get_connection('default')
     month = datetime.now().month
     year = datetime.now().year
-    query = f'SELECT lb.user_id,su.first_name,su.user_name,lb.marks as score,lb.user_rank, su.user_profile_img FROM leadership_board lb inner join student_users as su on lb.user_id=su.id where lb.month={month} and lb.year={year} and lb.class_exam_id={exam_id} and su.first_name="{friend_name}"'
+    query=f"SELECT lb.user_id,su.first_name,su.user_name,lb.marks as score,lb.user_rank, su.user_profile_img FROM leadership_board lb inner join student_users as su on lb.user_id=su.id where lb.month={month} and lb.year={year} and lb.class_exam_id={exam_id} and (su.first_name like '%' '{friend_name}' '%' or su.user_name like '%' '{friend_name}' '%' or su.middle_name like '%' '{friend_name}' '%')"
     res = await conn.execute_query_dict(query)
     if not res:
         resp = {

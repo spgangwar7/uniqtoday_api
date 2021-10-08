@@ -1,4 +1,5 @@
 import json
+import os
 import traceback
 from datetime import datetime, time, date, timedelta
 from http import HTTPStatus
@@ -22,12 +23,18 @@ router = APIRouter(
     prefix='/api/payment',
     tags=['Payment'],
 )
+from dotenv import load_dotenv
 
+load_dotenv()  # take environment variables from .env.
+
+payment_k = os.environ.get("RAZORPAY_KEY")
+payment_s=os.environ.get("RAZORPAY_SECRET")
 @router.post('/order-id', description='Get Order ID')
 async def get_order_id(orderdetails:OrderSchema):
     try:
-        _RAZORPAY_KEY = "rzp_test_foHLtdKSJjEDzv"
-        _RAZORPAY_SECRET = "RFrAe68CEzVrQpuuHnlKJHcy"
+        _RAZORPAY_KEY = payment_k
+        _RAZORPAY_SECRET = payment_s
+
         client = razorpay.Client(auth=(_RAZORPAY_KEY, _RAZORPAY_SECRET))
         order_amount=orderdetails.amount*100
         order_currency=orderdetails.currency
@@ -51,8 +58,8 @@ async def verify_payment(verifyPayment:VerifyPayment):
     try:
         r=redis.Redis()
         conn = Tortoise.get_connection("default")
-        _RAZORPAY_KEY = "rzp_test_foHLtdKSJjEDzv"
-        _RAZORPAY_SECRET = "RFrAe68CEzVrQpuuHnlKJHcy"
+        _RAZORPAY_KEY = payment_k
+        _RAZORPAY_SECRET = payment_s
         client = razorpay.Client(auth=(_RAZORPAY_KEY, _RAZORPAY_SECRET))
         razorpay_payment_id=verifyPayment.payment_id
         razorpay_order_id=verifyPayment.order_id

@@ -37,3 +37,4 @@ class AdaptiveQuestionsTopicPractice(BaseModel):
     end_test:str
     questions_list:List[int]
     answerList:List[answer_list]
+

@@ -1,11 +1,15 @@
+import os
 import uvicorn
 import firebase_admin
+from celery.result import AsyncResult
 from firebase_admin import credentials
 from celery import Celery
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from queues.worker import add,initializeCelery
+from starlette.responses import JSONResponse
+
+from queues.worker import add_task
 from db.sparkSession import spark_session
 from routers.users import router as users
 from routers.exams import router as exams
@@ -45,6 +49,8 @@ from routers.liveExams import router as liveExams
 from routers.assessmentQuestionsPredictor import router as assessmentQuestionsPredictor
 from routers.webinar import router as webinar
 from routers.newAdaptiveAPI import router as newAdaptiveAPI
+from queues.worker import router as queues
+
 import db.models
 from os import path
 
@@ -57,8 +63,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())  # take environment variables from .env.
+
+firebase_config_file = os.environ.get("CRED")
+print(firebase_config_file)
+#firebase_config_file="E://Thomson//uniq-notifications-firebase.json"
+
 #cred = credentials.Certificate("/home/ubuntu/UNIQ_API_UAT/uniq-notifications-firebase.json")
-cred = credentials.Certificate("E://Thomson//uniq-notifications-firebase.json")
+cred = credentials.Certificate(firebase_config_file)
 firebase_admin.initialize_app(cred)
 
 class UNIQ_Live:
@@ -129,11 +143,11 @@ app.include_router(predictStudentsEffort)
 app.include_router(studentSelectionInCe)
 app.include_router(assessmentQuestionsPredictor)
 app.include_router(newAdaptiveAPI)
+app.include_router(queues)
 
 @app.get('/')
 async def welcome():
     return {"message":"Fastapi Running"}
-
 
 if __name__=="__main__":
     import sys

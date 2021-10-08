@@ -100,7 +100,7 @@ async def get_student_planner(student_id:int=0):
         monday = now - timedelta(days=now.weekday())
         #print(monday.date())
         conn = Tortoise.get_connection("default")
-        query=f'select sp.id,sp.exam_id,sp.subject_id,question_count,test_time_in_min,sp.chapter_id, esc.chapter_name ,date_from,date_to from student_planner as sp join exam_subject_chapters as esc on sp.chapter_id=esc.chapter_id where student_id={student_id} and date_from="{monday.date()}"'
+        query=f'select sp.id,sp.exam_id,sp.subject_id,question_count,test_time_in_min,sp.chapter_id, esc.chapter_name ,date_from,date_to,test_completed_yn from student_planner as sp join exam_subject_chapters as esc on sp.chapter_id=esc.chapter_id where student_id={student_id} and date_from="{monday.date()}"'
         result= await conn.execute_query_dict(query)
         result=pd.DataFrame(result)
         if result.empty:

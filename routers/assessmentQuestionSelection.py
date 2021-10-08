@@ -79,6 +79,7 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
         res=await conn.execute_query_dict(query)
         res=pd.DataFrame(res)
         subject_ids=res['subject_id'].tolist()
+        questions = []
         if len(test_status) == 0:
             #########################################################################################################
             #case 1
@@ -118,12 +119,21 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                            WHERE b.last_test_date IS NULL and m.student_id={student_id} and m.ques_ans_incorrectly !=0 order by topic_id'
             topicslist = await conn.execute_query_dict(getTopicsQuery)
             topic_id_list = [d['topic_id'] for d in topicslist if 'topic_id' in d]
-
+            print(topic_id_list)
             if topic_id_list:
                 if len(topic_id_list) == 1:
                     topic_id_list = "(" + str(topic_id_list[0]) + ")"
                 else:
                     topic_id_list = tuple(topic_id_list)
+                questions = []
+                for i in range(len(subject_ids)):
+                    query2 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
+                                                                     qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
+                                                                     qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
+                                                                     from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
+                                                                     where qb.subject_id={int(subject_ids[i])} and topic_id in {topic_id_list} order by rand() limit {int(cutt_off)}'
+                    result2 = await conn.execute_query_dict(query2)
+                    questions = questions + result2
             else:
                 questions=[]
                 for i in range(len(subject_ids)):
@@ -132,7 +142,6 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                                                      qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
                                                      from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
                                                      where qb.subject_id={int(subject_ids[i])}  order by rand() limit {int(cutt_off)}'
-
                     result2 = await conn.execute_query_dict(query2)
                     questions=questions+result2
 
@@ -166,6 +175,15 @@ async def AssessmentQuestionSelection(assessmentInput:AssessmentQuestions):
                     topic_id_list = "(" + str(topic_id_list[0]) + ")"
                 else:
                     topic_id_list = tuple(topic_id_list)
+                questions = []
+                for i in range(len(subject_ids)):
+                    query2 = f'select qb.question_id, qb.subject_id,qb.chapter_id, qb.topic_id, qb.question, qb.template_type, qb.difficulty_level, \
+                                                                     qb.marks, qb.negative_marking, qb.question_options,  qb.answers, \
+                                                                     qb.time_allowed, qb.passage_inst_ind, qb.passage_inst_id, b.passage_inst, b.pass_inst_type \
+                                                                     from {question_bank_name} qb LEFT JOIN question_bank_passage_inst b ON b.id = qb.passage_inst_id \
+                                                                     where qb.subject_id={int(subject_ids[i])} and topic_id in {topic_id_list} order by rand() limit {int(cutt_off)}'
+                    result2 = await conn.execute_query_dict(query2)
+                    questions = questions + result2
             else:
 
                 questions=[]
