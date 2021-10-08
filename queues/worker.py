@@ -10,6 +10,7 @@ from starlette.responses import JSONResponse
 from tortoise import Tortoise
 from datetime import datetime,date,timedelta
 from asgiref.sync import async_to_sync
+import MySQLdb
 
 from tortoise.contrib.fastapi import register_tortoise
 os.environ.setdefault('FORKED_BY_MULTIPROCESSING', '1')
@@ -17,6 +18,13 @@ celery = Celery(__name__)
 celery.conf.broker_url = os.environ.get("CELERY_BROKER_URL", "redis://")
 celery.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND", "redis://")
 
+def db_connection():
+    connection = MySQLdb.connect(host='database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com',
+    user='admin',
+    password='5DBYs1ou3ACxlRjBUmfn',charset='utf8',port=3306) # create the connection
+    cursor = connection.cursor() # get the cursor
+    cursor.execute('use learntoday_uat') # select the DB
+    return connection,cursor
 
 
 @celery.task(name="add_task")
@@ -29,15 +37,13 @@ router = APIRouter(
 )
 
 
-async def save_student_summary(student_id:int,exam_id:int):
+def save_student_summary(student_id:int,exam_id:int):
     try:
         start_time=datetime.now()
         db_url = "mysql://admin:5DBYs1ou3ACxlRjBUmfn@database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com:3306/learntoday_uat"
-        await Tortoise.init(
-            db_url=db_url,
-            modules={"models": []}
-        )
-        conn = Tortoise.get_connection("default")
+
+        #conn = Tortoise.get_connection("default")
+        conn,crsr= db_connection()
 
         #Initializing Redis
         r = redis.Redis()
@@ -49,29 +55,31 @@ async def save_student_summary(student_id:int,exam_id:int):
                 classTablename = exam_cache['question_bank_name']
             else:
                 query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
-                class_exam_data = await conn.execute_query_dict(query_class_exam_data)
-                classTablename = class_exam_data[0].get("question_bank_name")
-                exam_cache['question_bank_name']=classTablename
+                class_exam_data = pd.read_sql(query_class_exam_data,con=conn)
+                classTablename = class_exam_data['question_bank_name'].iloc[0]
+                exam_cache={
+                    'question_bank_name':classTablename
+                }
                 r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
         else:
             query_class_exam_data = f"SELECT question_bank_name FROM class_exams WHERE id = {exam_id}"
-            class_exam_data = await conn.execute_query_dict(query_class_exam_data)
-            classTablename = class_exam_data[0].get("question_bank_name")
-            exam_cache['question_bank_name'] = classTablename
-            r.setex(str(exam_id) + "_examid",timedelta(days=1),json.dumps(exam_cache))
+            class_exam_data = pd.read_sql(query_class_exam_data, con=conn)
+            classTablename = class_exam_data['question_bank_name'].iloc[0]
+            exam_cache = {
+                'question_bank_name': classTablename
+            }
+            r.setex(str(exam_id) + "_examid", timedelta(days=1), json.dumps(exam_cache))
         result2=[]
 
         query = f'SELECT id,class_exam_id,student_id,student_result_id,sqa.subject_id,sqa.chapter_id,sqa.topic_id,exam_type,' \
                 f'sqa.question_id,attempt_status,sqa.gain_marks,unit_id,skill_id,difficulty_level,major_concept_id,sqa.created_on FROM ' \
                 f'student_questions_attempted as sqa left join {classTablename} as qbj on sqa.question_id=qbj.question_id ' \
                 f'where student_id={student_id} and class_exam_id={exam_id}'
-        result= await conn.execute_query_dict(query)
-        resultdf=pd.DataFrame(result)
+        resultdf= pd.read_sql(query,con=conn)
         resultdf["created_on"]=pd.to_datetime(resultdf["created_on"]).dt.strftime('%Y-%m-%d')
         if resultdf.empty:
             return JSONResponse(status_code=400,content={"response":"invalid credentials","success":False})
-        print(len(resultdf))
-        #print(resultdf)
+
         resultdf=resultdf.fillna(0)
 
         dfgrouponehot = pd.get_dummies(resultdf, columns=['attempt_status'], prefix=['attempt_status'])
@@ -89,9 +97,9 @@ async def save_student_summary(student_id:int,exam_id:int):
                    'difficulty_level', 'major_concept_id', 'created_on', 'gain_marks'],
             columns=[],
             aggfunc='sum')
-        await del_question(student_id)
+        del_question(student_id)
         newdf = pd.DataFrame(pivotdf.to_records())
-
+        print("Inserting in student performance summary")
         newdf=newdf.to_dict('records')
         for dict in newdf:
             student_id=dict['student_id']
@@ -110,38 +118,43 @@ async def save_student_summary(student_id:int,exam_id:int):
             attempt_status_Unanswered=dict['attempt_status_Unanswered']
             quesattempted=int(attempt_status_Correct)+int(attempt_status_Incorrect)+int(attempt_status_Unanswered)
             query_insert = f'INSERT INTO student_performance_summary (student_id, exam_id, subject_id, unit_id, chapter_id, \
-            topic_id, skill_id, ques_difficulty_level, major_concept_id,last_test_date,question_attempted, ques_ans_correctly, \
-            ques_ans_incorrectly, ques_unattempted_cnt,marks) VALUES ({student_id},{class_exam_id},{subject_id},{unit_id}, \
-            {chapter_id},{topic_id},{skill_id},{difficulty_level},{major_concept_id},"{created_on}",{quesattempted},{attempt_status_Correct}, \
-            {attempt_status_Incorrect},{attempt_status_Unanswered},{gain_marks})'
-            await conn.execute_query_dict(query_insert)
+                        topic_id, skill_id, ques_difficulty_level, major_concept_id,last_test_date,question_attempted, ques_ans_correctly, \
+                        ques_ans_incorrectly, ques_unattempted_cnt,marks) VALUES ({student_id},{class_exam_id},{subject_id},{unit_id}, \
+                        {chapter_id},{topic_id},{skill_id},{difficulty_level},{major_concept_id},"{created_on}",{quesattempted},{attempt_status_Correct}, \
+                        {attempt_status_Incorrect},{attempt_status_Unanswered},{gain_marks})'
+            crsr.execute(query_insert)
+
 
         resp={"response":"Records inserted in db successfully"
             ,"success":True}
         print(f"execution time is {(datetime.now()-start_time)}")
-        await Tortoise.close_connections()
+        #await Tortoise.close_connections()
 
         return resp
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
         return {"error":f"{e}","success":False}
+    finally:
+        crsr.close()
+        conn.close()
 
 
-async def del_question(student_id):
+def del_question(student_id):
     try:
-        conn = Tortoise.get_connection("default")
+        #conn = Tortoise.get_connection("default")
+        conn,crsr= db_connection()
         del_query = f'DELETE FROM student_performance_summary WHERE student_id={student_id}'
-        await conn.execute_query_dict(del_query)
+        crsr.execute(del_query)
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
 
 
-
+@router.get('/save_student_summary', status_code=201)
 @celery.task(name="save_student_summary")
 def save_summary_task(student_id:int,exam_id:int):
-    task=async_to_sync(save_student_summary)(student_id,exam_id)
+    task=save_student_summary(student_id,exam_id)
     #task=asyncio.run(save_student_summary(student_id,exam_id))
     return task
 

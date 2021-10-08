@@ -17,14 +17,10 @@ router = APIRouter(
 async def get_analytics(user_id:int=0):
     try:
         conn = Tortoise.get_connection("default")
-        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id} order by id desc limit 1'
+        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id} and exam_mode = "Live"  order by id desc limit 2'
         val = await conn.execute_query_dict(query)
         if not val:
-            resp={
-                "response":"User did not give any exam yet",
-                "success":False
-            }
-            return JSONResponse(status_code=400,content=resp)
+            val=[]
         query2 = f'SELECT grade_id as exam_id FROM student_users where id={user_id} limit 1'
         res = await conn.execute_query_dict(query2)
         if not res:
@@ -56,31 +52,33 @@ async def get_analytics(user_id:int=0):
         result = await conn.execute_query_dict(query2)
         resultdf = pd.DataFrame(result)
         if not resultdf.empty:
-            output = resultdf.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.max().to_dict()
-        else:
             output={}
-        resultdf = resultdf.round(1)
-        query3 = f'SELECT user_id,marks_gain,created_at as test_date FROM user_result where DATE(created_at) >= DATE(NOW()) - INTERVAL 28 DAY and class_grade_id={class_exam_id};'
-        result2 = await conn.execute_query_dict(query3)
-        resultdf2 = pd.DataFrame(result2)
-        resultdf2 = resultdf2.round(2)
-        output1 = resultdf2.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.mean().to_dict()
-        output1 = {k: round(v, 2) for k, v in output1.items()}
-        output2 = resultdf2.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.max().to_dict()
-        finaldict = []
-        for key, value in output1.items():
-            # print("key"+str(key))
-            student_score = output.get(key, 0)
-            average_score = output1.get(key, 0)
-            max_score = output2.get(key, 0)
+            marks_trend=[]
+        else:
+            output = resultdf.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.max().to_dict()
 
-            if pd.isna(student_score) :
-                student_score=0
-            if pd.isna(average_score) :
-                average_score=0
-            if pd.isna(max_score) :
-                max_score=0
-            finaldict.append({"date":str(key),"student_score": student_score, "average_score": average_score, "max_score": max_score})
+            resultdf = resultdf.round(1)
+            query3 = f'SELECT user_id,marks_gain,created_at as test_date FROM user_result where DATE(created_at) >= DATE(NOW()) - INTERVAL 28 DAY and class_grade_id={class_exam_id};'
+            result2 = await conn.execute_query_dict(query3)
+            resultdf2 = pd.DataFrame(result2)
+            resultdf2 = resultdf2.round(2)
+            output1 = resultdf2.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.mean().to_dict()
+            output1 = {k: round(v, 2) for k, v in output1.items()}
+            output2 = resultdf2.groupby(pd.Grouper(freq='W', key='test_date')).marks_gain.max().to_dict()
+            finaldict = []
+            for key, value in output1.items():
+                # print("key"+str(key))
+                student_score = output.get(key, 0)
+                average_score = output1.get(key, 0)
+                max_score = output2.get(key, 0)
+
+                if pd.isna(student_score) :
+                    student_score=0
+                if pd.isna(average_score) :
+                    average_score=0
+                if pd.isna(max_score) :
+                    max_score=0
+                finaldict.append({"date":str(key),"student_score": student_score, "average_score": average_score, "max_score": max_score})
 
         resp={'test_score': val,'subject_proficiency': subject_proficiency,'marks_trend':finaldict,"success":True}
         return json.dumps(resp)

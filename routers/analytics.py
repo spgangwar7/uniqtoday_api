@@ -36,7 +36,7 @@ async def overall_analytics(user_id: int = 0):
     try:
         start_time = datetime.now()
         conn = Tortoise.get_connection('default')
-        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id} order by id desc limit 2'
+        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id}  and exam_mode = "Live"  order by id desc limit 2'
         test_score = await conn.execute_query_dict(query)
 
         student_cache = {}
@@ -285,7 +285,7 @@ async def overall_analytics(user_id: int = 0):
         }
         print("Time took for execution for this API: %s seconds " % (datetime.now() - start_time))
 
-        return resp, 200
+        return resp
     except Exception as e:
         print(e)
         traceback.print_tb(e.__traceback__)
@@ -298,9 +298,10 @@ async def overall_analytics(user_id: int = 0):
     try:
         start_time = datetime.now()
         conn = Tortoise.get_connection('default')
-        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id} order by id desc limit 2'
+        query = f'select id,test_type,exam_mode,marks_gain,result_percentage from user_result where user_id={user_id} and exam_mode = "Live"  order by id desc limit 2'
         test_score = await conn.execute_query_dict(query)
-
+        if not test_score:
+            test_score=[]
         student_cache = {}
 
         # Initializing Redis

@@ -217,7 +217,7 @@ async def GetAllChapters(student_id:int=0,subject_id:int=0):
             if "chapters" in subject_cache:
                 chapters=subject_cache['chapters']
             else:
-                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id{class_exam_id} and chapter_name is not null"
+                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id={class_exam_id} and chapter_name is not null"
                 chapters = await conn.execute_query_dict(query)
                 if len(chapters)!=0:
                     subject_cache['chapters']=chapters
