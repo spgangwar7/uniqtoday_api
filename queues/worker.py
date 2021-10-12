@@ -18,12 +18,26 @@ celery = Celery(__name__)
 celery.conf.broker_url = os.environ.get("CELERY_BROKER_URL", "redis://")
 celery.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND", "redis://")
 
+
+from dotenv import load_dotenv
+
+load_dotenv()  # take environment variables from .env.
+
+db_url = os.environ.get("DB_URL")
+db_host = os.environ.get("DB_HOST")
+db_user = os.environ.get("DB_USER")
+db_pass = os.environ.get("DB_PASS")
+db_port = os.environ.get("DB_PORT")
+db_name = os.environ.get("DB_NAME")
+
+
 def db_connection():
-    connection = MySQLdb.connect(host='database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com',
-    user='admin',
-    password='5DBYs1ou3ACxlRjBUmfn',charset='utf8',port=3306) # create the connection
+    connection = MySQLdb.connect(host=db_host,
+    user=db_user,
+    password=db_pass,charset='utf8',port=db_port) # create the connection
     cursor = connection.cursor() # get the cursor
-    cursor.execute('use learntoday_uat') # select the DB
+    query=f'use {db_name}'
+    cursor.execute(query) # select the DB
     return connection,cursor
 
 
@@ -40,7 +54,6 @@ router = APIRouter(
 def save_student_summary(student_id:int,exam_id:int):
     try:
         start_time=datetime.now()
-        db_url = "mysql://admin:5DBYs1ou3ACxlRjBUmfn@database-2.c0jbkrha6hgp.us-west-2.rds.amazonaws.com:3306/learntoday_uat"
 
         #conn = Tortoise.get_connection("default")
         conn,crsr= db_connection()

@@ -115,7 +115,7 @@ async def GetAllTopics(student_id:int=0,chapter_id:int=0):
         conn = Tortoise.get_connection("default")
         r=redis.Redis()
         chapter_cache={}
-        topics=''
+        topics=[]
         class_exam_id=""
         if r.exists(str(student_id) + "_sid"):
             student_cache = json.loads(r.get(str(student_id) + "_sid"))
@@ -124,27 +124,30 @@ async def GetAllTopics(student_id:int=0,chapter_id:int=0):
             else:
                 query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
                 class_exam_id = await conn.execute_query_dict(query)
-                if len(class_exam_id) == 0:
+                if not class_exam_id:
                     resp = {
                         "message": "No exam Found for this user",
                         "success": False
                     }
-                    return resp, 400
+                    return JSONResponse(status_code=400,content={"response":resp})
                 class_exam_id = int(class_exam_id[0]['grade_id'])
-
-                student_cache['exam_id'] = class_exam_id
+                student_cache={
+                    "exam_id":class_exam_id
+                }
                 r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
         else:
             query = f'SELECT grade_id FROM student_users where id={student_id} limit 1;'  # fetch exam_id by user_id
             class_exam_id = await conn.execute_query_dict(query)
-            if len(class_exam_id) == 0:
+            if not class_exam_id:
                 resp = {
                     "message": "No exam Found for this user",
                     "success": False
                 }
-                return resp, 400
+                return JSONResponse(status_code=400, content={"response": resp})
             class_exam_id = int(class_exam_id[0]['grade_id'])
-            student_cache={'exam_id':class_exam_id}
+            student_cache = {
+                "exam_id": class_exam_id
+            }
             r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
 
 
@@ -152,23 +155,87 @@ async def GetAllTopics(student_id:int=0,chapter_id:int=0):
             chapter_cache=json.loads(r.get(str(chapter_id)+"_chapter_id"))
             if 'topics' in chapter_cache:
                 topics=chapter_cache['topics']
+                print(f"execution time : {datetime.now() - start_time}")
+                return JSONResponse(status_code=200,content={'message': "Topic list by Chapter Id", 'response': topics, "success": True})
             else:
-                query = f"select id ,topic_name from topics where chapter_id={chapter_id} and class_id={class_exam_id}"
+                query=f"SELECT t.id,t.topic_name,sps.student_id," \
+                      f" IFNULL((sps.ques_ans_correctly/sps.question_attempted*100),0) AS topic_score,IFNULL(SUM(sk.skill_name='Evaluation'),0) AS E," \
+                      f" IFNULL(SUM(sk.skill_name='Comprehension'),0) AS C," \
+                      f" IFNULL(SUM(sk.skill_name='Application'),0) AS A," \
+                      f" IFNULL(SUM(sk.skill_name='Knowledge'),0) AS K" \
+                      f"FROM topics AS t LEFT JOIN student_performance_summary" \
+                      f" AS sps ON t.id=sps.topic_id LEFT JOIN skills AS sk ON sk.skill_id=sps.skill_id WHERE t.chapter_id={chapter_id} " \
+                      f" AND t.class_id={class_exam_id} GROUP BY id"
                 topics = await conn.execute_query_dict(query)
-                chapter_cache['topics']=topics
-                r.setex(str(chapter_id)+"_chapter_id",timedelta(days=1),json.dumps(chapter_cache))
-        else:
-            query = f"select id ,topic_name from topics where chapter_id={chapter_id} and class_id={class_exam_id}"
-            topics = await conn.execute_query_dict(query)
-            if len(topics)!=0:
-                chapter_cache['topics'] = topics
-                r.setex(str(chapter_id) + "_chapter_id", timedelta(days=1), json.dumps(chapter_cache))
-            else:
-                return JSONResponse(status_code=400, content={"msg": f"no topics with given Chapter ID : {chapter_id}",
-                                                              "success": False})
+                if not topics:
+                    return JSONResponse(status_code=400,
+                                        content={"response": "no performance summary for the user", "success": False})
+                topics_df = pd.DataFrame(topics)
+                filt = topics_df['student_id'] != student_id
+                topics_df.loc[filt, 'topic_score'] = 0
+                topics_df.loc[filt, "A"] = 0
+                topics_df.loc[filt, "E"] = 0
+                topics_df.loc[filt, "C"] = 0
+                topics_df.loc[filt, "K"] = 0
+                topics_df.drop('student_id', axis=1, inplace=True)
+                # print(result_df)
 
-        print(f"execution time : {datetime.now()-start_time}")
-        return JSONResponse(status_code=200,content={'message': "Topic list by Chapter Id", 'response': topics,"success":True})
+                total = topics['A'].sum() + topics['E'].sum() + topics_df['C'].sum() + topics_df['K'].sum()
+                if total == 0:
+                    total = 1
+                topics_df['A'] = ((topics_df['A'] / total) * 100).astype(float).round(2)
+
+                topics_df['E'] = ((topics_df['E'] / total) * 100).astype(float).round(2)
+                topics_df['C'] = ((topics_df['C'] / total) * 100).astype(float).round(2)
+                topics_df['K'] = ((topics_df['K'] / total) * 100).astype(float).round(2)
+                topics_df['topics_score'] = topics_df['topics_score'].astype(float).round(2)
+                res=topics_df.to_dict('records')
+                chapter_cache={
+                    'topics': res
+                }
+                r.setex(str(chapter_id)+"_chapter_id",timedelta(days=1),json.dumps(chapter_cache))
+                print(f"execution time : {datetime.now() - start_time}")
+                return JSONResponse(status_code=200,
+                                    content={'message': "Topic list by Chapter Id", 'response': res, "success": True})
+        else:
+            query = f"SELECT t.id,t.topic_name,sps.student_id," \
+                    f" IFNULL((sps.ques_ans_correctly/sps.question_attempted*100),0) AS topic_score,IFNULL(SUM(sk.skill_name='Evaluation'),0) AS E," \
+                    f" IFNULL(SUM(sk.skill_name='Comprehension'),0) AS C," \
+                    f" IFNULL(SUM(sk.skill_name='Application'),0) AS A," \
+                    f" IFNULL(SUM(sk.skill_name='Knowledge'),0) AS K" \
+                    f" FROM topics AS t LEFT JOIN student_performance_summary" \
+                    f" AS sps ON t.id=sps.topic_id LEFT JOIN skills AS sk ON sk.skill_id=sps.skill_id WHERE t.chapter_id={chapter_id} " \
+                    f" AND t.class_id={class_exam_id} GROUP BY id"
+            topics = await conn.execute_query_dict(query)
+            if not topics:
+                return JSONResponse(status_code=400,content={"response":"no performance summary for the user","success":False})
+            topics_df = pd.DataFrame(topics)
+            filt = topics_df['student_id'] != student_id
+            topics_df.loc[filt, 'topic_score'] = 0
+            topics_df.loc[filt, "A"] = 0
+            topics_df.loc[filt, "E"] = 0
+            topics_df.loc[filt, "C"] = 0
+            topics_df.loc[filt, "K"] = 0
+            topics_df.drop('student_id', axis=1, inplace=True)
+            # print(result_df)
+
+            total = topics_df['A'].sum() + topics_df['E'].sum() + topics_df['C'].sum() + topics_df['K'].sum()
+            if total == 0:
+                total = 1
+            topics_df['A'] = ((topics_df['A'] / total) * 100).astype(float).round(2)
+
+            topics_df['E'] = ((topics_df['E'] / total) * 100).astype(float).round(2)
+            topics_df['C'] = ((topics_df['C'] / total) * 100).astype(float).round(2)
+            topics_df['K'] = ((topics_df['K'] / total) * 100).astype(float).round(2)
+            topics_df['topic_score'] = topics_df['topic_score'].astype(float).round(2)
+            res=topics_df.to_dict('records')
+            chapter_cache = {
+                'topics': res
+            }
+            r.setex(str(chapter_id) + "_chapter_id", timedelta(days=1), json.dumps(chapter_cache))
+            print(f"execution time : {datetime.now() - start_time}")
+            return JSONResponse(status_code=200,content={'message': "Topic list by Chapter Id", 'response': res, "success": True})
+
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":False})
 
@@ -211,31 +278,70 @@ async def GetAllChapters(student_id:int=0,subject_id:int=0):
             class_exam_id = int(class_exam_id[0]['grade_id'])
             student_cache = {'exam_id': class_exam_id}
             r.setex(str(student_id) + "_sid", timedelta(days=1), json.dumps(student_cache))
-
+        '''
         if r.exists(str(subject_id)+"_subject_id"):
             subject_cache=json.loads(r.get(str(subject_id)+"_subject_id"))
             if "chapters" in subject_cache:
                 chapters=subject_cache['chapters']
             else:
-                query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id={class_exam_id} and chapter_name is not null"
+                query = f"SELECT esc.chapter_id,esc.chapter_name,IFNULL((sps.ques_ans_correctly/sps.question_attempted)*100,0) AS score FROM exam_subject_chapters AS esc LEFT JOIN " \
+                        f"student_performance_summary AS sps ON esc.chapter_id=sps.chapter_id WHERE esc.subject_id={subject_id} AND esc.class_exam_id={class_exam_id} AND sps.student_id={student_id} GROUP BY chapter_id"
                 chapters = await conn.execute_query_dict(query)
-                if len(chapters)!=0:
-                    subject_cache['chapters']=chapters
-                    r.setex(str(subject_id)+"_subject_id",timedelta(days=1),json.dumps(subject_cache))
-                else:
-                    return JSONResponse(status_code=400,
-                                        content={"msg": f"no Chapters with given subject_id : {subject_id}"})
-        else:
-            query = f"select chapter_id,chapter_name from exam_subject_chapters where subject_id={subject_id} and class_exam_id={class_exam_id} and chapter_name is not null"
-            chapters = await conn.execute_query_dict(query)
-            if len(chapters) != 0:
-                subject_cache['chapters'] = chapters
+                if not chapters:
+                    return JSONResponse(status_code=400, content={"msg": "no Chapters for given subject or student","sucess":False})
+                chapters_df = pd.DataFrame(chapters)
+                chapters_df['score'] = chapters_df['score'].astype(float)
+                chapters = chapters_df.to_dict('records')
+                subject_cache = {
+                    'chapters': chapters
+                }
                 r.setex(str(subject_id) + "_subject_id", timedelta(days=1), json.dumps(subject_cache))
-            else:
-                return JSONResponse(status_code=400,
-                                    content={"msg": f"no Chapters with given subject_id : {subject_id}"})
+        else:
+            query = f"SELECT esc.chapter_id,esc.chapter_name,IFNULL((sps.ques_ans_correctly/sps.question_attempted)*100,0) AS score FROM exam_subject_chapters AS esc LEFT JOIN " \
+                    f"student_performance_summary AS sps ON esc.chapter_id=sps.chapter_id WHERE esc.subject_id={subject_id} AND esc.class_exam_id={class_exam_id} AND sps.student_id={student_id} GROUP BY chapter_id"
+            chapters = await conn.execute_query_dict(query)
+            if not chapters:
+                return JSONResponse(status_code=400, content={"msg": "no Chapters for given subject or student","sucess":False})
+            chapters_df = pd.DataFrame(chapters)
+            chapters_df['score'] = chapters_df['score'].astype(float)
+            chapters = chapters_df.to_dict('records')
+            subject_cache = {
+                'chapters': chapters
+            }
+            r.setex(str(subject_id) + "_subject_id", timedelta(days=1), json.dumps(subject_cache))
+        '''
+
+        query=f"SELECT esc.chapter_id,esc.chapter_name,sps.student_id,IFNULL((sps.ques_ans_correctly/sps.question_attempted)*100,0)" \
+              f" AS chapter_score,IFNULL(SUM(sk.skill_name='Evaluation'),0) AS E," \
+              f" IFNULL(SUM(sk.skill_name='Comprehension'),0) AS C," \
+              f" IFNULL(SUM(sk.skill_name='Application'),0) AS A," \
+              f"IFNULL(SUM(sk.skill_name='Knowledge'),0) AS K FROM exam_subject_chapters " \
+              f" AS esc LEFT JOIN student_performance_summary  AS sps ON esc.chapter_id=sps.chapter_id LEFT JOIN skills AS sk ON sk.skill_id=sps.skill_id" \
+              f" WHERE esc.subject_id={subject_id} AND esc.class_exam_id={class_exam_id} GROUP BY chapter_id"
+        result=await conn.execute_query_dict(query)
+
+        if not result:
+            return JSONResponse(status_code=400,content={"response":"no performance summary for user","success":False})
+        result_df=pd.DataFrame(result)
+        filt=result_df['student_id']!=student_id
+        result_df.loc[filt,'chapter_score']=0
+        result_df.loc[filt, "A"] = 0
+        result_df.loc[filt, "E"] = 0
+        result_df.loc[filt, "C"] = 0
+        result_df.loc[filt, "K"] = 0
+        result_df.drop('student_id',axis=1,inplace=True)
+        #print(result_df)
+        total=result_df['A'].sum()+result_df['E'].sum()+result_df['C'].sum()+result_df['K'].sum()
+        if total==0:
+            total=1
+        result_df['A']=((result_df['A']/total)*100).astype(float).round(2)
+
+        result_df['E'] = ((result_df['E'] / total) * 100).astype(float).round(2)
+        result_df['C'] = ((result_df['C'] / total) * 100).astype(float).round(2)
+        result_df['K'] = ((result_df['K'] / total) * 100).astype(float).round(2)
+        result_df['chapter_score']=result_df['chapter_score'].astype(float).round(2)
         print(f"execution time: {datetime.now()-start_time}")
-        return JSONResponse(status_code=200, content={'message': "Chapters list by subject Id", 'response': chapters,"success":True})
+        return JSONResponse(status_code=200, content={'message': "Chapters list by subject Id", 'response': result_df.to_dict('records'),"success":True})
     except IntegrityError as e:
         return JSONResponse(status_code=400, content={'error': f'{e}',"success":True})
 
@@ -277,7 +383,6 @@ async def subject_rating(s_data:SubjectRating):
     conn = Tortoise.get_connection("default")
     getJson = jsonable_encoder(s_data)
     subjects_rating=getJson['subjects_rating']
-    print(subjects_rating)
     student_id = s_data.student_id
     try:
         query=f"update student_preferences set subjects_rating = '{subjects_rating}' where student_id={student_id}"

@@ -466,7 +466,7 @@ async def getAdaptiveMockTest(input:AdaptiveQuestionsMock2):
 
             remaining_questions=total_count-len(final_question_list)
             print("Getting more questions")
-            random_questions_query = f'SELECT question_id FROM {quiz_bank} where question_id not in {final_question_list_str}  order by rand() limit {remaining_questions}'
+            random_questions_query = f'SELECT question_id FROM {quiz_bank} where subject_id=3 and question_id not in {final_question_list_str}  order by rand() limit {remaining_questions}'
             question_list1 = await conn.execute_query_dict(random_questions_query)
             question_list1 = [d['question_id'] for d in question_list1 if 'question_id' in d]
             final_question_list.extend(question_list1)
@@ -741,6 +741,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
             r.setex(str(student_id)+"_sid", timedelta(days=1), json.dumps(student_cache))
             #print("Student Data stored in redis")
 
+        import random
         result_cache={}
         if session_id==0:
             #check last track and get new track
@@ -753,13 +754,13 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                 track = track_list[0]
                 track=track['track']
                 tracks.remove(track)
-                import random
                 track = random.choice(tracks)
                 "Selecting random track"
             else:
-                track = "track1"
-            print(f"Track: {track}")
+                #track = "track2"
+                track = random.choice(tracks)
 
+            print(f"Track: {track}")
 
             query=f'INSERT INTO adaptive_session (student_id,track) VALUES ({student_id},"{track}"); '
             await conn.execute_query_dict(query)
@@ -774,7 +775,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                 result_dict = getQuestionsTrack3([], topics, "yes",student_id)
                 result=[result_dict]
             result_df=pd.DataFrame(result)
-            #print(result_df)
+            print(result_df)
             for topics_dict in result:
                 topic_id=topics_dict['topic_id']
                 rank=topics_dict['rank']
@@ -841,6 +842,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
             time_taken_sec="00:00:00"
             #print(adaptive_state_df)
             if all_questions_list:
+                no_of_question=len(all_questions_list)
                 #print(f"all_questions_list_str: {all_questions_list_str}")
                 Query = f"SELECT question_id, subject_id,topic_id,chapter_id, marks,negative_marking," \
                         f" template_type,answers,question_options \
@@ -933,6 +935,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                         result=[result_dict]
 
                     result_df = pd.DataFrame(result)
+                    print(result_df)
                     #print(result_df)
                     for topics_dict in result:
                         topic_id=topics_dict['topic_id']
@@ -945,9 +948,10 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                             questions.append(question_id[0])
                         else:
                             if trend == "asc":
-                                questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level<={rank}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
+                                questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level>={rank}  and question_id not in {question_list_temp_str} order by difficulty_level asc limit 1'
                             if trend == "desc":
-                                questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level>={rank}  and question_id not in {question_list_temp_str} order by difficulty_level  limit 1'
+                                questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level<={rank}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
+
                             else:
                                 questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
                             #print(questions_query)
@@ -960,27 +964,28 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                             else:
                                 questions.append(question_id[0])
                     questions_df=pd.DataFrame(questions)
-                    questions_df2=pd.merge(result_df, questions_df, on='topic_id', how='inner')
-                    #print(questions_df2)
-                    ##Save adaptive state in database
+                    if questions:
+                        questions_df2=pd.merge(result_df, questions_df, on='topic_id', how='inner')
+                        #print(questions_df2)
+                        ##Save adaptive state in database
 
-                    adaptiveState = questions_df2.to_dict("records")
-                    for state in adaptiveState:
-                        t_id = state['topic_id']
-                        t_priority = state['topic_priority']
-                        rank = state['difficulty_level']
-                        lastbase = state['lastbase']
-                        trend = state['trend']
-                        # print(state['topic_id'])
-                        state_select_query=f"select id from adaptive_student_states where session_id={session_id} and topic_id={t_id}"
-                        state_id=await conn.execute_query_dict(state_select_query)
-                        if state_id:
-                            statequery = f"UPDATE adaptive_student_states SET chapter_id={chapter_id},topic_id={t_id},topic_priority={t_priority}" \
-                                     f",adaptive_rank={rank},lastbase={lastbase},trend='{trend}' where session_id={session_id} and topic_id={t_id}"
-                        else:
-                            statequery=f"INSERT INTO adaptive_student_states (chapter_id,topic_id,topic_priority,adaptive_rank,lastbase,trend,session_id)" \
-                              f"VALUES ({chapter_id},{t_id},{t_priority},{rank},{lastbase},'{trend}',{session_id})"
-                        await conn.execute_query_dict(statequery)
+                        adaptiveState = questions_df2.to_dict("records")
+                        for state in adaptiveState:
+                            t_id = state['topic_id']
+                            t_priority = state['topic_priority']
+                            rank = state['difficulty_level']
+                            lastbase = state['lastbase']
+                            trend = state['trend']
+                            # print(state['topic_id'])
+                            state_select_query=f"select id from adaptive_student_states where session_id={session_id} and topic_id={t_id}"
+                            state_id=await conn.execute_query_dict(state_select_query)
+                            if state_id:
+                                statequery = f"UPDATE adaptive_student_states SET chapter_id={chapter_id},topic_id={t_id},topic_priority={t_priority}" \
+                                         f",adaptive_rank={rank},lastbase={lastbase},trend='{trend}' where session_id={session_id} and topic_id={t_id}"
+                            else:
+                                statequery=f"INSERT INTO adaptive_student_states (chapter_id,topic_id,topic_priority,adaptive_rank,lastbase,trend,session_id)" \
+                                  f"VALUES ({chapter_id},{t_id},{t_priority},{rank},{lastbase},'{trend}',{session_id})"
+                            await conn.execute_query_dict(statequery)
 
             unattmepted_ques_cnt = no_of_question - (total_correctAttempt + total_incorrectAttempt)
 
@@ -1049,6 +1054,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                 result_cache['questions_list'] = questions_list_temp
                 result_cache['timetaken']=timetaken
                 result_cache['total_exam_marks']=total_exam_marks
+
                 r.setex(str(student_id) + "adaptive_result_session"+str(session_id), timedelta(days=1), json.dumps(result_cache))
 
                 correct_score = int(question_marks * total_correctAttempt)
@@ -1088,7 +1094,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                     student_result = {}
                     student_result["correct_score"] = correct_score
                     student_result["result_id"] = resultId
-                    student_result["no_of_question"] = int(no_of_question)
+                    student_result["no_of_question"] = int(total_questions)
                     student_result["correct_count"] = int(total_correctAttempt)
                     student_result["wrong_count"] = int(total_incorrectAttempt)
                     student_result["incorrect_score"] = incorrect_score
@@ -1097,6 +1103,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
                     student_result["result_time_taken"] = timetaken
                     student_result["result_percentage"] = result_percentage
                     student_result["not_answered"] = len(list(map(int, unattempted_questions_list)))
+                    print(student_result)
                     r.setex(str(student_id) + "_sid" + "_result_data", timedelta(days=1), json.dumps(student_result))
 
                     return resp
@@ -1127,6 +1134,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
             result_cache = json.loads(r.get(str(student_id) + "adaptive_result_session" + str(session_id)))
             totalmarkstemp = result_cache['total_exam_marks']
             result_cache['total_exam_marks'] = total_exam_marks + totalmarkstemp
+            print(result_cache)
             r.setex(str(student_id) + "adaptive_result_session" + str(session_id), timedelta(days=1),
                     json.dumps(result_cache))
             filt1 = (data1['difficulty_level'] >= 1) & (data1['difficulty_level'] <= 9)
@@ -1136,6 +1144,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsChapterPractice):
             filt3 = (data1['difficulty_level'] >= 19) & (data1['difficulty_level'] <= 27)
             data1.loc[filt3, 'time_allowed'] = 3
             l1 = int(data1['time_allowed'].sum())
+            data1['track']=track
             l2 = data1.to_dict(orient='records')
 
             response = {"time_allowed": l1,"session_id":session_id, "questions": l2, "success": True}
@@ -1238,7 +1247,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsTopicPractice):
                 result_cache['total_incorrectAttempt'] = 0
                 result_cache['questions_list'] = questions_list
                 result_cache['timetaken'] = "00:00:00"
-                result_cache['total_exam_marks'] = total_exam_marks
+                result_cache['total_exam_marks'] = 0
                 r.setex(str(student_id) + "adaptive_result_session" + str(session_id), timedelta(days=1),
                         json.dumps(result_cache))
 
@@ -1342,9 +1351,9 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsTopicPractice):
                     questions_list.append(question_id[0]['question_id'])
                 else:
                     if trend=="asc":
-                        questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level<={rank}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
+                        questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level>={rank}  and question_id not in {question_list_temp_str} order by difficulty_level asc limit 1'
                     if trend=="desc":
-                        questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level>={rank}  and question_id not in {question_list_temp_str} order by difficulty_level  limit 1'
+                        questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id} and difficulty_level<={rank}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
                     else:
                         questions_query = f'select question_id,topic_id,difficulty_level as difficulty_level from {quiz_bank} where topic_id={topic_id}  and question_id not in {question_list_temp_str} order by difficulty_level desc limit 1'
                     #print(questions_query)
@@ -1492,6 +1501,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsTopicPractice):
                     student_result["result_time_taken"] = timetaken
                     student_result["result_percentage"] = result_percentage
                     student_result["not_answered"] = len(list(map(int, unattempted_questions_list)))
+                    print(student_result)
                     r.setex(str(student_id) + "_sid" + "_result_data", timedelta(days=1), json.dumps(student_result))
 
                     return resp
@@ -1516,6 +1526,7 @@ async def getAdaptiveQuestions(input:AdaptiveQuestionsTopicPractice):
             result_cache = json.loads(r.get(str(student_id) + "adaptive_result_session" + str(session_id)))
             totalmarkstemp=result_cache['total_exam_marks']
             result_cache['total_exam_marks'] = total_exam_marks+totalmarkstemp
+            print(result_cache)
             r.setex(str(student_id) + "adaptive_result_session" + str(session_id), timedelta(days=1),
                     json.dumps(result_cache))
 
